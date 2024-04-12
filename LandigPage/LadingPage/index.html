@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>NutriLife - Tu compañero de salud & Bienestar</title>
+    <meta name="title" content="NutriLife - Tu compañero de salud & Bienestar">
+    <!---Iconos--->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <!-- 
+    - google font link
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+        rel="stylesheet">
+
+    <!-- css link-->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- img link-->
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.png">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-2.png">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-3.png">
+</head>
+
+<body>
+    <!-- Pre Cargado de la pagina-->
+    <div class="preload" data-preaload>
+        <div class="circle">
+            <div class="logo_dentro"></div>
+        </div>
+        <p class="text">NutriLife</p>
+    </div>
+
+    <!-- Header-->
+    <header class="header" data-header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="./assets/images/logo_verde.svg" width="160" height="40" alt="NutriLife-Home">
+            </a>
+            <nav class="navbar active" data-navbar>
+                <button class="close-btn" aria-label="close menu" data-nav-toggler>
+                    <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                </button>
+                <a href="#" class="logo">
+                    <img src="./assets/images/logo_verde.svg" width="160" height="40" alt="NutriLife-Home">
+                </a>
+
+                <ul class="navbar-list">
+                    <li class="navbar-item">
+                        <a href="#home" class="navbar-link hover-underline active ">
+                            <div class="separator"></div>
+                            <span class="span">Home</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#about_us" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Sobre Nosotros</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#nutricionistas" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Nutricionistas</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#recetas" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Recetas</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#entrenamiento" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Entrenamiento</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#precio" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Precio</span>
+                        </a>
+                    </li>
+                </ul>
+    
+            </nav>
+            <a href="#" class="btn btn-secondary">
+                <span class="text text-1">Find A Table</span>
+                <span class="text text-2" aria-hidden="true">Find A Table</span>
+            </a>
+            <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+                <span class="line line-4"></span>
+            </button>
+
+            <div class="overlay" data-nav-toggler data-overlay></div>
+        </div>
+    </header>
+    <!-- js link-->
+    <script src="./assets/js/script.js"></script>
+
+    <!-- ionicon link-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
