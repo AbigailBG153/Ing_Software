@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>NutriLife - Tu compañero de salud & Bienestar</title>
+    <meta name="title" content="NutriLife - Tu compañero de salud & Bienestar">
+    <!---Iconos--->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <!-- 
+    - google font link
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.0.1/css/ionicons.min.css"
+        integrity="sha512-EDa1bFvjHp5kO2kXx8rD18T6p3xqvccFpYLho5gj41YIwIa9eXixA31fK0eS4M67wP/hIkOy1Mw3iKg5NflAYw=="
+        crossorigin="anonymous" />
+
+    <!-- css link-->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- img link-->
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.png">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-2.png">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-3.png">
+</head>
+
+<body>
+    <!-- Pre Cargado de la pagina-->
+    <div class="preload" data-preaload>
+        <div class="circle">
+            <div class="logo_dentro"></div>
+        </div>
+        <p class="text">NutriLife</p>
+    </div>
+
+    <!-- Header-->
+    <header class="header" data-header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="./assets/images/logo_verde.svg" width="160" height="40" alt="NutriLife-Home">
+            </a>
+            <nav class="navbar" data-navbar>
+                <button class="close-btn" aria-label="close menu" data-nav-toggler>
+                    <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                </button>
+                <a href="#" class="logo">
+                    <img src="./assets/images/logo_verde.svg" width="160" height="40" alt="NutriLife-Home">
+                </a>
+
+                <ul class="navbar-list">
+                    <li class="navbar-item">
+                        <a href="#home" class="navbar-link hover-underline active ">
+                            <div class="separator"></div>
+                            <span class="span">Home</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#about_us" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Sobre Nosotros</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#nutricionistas" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Nutricionistas</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#recetas" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Recetas</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#entrenamiento" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Entrenamiento</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#precio" class="navbar-link hover-underline ">
+                            <div class="separator"></div>
+                            <span class="span">Precio</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+            <a href="#" class="btn btn-secondary">
+                <span class="text text-1">Inicia Sesion</span>
+                <span class="text text-2" aria-hidden="true">Inicia Sesion</span>
+            </a>
+            <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+                <span class="line line-4"></span>
+            </button>
+
+            <div class="overlay " data-nav-toggler data-overlay></div>
+        </div>
+    </header>
+    <main>
+        <article>
+            <!--Sliders-->
+            <section class="hero text-center" aria-label="home" id="home">
+                <ul class="hero-slider" data-hero-slider>
+                    <li class="slider-item active" data-hero-slider-item>
+                        <div class="slider-bg">
+                            <img src="./assets/images/hero-slider-1.png" width="1880" height="950" alt=""
+                                class="img-cover">
+                        </div>
+                        <p class="label-2 section-subtitle slider-reveal">
+                            Encuentra el equilibrio perfecto <br> entre dieta y ejercicio.
+                        </p>
+                        <h1 class="display-1 hero-title slider-reveal">
+                            Mejora tu salud con NutriLife
+                        </h1>
+                        <p class="body-2 hero-text slider-reveal">
+                            Alcanza tus metas de fitness de manera sostenible y saludable.
+                        </p>
+                        <a href="#" class="btn btn-primary slider-reveal">
+                            <span class="text text-1">Explorar planes de alimentación</span>
+                            <span class="text text-2" aria-hidden="true">Explorar planes de alimentación</span>
+                        </a>
+
+                    </li>
+
+                    <li class="slider-item active" data-hero-slider-item>
+                        <div class="slider-bg">
+                            <img src="./assets/images/hero-slider-2.png" width="1880" height="950" alt=""
+                                class="img-cover">
+                        </div>
+                        <p class="label-2 section-subtitle slider-reveal">
+                            Convierte tus sueños de un cuerpo saludable en realidad.
+                        </p>
+                        <h1 class="display-1 hero-title slider-reveal">
+                            Transforma tu cuerpo con NutriLife
+                        </h1>
+                        <p class="body-2 hero-text slider-reveal">
+                            Obtén el apoyo y la guía de expertos en nutrición y fitness
+                        </p>
+                        <a href="#" class="btn btn-primary slider-reveal">
+                            <span class="text text-1">Agenda una consulta</span>
+                            <span class="text text-2" aria-hidden="true">Agenda una consulta</span>
+                        </a>
+
+                    </li>
+
+                    <li class="slider-item active" data-hero-slider-item>
+                        <div class="slider-bg">
+                            <img src="./assets/images/hero-slider-3.png" width="1880" height="950" alt=""
+                                class="img-cover">
+                        </div>
+                        <p class="label-2 section-subtitle slider-reveal">
+                            Alimentación saludable
+                        </p>
+                        <h1 class="display-1 hero-title slider-reveal">
+                            Siembra hábitos duraderos.
+                        </h1>
+                        <p class="body-2 hero-text slider-reveal">
+                            Descubre recetas deliciosas & nutritivas para toda la familia.
+                        </p>
+                        <a href="#" class="btn btn-primary slider-reveal">
+                            <span class="text text-1">Explorar recetas</span>
+                            <span class="text text-2" aria-hidden="true">Explorar recetas</span>
+                        </a>
+
+                    </li>
+                </ul>
+
+                <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
+                    <ion-icon name="chevron-back"></ion-icon>
+                </button>
+
+                <button class="slider-btn next" aria-label="slide to bext" data-next-btn>
+                    <ion-icon name="chevron-forward"></ion-icon>
+                </button>
+
+
+            </section>
+
+
+            <!--Servicio-->
+            <section class="section service bg-black-10 text-center" aria-label="service" id="service">
+                <div class="container">
+                    <p class="section-subtitle label-2">Descubre una nueva forma de cuidar tu salud</p>
+                    <h2 class="headline-1 section-title">
+                        Transforma tu salud y bienestar con nuestros servicios especializados
+                    </h2>
+                    <p class="section-text">
+                        Nuestros servicios están diseñados y supervisados por expertos en nutrición y
+                        entrenamiento, garantizando resultados óptimos y un progreso continuo en tu viaje
+                        hacia una vida más saludable
+                    </p>
+                    <ul class="grid-list">
+                        <li>
+                            <div class="service-card">
+                                <a href="#" class="has-before hover:shine">
+                                    <figure class="card-banner img-holder" style="--width:285; --height: ;">
+                                        <img src="./assets/images/service-1.png" width="285" height="336" alt=""
+                                            class="img-cover">
+                                    </figure>
+                                </a>
+                                <div class="card-content">
+                                    <h3 class="title-4 card-title">
+                                        <a href="#">Asesoramiento Nutricional</a>
+                                    </h3>
+                                    <a href="" class="btn-text hover-underline label-2">Ver Nutricionistas</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="service-card">
+                                <a href="#" class="has-before hover:shine">
+                                    <figure class="card-banner img-holder" style="--width:285; --height: ;">
+                                        <img src="./assets/images/service-2.png" width="285" height="336" alt=""
+                                            class="img-cover">
+                                    </figure>
+                                </a>
+                                <div class="card-content">
+                                    <h3 class="title-4 card-title">
+                                        <a href="#">Planes a Medida</a>
+                                    </h3>
+                                    <a href="" class="btn-text hover-underline label-2">Ver Ejercicios</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="service-card">
+                                <a href="#" class="has-before hover:shine">
+                                    <figure class="card-banner img-holder" style="--width:285; --height: ;">
+                                        <img src="./assets/images/service-3.png" width="285" height="336" alt=""
+                                            class="img-cover">
+                                    </figure>
+                                </a>
+                                <div class="card-content">
+                                    <h3 class="title-4 card-title">
+                                        <a href="#">Seguimiento y Evaluación Continua</a>
+                                    </h3>
+                                    <a href="" class="btn-text hover-underline label-2">Progreso Garantizado</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <img src="./assets/images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
+                        class="shape shape-1 move-anim">
+                    <img src="./assets/images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
+                        class="shape shape-2 move-anim">
+                </div>
+            </section>
+
+
+            <!--Nosotros-->
+            <section class="section about text-center" aria-labelledby="about-label" id="about_us">
+                <div class="container">
+
+                    <div class="about-content">
+
+                        <p class="label-2 section-subtitle" id="about-label">Nuestra Historia</p>
+
+                        <h2 class="headline-1 section-title">Descubre tu Mejor Versión con Recetas Saludables y Fitness
+                        </h2>
+
+                        <p class="section-text">
+                            NutriLife es mucho más que una empresa de nutrición y fitness.
+                            Nuestra historia se basa en el compromiso de inspirar a las
+                            personas a adoptar un estilo de vida saludable y activo.
+                            Desde nuestros inicios, hemos estado dedicados a ofrecer
+                            servicios personalizados de alta calidad que ayuden a nuestros
+                            clientes a alcanzar sus objetivos de salud y bienestar.
+                        </p>
+
+                        <a href="#" class="btn btn-primary">
+                            <span class="text text-1">Read More</span>
+
+                            <span class="text text-2" aria-hidden="true">Read More</span>
+                        </a>
+
+                    </div>
+
+                    <figure class="about-banner">
+
+                        <img src="./assets/images/about-banner.png" width="570" height="570" loading="lazy"
+                            alt="about banner" class="w-100" data-parallax-item data-parallax-speed="1">
+
+                        <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
+                            <img src="./assets/images/about-abs-image.png" width="285" height="285" loading="lazy"
+                                alt="" class="w-100">
+                        </div>
+
+
+                        <img src="./assets/images/shape-3.png" width="197" height="194" loading="lazy" alt=""
+                            class="shape">
+                    </figure>
+
+
+
+                </div>
+            </section>
+
+            <!--Nutricionistas-->
+            <section class="nutrition text-center bg-black-10" aria-labelledby="nutrition-label" id="nutricionistas">
+                <div class="nutrition-banner ">
+                    <img src="/assets/images/nutricionista-banner.png" width="940" height="900" loading="lazy"
+                        alt="nutrition" class="img-cover">
+                </div>
+                <div class="nutrition-content">
+                    <div class="container">
+                        <img src="./assets/images/badge-1.png" width="40" height="60" loading="lazy" alt="badge"
+                            class="abs-img">
+
+                        <p class="section-subtitle label-2">Variedad de especialistas</p>
+                        <h2 class="headline-1 section-title">Los especialistas de la
+                            salud te acompañarán en todo el proceso.</h2>
+                        <p class="section-text">
+                            Con nuestra consulta online, podras realizar tus consultas desde cualquier lugar y
+                            poder personalizar recetas con tu nutricionista online por
+                            Skype, meet , videollamada whatsapp o por teléfono.
+                        </p>
+                        <div class="wrapper">
+                            <span class="span body-1"><ion-icon name="videocam-outline"></ion-icon></span>
+                            <span class="span body-1"><ion-icon name="logo-whatsapp"></ion-icon></span>
+                        </div>
+
+                        <a href="#" class="btn btn-primary">
+                            <span class="text text-1">Comienza ya</span>
+                            <span class="text text-2" aria-hidden="true">Comienza ya</span>
+                        </a>
+                    </div>
+                </div>
+
+                <img src="./assets/images/shape-4.png" width="179" height="359" loading="lazy" alt=""
+                    class="shape shape-1">
+
+                <img src="./assets/images/shape-9.png" width="351" height="462" loading="lazy" alt=""
+                    class="shape shape-2">
+
+
+            </section>
+
+            <!-- Recetas -->
+            <section class="section receta" aria-label="receta-label" id="recetas">
+                <div class="container">
+                    <p class="section-subtitle text-center label-2">Recetas Saludables</p>
+                    <h2 class="headline-1 section-title text-center">Explora una variedad de recetas nutritivas y
+                        deliciosas</h2>
+                    <ul class="grid-list">
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-1.png" width="100" height="100" loading="lazy"
+                                        alt="Ensalada de arroz con salmón y verduras" 
+                                        class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Ensalada de arroz con salmón y verduras</a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2">35 min</span>
+                                        </div>
+
+                                    </div>
+
+                                    
+                                    <p class="card-text label-1">
+                                        Arroz, Guisantes,Zanahoria, Limón, Hojas verdes.
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-2.png" width="100" height="100" loading="lazy"
+                                        alt="Salmón al horno con hierbas" class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Salmón al horno con hierbas</a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2">20 min</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text label-1">
+                                        Salmón fresco lomos,aceite de oliva virgen extra ,Hierbas ,Sal,Ajo en polvo
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-3.png" width="100" height="100" loading="lazy"
+                                        alt="Salmón a la ribereña" class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Salmón a la ribereña</a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2">10 min</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text label-1">
+                                        Salmón fresco,Harina,Aceite de oliva,Jamón ibérico,Sal.
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-4.png" width="100" height="100" loading="lazy"
+                                        alt="Ensalada de salmón con aderezo Mil Islas" class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Ensalada de salmón con aderezo Mil Islas</a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2">40 min</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text label-1">
+                                        Salmón fresco,Arroz basmati,Pimiento rojo,Maíz cocido,Ketchup.
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-5.png" width="100" height="100" loading="lazy"
+                                        alt="Albóndigas de salmón noruego" class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Albóndigas de salmón noruego </a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2">30 min</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text label-1">
+                                        Salmón fresco,Mostaza,Huevo,Pan rallado,Eneldo fresco,Mayonesa,Agua,Zumo de
+                                        limón
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="receta-card hover:card">
+
+                                <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+                                    <img src="./assets/images/recetas-6.png" width="100" height="100" loading="lazy"
+                                        alt="Ensalada Poke" class="img-cover">
+                                </figure>
+
+                                <div>
+
+                                    <div class="title-wrapper">
+                                        <h3 class="title-3">
+                                            <a href="#" class="card-title">Ensalada Poke </a>
+                                        </h3>
+                                        <div class="info">
+                                            <span class="badge label-1">Fácil</span>
+                                            <span class="span title-2" >30 min</span>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text label-1">
+                                        Arroz para Sushi,Vinagre de arroz,Azúcar,Eneldo fresco,Salsa de soja.
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">
+                        <span class="text text-1">Ver Mas</span>
+                        <span class="text text-2" aria-hidden="true">Ver Mas</span>
+                    </a>
+
+                    <img src="./assets/images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
+                        class="shape shape-2 move-anim">
+                    <img src="./assets/images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
+                        class="shape shape-3 move-anim">
+                </div>
+
+            </section>
+
+            <!-- Entrenamiento -->
+
+            <section class="section entrenamiento text-center has-bg-image"
+                style="background-image:url('./assets/images/entrenamiento-bg.png');" aria-label="entrenamiento" id="entrenamiento">
+                <div class="container">
+                    <p class="section-subtitle text-center label-2">Ejercicios a tu medida</p>
+                    <div class="grid-list">
+                        <div class="entrenamiento-card">
+                            <div class="circle-1"></div>
+                            <img src="./assets/images/entremaniento-1.png" width="200" height="200" loading="lazy"
+                                class="img abs-img">
+                        </div>
+
+                        <div class="entrenamiento-card">
+                            <div class="circle-1"></div>
+                            <img src="./assets/images/entremaniento-2.png" width="200" height="200" loading="lazy"
+                                class="img abs-img">
+                        </div>
+                        <div class="entrenamiento-card">
+                            <div class="circle-1"></div>
+                            <img src="./assets/images/entremaniento-3.png" width="200" height="200" loading="lazy"
+                                class="img abs-img">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Planes -->
+            <section class="section planes bg-black-10" aria-label="planes" id="precio">
+                <div class="container">
+                    <p class="section-subtitle label-2 text-center">Planes de Suscripción </p>
+                    <ul class="grid-list">
+                        <li>
+                            <div class="planes-card has-before">
+                                <div class="card-banner img-holder" style="--width: 350; --height: 500; background: transparent;">
+                                    <img src="./assets/images/plan-1.png" width="350" height="450" loading="lazy" alt=""
+                                        class="img-cover">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="planes-card has-before hover:shine">
+                                <div class="card-banner img-holder" style="--width: 350; --height: 500; background: transparent;">
+                                    <img src="./assets/images/plan-2.png" width="350" height="450" loading="lazy" alt=""
+                                        class="img-cover">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="planes-card has-before hover:shine">
+                                <div  class="card-banner img-holder" style="--width: 350; --height: 500; background: transparent;">
+                                    <img src="./assets/images/plan-3.png" width="350" height="450" loading="lazy" alt=""
+                                        class="img-cover">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">
+                        <span class="text text-1">Suscribete</span>
+
+                        <span class="text text-2" aria-hidden="true">Suscribete</span>
+                    </a>
+
+                    <img src="./assets/images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
+                        class="shape shape-2 move-anim">
+                    <img src="./assets/images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
+                        class="shape shape-3 move-anim">
+                </div>
+
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="footer section has-bg-image text-center"
+        style="background-image: url('./assets/images/footer-bg.jpg')">
+        <div class="container">
+            <div class="footer-top grid-list">
+                <div class="footer-brand has-before has-after">
+                    <a href="#" class="logo">
+                        <img src="/assets/images/logo_verde.svg" width="160" height="50" loading="lazy"
+                            alt="nutrilife home">
+                    </a>
+                    <a href="mailto:soporte_NutriLife@gmail.com"
+                        class="body-4 contact-link">soporte_NutriLife@gmail.com</a>
+                    <a href="tel:+555 555 555" class="body-4 contact-link">Soporte Tecnico : +555-555-555</a>
+
+                    <div class="wrapper">
+                        <div class="separator"></div>
+                        <div class="separator"></div>
+                        <div class="separator"></div>
+                    </div>
+
+                </div>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Sobre Nosotros</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Nutricionistas</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Recetas</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Entrenamiento</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Planes</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Facebook</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">X</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="label-2 footer-link hover-underline">Youtube</a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+            <div class="footer-bottom">
+
+                <p class="copyright">
+                    &copy; 2024 NutriLife. Tu compañero de salud & Bienestar<a href="#" target="_blank"
+                        class="link">HealthyTeam</a>
+                </p>
+
+            </div>
+        </div>
+    </footer>
+    <!-- js link-->
+    <script src="./assets/js/script.js"></script>
+
+    <!-- ionicon link-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
