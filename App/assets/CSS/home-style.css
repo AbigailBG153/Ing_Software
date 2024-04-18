@@ -110,27 +110,27 @@ a {
 
 /*========== BIENVENIDA ==========*/
 .bg-morning {
-    background-image: url(/App//assets/images/home/mañana.png);
+    background-image: url(/App/assets/images/home/mañana.png);
     /* Otros estilos de fondo de mañana */
 }
 
 .bg-noon {
-    background-image: url(/App//assets/images/home/mañana.png);
+    background-image: url(/App/assets/images/home/mañana.png);
     /* Otros estilos de fondo de mediodía */
 }
 
 .bg-afternoon {
-    background-image: url(/App//assets/images/home/tardes-bg-bv.png);
+    background-image: url(/App/assets/images/home/tardes-bg-bv.png);
     /* Otros estilos de fondo de tarde */
 }
 
 .bg-evening {
-    background-image: url(/App//assets/images/home/noches-bg-bv.png);
+    background-image: url(/App/assets/images/home/noches-bg-bv.png);
     /* Otros estilos de fondo de noche */
 }
 
 .bg-night {
-    background-image: url(/App//assets/images/home/noches-bg-bv.png);
+    background-image: url(/App/assets/images/home/noches-bg-bv.png);
     /* Otros estilos de fondo de noche */
 }
 
