@@ -1,0 +1,283 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    align-items: center;
+    text-align: center;
+    justify-content:  center;
+    height: 100vh;
+    background-color: #FAF1EB;
+}
+
+.button-data {
+    align-items: center;
+    width: 70%;
+    padding: 5px 10px;
+    background-color: #FF003B;
+    color: white;
+    margin-top: 10px;
+}
+
+.button-type{
+    position: relative;
+    width: 50%;
+    display: flexbox;
+    overflow: hidden;
+    text-align: center;
+}
+
+.button-type:hover .superposition-color {
+    background-color: rgba(85, 84, 84, 0.301);;
+}
+
+.button-type h3 {
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0;
+
+}
+
+.container-form{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+    transition: all 1s ease;
+    margin: 100px auto;
+    height: 500px;
+    width: 80%;
+    max-width: 900px;
+}
+
+.container-form-button {
+    background-color: #ffffff;
+    border-radius: 0px 0px 20px 20px;
+    display: flex;
+    height: 450px;
+    max-width: 900px;
+    overflow: hidden;
+    
+}
+
+.container-form-button img {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.container-form-choose {
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+    transition: all 1s ease;
+    margin: 100px auto;
+    height: 480px;
+    width: 80%;
+    max-width: 900px;
+}
+
+.container-form-choose h2{
+    background-color: #ff003c;
+    color: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 15px;
+}
+
+.information {
+    width: 50%;
+    display: flex;
+    overflow: hidden;
+    text-align: center;
+}
+
+.information img {
+    float: left;
+    height: auto;
+    filter: blur(1.1px);
+    width: 100%;
+}
+
+
+.form-information{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: #F2E1D2;
+    width: 50%;
+    
+}
+
+.form-information-childs {
+    padding: 0 30px;
+    height: auto;
+    width: 100%;
+}
+
+.form-information-childs h2 {
+    color: #0FAA0F;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.form-information-childs p {
+    font-size: 0.8rem;
+    width: 100%;
+    color: #000000;
+    margin: 5px 0 10px 0;
+}
+
+form {
+    margin: 10px 0 0 0;
+}
+
+.header-form {
+    position: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(53, 21, 21, 0.644);
+    padding-block: 30px;
+    z-index: 4;
+    border-block-end: 1px solid transparent;
+    transition: var(--transition-1);
+    text-align: right;
+}
+
+.header-form a{
+    background-color: #FF003B;
+    margin: 8px;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+.Login-Google {
+    display: flex;
+    background-color: #ffffff;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+} 
+
+.Login-Google i {
+    padding-top: 12px;
+    padding-left: 10px;
+}
+
+.Login-Google input{
+    border: none;
+    background-color: #ffffff;
+    margin: auto;
+    padding: 13px;
+    width: 95%;
+    cursor: pointer;
+}
+
+.superposition-color{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(85, 84, 84, 0.61);
+    transition: background-color 0.3s ease;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 7px 10px;
+    background-color: #fff;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+}
+
+form p {
+    text-align: right;
+    color: rgb(89, 0, 231);
+}
+
+.form-data p + input {
+    align-items: center;
+    width: 70%;
+    padding: 5px 10px;
+    background-color: #FF003B;
+    color: white;
+    margin-top: 10px;
+}
+
+.form-data label input {
+    border: none;
+    margin-left: 5px;
+    width: 100%;
+    outline: none;
+    height: 30px;
+}
+.form-data + p{
+    margin-top: 130px;
+}
+
+.hide {
+    position: absolute;
+    display: none;
+}
+
+.container-form.register-ocupation {
+    height: 550px;
+}
+
+.container-form.register-user {
+    height: 620px;
+}
+
+@media only screen and (max-width: 800px){
+    .container-form-choose h3{
+        font-size: 30px;
+    }
+
+    .form-information-childs h2 {
+        font-size: 25px;
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .container-form {
+        flex-direction: column;
+        height: auto;
+        margin: 50px auto;
+    }
+
+    .information,
+    .form-information {
+        width: 100%;
+        margin: auto;
+        height: auto;
+    }
+
+    .information img{
+        display: none;
+    }
+    .container-form-choose {
+        width: 80%;
+        height: 535px;
+    }
+    .container-form-choose h3{
+        font-size: 30px;
+    }
+    .container-form-button{
+        flex-direction: column;
+    }
+    .button-type {
+        width: 100%;
+    }
+}
+
