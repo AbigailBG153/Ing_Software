@@ -328,7 +328,7 @@ body.nav-active {
     height: 100%;
     border-radius: 50%;
     background-color: var(--smoky-black-3);
-    background-image: url(/assets/images/logo_blanco.png);
+    background-image: url(assets/images/logo_blanco.png);
     background-size: contain;
     /* Ajustar tamaño de la imagen */
     background-repeat: no-repeat;
