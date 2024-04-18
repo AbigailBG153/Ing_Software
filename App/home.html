@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!---Iconos--->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <!-- 
+    - google font link
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.0.1/css/ionicons.min.css"
+        integrity="sha512-EDa1bFvjHp5kO2kXx8rD18T6p3xqvccFpYLho5gj41YIwIa9eXixA31fK0eS4M67wP/hIkOy1Mw3iKg5NflAYw=="
+        crossorigin="anonymous" />
+    <!---graficos--->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="assets/CSS/home-style.css">
+</head>
+
+<body>
+    
+    <div class="box box-bienvenida" id="box-bienvenida">
+        <p id="nombre-dia"></p>
+        <h2>Bienvenido</h2>
+        <p id="saludo"></p>
+    </div>
+    
+    <div class="insights">
+        <div class=" control container">
+            <div class="cards">
+                <!---BALANCE--->
+                <div class="box balance">
+                    <h3 class="span titulo text-center">Balance</h3>
+                    <div class="info">
+                        <a class="item">
+                            <ion-icon name="flash"></ion-icon>
+                            <div class="valor">
+                                <p class="item-kcal">2,00 kcal</p>
+                                <span class="text item-catg">Quemado</span>
+                            </div>
+                        </a>
+                        <a class="item">
+                            <ion-icon name="flame"></ion-icon>
+                            <div class="valor">
+                                <p class="item-kcal">5,00 kcal</p>
+                                <span class="text item-catg">Ingerido</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="diagrama">
+                        <div class="container" id="doubleRingChartContainer">
+                            <canvas id="doubleRingChart" width="200" height="200"></canvas>
+                            <div class="valor" id="deficitText"></div>
+                            <p class="name text">Deficit</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box water">
+                    <h3 class="span title text-center">Control de Agua</h3>
+                    <div class="info">
+                        <div class="item">
+                            <ion-icon name="water"></ion-icon>
+                            <div class="valor">
+                                <p class="item-amount">500 ml</p>
+                                <span class="text item-catg">Consumido</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <ion-icon name="water"></ion-icon>
+                            <div class="valor">
+                                <p class="item-amount">2000 ml</p>
+                                <span class="text item-catg">Objetivo diario</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="diagrama-water">
+                        <div class="grafico cup-borde" id="cupBorde"></div>
+                        <div class="grafico cup" id="cup"></div>
+                        <div class="waterLevel">
+                            <span class="name text text-center ">Falta tomar</span>
+                            <p class="valor">800 ml</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box peso">
+                    <h3 class="span title text-center">Control de Peso</h3>
+                    <div class="info item ">
+                        <ion-icon name="leaf-sharp"></ion-icon>
+                        <p class="name">Peso Actual: <span class="current-weight">75 kg</span></p>
+                    </div>
+                    <div class="diagrama">
+                        <div class="container">
+
+                            <canvas id="weightChart" width="200" height="300"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" recordatorios container">
+            
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="box plan-recetas">
+        <h3 class="span carrusel-titulo">Plan Recetas Diario</h3>
+        <div class="carrusel">
+            <div class="carrusel-list" id="carrusel-list">
+                <button class="carrusel-btn flecha-izquierda">&lt;</button>
+                <div class="carrusel-card" id="carrusel-cards">
+                    <div class="card">
+                        <div>
+                            <a href="/">
+                                <h4>Desayuno</h4>
+                                <picture class="" style="--width:285; --height: ;">
+                                    <img src="assets/images/home/plan-1.png" width="285" height="336" alt="imagen">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <a href="/">
+                                <h4>Media Manañana</h4>
+                                <picture class="" style="--width:285; --height: ;">
+                                    <img src="assets/images/home/plan-2.png" width="285" height="336" alt="imagen">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <a href="/">
+                                <h4>Almuerzo</h4>
+                                <picture class="" style="--width:285; --height: ;">
+                                    <img src="assets/images/home/plan-3.png" width="285" height="336" alt="imagen">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <a href="/">
+                                <h4> Merienda </h4>
+                                <picture class="" style="--width:285; --height: ;">
+                                    <img src="assets/images/home/plan-4.png" width="285" height="336" alt="imagen">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <a href="/">
+                                <h4>Cena</h4>
+                                <picture class="" style="--width:285; --height: ;">
+                                    <img src="assets/images/home/plan-7.png" width="285" height="336" alt="imagen">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carrusel-btn flecha-derecha">&gt;</button>
+            </div>
+        </div>
+    </div>
+    <!-- js link-->
+    <script src="./assets/JS/home.js"></script>
+    <!-- ionicon link-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
