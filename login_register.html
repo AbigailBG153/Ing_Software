@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/LandigPage/assets/css/style-login.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header-form">
+        <a href="" class="sign-in">Acceder</a>
+        <a href="" class="sign-up">Crear cuenta</a>
+    </div>
+    <div class="container-form login">
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Iniciar Sesion</h2>
+                <label class="Login-Google">
+                    <i class='bx bxl-google'></i>
+                    <input type="button" value="Continuar con Google">
+                </label>
+                <p>O</p>
+                <form class="form-data">
+                    <label for="">
+                        <i class='bx bx-envelope' ></i>
+                        <input type="email" placeholder="Correo Electronico" name="correo">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" placeholder="Contraseña" name="contraseña">
+                    </label>
+                    <p>Has olvidado tu contraseña?</p>
+                    <input type="submit" value="ACCESO">
+                </form>
+                <p>No tienes una cuenta? <a href="" class="sign-up" style="text-decoration: none;">Resgistrate ahora</a> </p>
+            </div>
+        </div>
+        <div class="information">
+            <img src="assets/images/Login_img.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        document.querySelector('.form-data').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var correo = document.querySelector('input[name="correo"]').value;
+            var contraseña = document.querySelector('input[name="contraseña"]').value;
+            
+            var found = false;
+
+            var tiposUsuarios = ['cliente', 'trabajador'];
+            for (var i = 0; i < tiposUsuarios.length; i++) {
+                var tipoUser = tiposUsuarios[i];
+                var storedUserData = localStorage.getItem(tipoUser);
+                console.log(storedUserData);
+                if (storedUserData) {
+                    var userData = JSON.parse(storedUserData);
+                    if (userData.correo === correo && userData.contraseña === contraseña) {
+                        found = true;
+                        localStorage.setItem('correoName', userData.correo);
+                        window.location.href = '/App/pagina_principal.html';
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                alert('Credenciales incorrectas. Inténtalo de nuevo.');
+            }
+        });
+
+    </script>
+    <div class="container-form-choose ocupation-type hide">
+        <h2>Escoge tu tipo de profesion</h2>
+        <div class="container-form-button">
+            <div class="button-type">
+                <a href="" class="sign-up-ocup trainer" style="text-decoration: none;">
+                    <img src="assets/images/choose_img1.jpg" alt="">
+                    <div class="superposition-color"></div>
+                    <h3>ENTRENADOR</h3>
+                </a>
+            </div>
+            <div class="button-type">
+                <a href="" class="sign-up-ocup nutritionist" style="text-decoration: none;">
+                    <img src="assets/images/choose_img2.jpg" alt="">
+                    <div class="superposition-color"></div>
+                    <h3>NUTRICIONISTA</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container-form-choose user-type hide">
+        <h2>Escoge como quieres resgistrate</h2>
+        <div class="container-form-button">
+            <div class="button-type">
+                <a href="" class="sign-up-user1" style="text-decoration: none;">
+                    <img src="assets/images/user_im1.jpg" alt="">
+                    <div class="superposition-color"></div>
+                    <h3>CLIENTE</h3>
+                </a>
+            </div>
+            <div class="button-type">
+                <a href="" class="sign-up-user2" style="text-decoration: none;">
+                    <img src="assets/images/user_im2.jpg" alt="">
+                    <div class="superposition-color"></div>
+                    <h3>TRABAJADOR</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container-form register-user hide">
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>User Register</h2>
+                <label class="Login-Google">
+                    <i class='bx bxl-google'></i>
+                    <input type="button" value="Continuar con Google">
+                </label>
+                <p>O</p>
+                <form class="form-data user1">
+                    <label for="">
+                        <i class='bx bx-user'></i>
+                        <input type="text" placeholder="Nombre y Apellidos" name="nombre y apellidos">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-envelope' ></i>
+                        <input type="email" placeholder="Correo Electronico" name="correo">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" placeholder="Contraseña" name="contraseña">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-phone'></i>
+                        <input type="text" placeholder="Número de celular" name="celular">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-calendar-week' ></i>
+                        <input type="text" placeholder="Edad" name="edad">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-dumbbell'></i>
+                        <input type="text" placeholder="Peso" name="peso">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-body'></i>
+                        <input type="text" placeholder="Altura" step="0.01" name="altura">
+                    </label>
+                    <p>Has olvidado tu contraseña?</p>
+                    <input type="submit" value="REGISTRARSE">
+                </form>
+            </div>
+        </div>
+        <div class="information">
+            <img src="assets/images/user_im1.jpg" alt="">
+        </div>
+    </div>
+    <div class="container-form register-ocupation hide">
+        <div class="information">
+            <img src="assets/images/user_im2.jpg" alt="">
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Worker Register</h2>
+                <label class="Login-Google">
+                    <i class='bx bxl-google'></i>
+                    <input type="button" value="Continuar con Google">
+                </label>
+                <p>O</p>
+                <form class="form-data user2">
+                    <label for="">
+                        <i class='bx bx-user'></i>
+                        <input type="text" placeholder="Nombre y Apellidos" name="nombre y apellidos">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-phone'></i>
+                        <input type="text" placeholder="Número de celular" name="celular">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-envelope' ></i>
+                        <input type="email" placeholder="Correo Electronico" name="correo">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" placeholder="Contraseña" name="contraseña">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-file'></i>
+                        <input type="file" placeholder="Certificado de Estudios" name="certificado de estudios">
+                    </label>
+                    <label for="">
+                        <i class='bx bx-file'></i>
+                        <input type="file" placeholder="CV" name="cv">
+                    </label>
+                    <input type="submit" class="button-data" value="REGISTRARSE">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/access_script.js"></script>
+    <script src="./assets/js/form_get_data.js"></script>
+</body>
+</html>
+
