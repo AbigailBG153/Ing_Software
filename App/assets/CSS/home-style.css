@@ -1,0 +1,453 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+
+:root {
+    --header-height: 3.5rem;
+    --nav-width: 219px;
+
+    /*========== Colors ==========*/
+    --first-color: #8bc34a;
+    --first-color-light: #F4F0FA;
+    --title-color: #19181B;
+    --text-color: #58555E;
+    --text-color-light: #A5A1AA;
+    --body-color: #F9F6FD;
+    --container-color: #FFFFFF;
+    --color-light: rgba(194, 235, 196, 0.87);
+    --color-dark: #377E62;
+    /*========== circulo ==========*/
+    --border-fondo1: 20px solid rgb(34, 231, 34, .3);
+    --border1: 20px solid rgb(10, 214, 10);
+
+    /*========== Font and typography ==========*/
+    --body-font: 'Poppins', sans-serif;
+    --normal-font-size: 1.2rem;
+    --small-font-size: .75rem;
+    --smaller-font-size: .75rem;
+
+    /*========== Font weight ==========*/
+    --font-medium: 500;
+    --font-semi-bold: 600;
+
+    /*========== z index ==========*/
+    --z-fixed: 100;
+
+    /**
+* SHADOW
+*/
+    --shadow-1: 0px 0px 25px 0px hsla(0, 0%, 0%, 0.25);
+    --shadow-2: 0 1px 0 rgba(22, 8, 43, 0.1);
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+        --smaller-font-size: .813rem;
+    }
+}
+
+body {
+    font-family: var(--body-font);
+    margin: 0;
+    padding-top: 1px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color:  #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+a {
+    text-decoration: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.titulo {
+    position: relative;
+    color: var(--color-dark);
+    font-weight: var(--font-semi-bold);
+    font-size: var(--normal-font-size);
+}
+
+.subtitulo {
+    position: relative;
+    color: var(--first-color);
+    font-weight: var(--font-semi-bold);
+    font-size: var(--small-font-size);
+}
+
+.text {
+    position: relative;
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    font-size: var(--smaller-font-size);
+}
+
+
+.clearfix {
+    clear: both;
+}
+
+.box {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 5px;
+    margin-bottom: 5px;
+}
+
+/*========== BIENVENIDA ==========*/
+.bg-morning {
+    background-image: url(/assets/images/home/mañana.png);
+    /* Otros estilos de fondo de mañana */
+}
+
+.bg-noon {
+    background-image: url(/assets/images/home/mañana.png);
+    /* Otros estilos de fondo de mediodía */
+}
+
+.bg-afternoon {
+    background-image: url(/assets/images/home/tardes-bg-bv.png);
+    /* Otros estilos de fondo de tarde */
+}
+
+.bg-evening {
+    background-image: url(/assets/images/home/noches-bg-bv.png);
+    /* Otros estilos de fondo de noche */
+}
+
+.bg-night {
+    background-image: url(/assets/images/home/noches-bg-bv.png);
+    /* Otros estilos de fondo de noche */
+}
+
+.bg-weekend {
+    background-image: url(/assets/images/home/noches-bg-bv.png);
+    /* Otros estilos de fondo de fin de semana */
+}
+
+.box-bienvenida {
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+
+/*========== BALANCE y CONTADOR DE AGUA Y ==========*/
+
+.balance {
+    background-color: var(--color-light);
+}
+
+.balance,
+.span {
+    margin-bottom: 3px;
+    /* Ajusta el margen inferior */
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3px;
+
+}
+
+.item,
+.valor {
+    display: flex;
+    align-items: center;
+}
+
+.item ion-icon {
+    margin-right: 10px;
+    border: 1px solid #008000;
+    /* Añade un borde alrededor del icono con color verde oscuro */
+    border-radius: 4px;
+    /* Agrega bordes redondeados */
+    padding: 3px;
+    /* Añade un poco de espacio entre el icono y el borde */
+    color: #008000;
+    /* Cambia el color del icono a verde oscuro */
+    display: flex;
+}
+
+.valor {
+    flex-direction: column;
+    gap: 0;
+}
+
+.valor p,
+span {
+    margin-bottom: 0;
+}
+
+.diagrama .container {
+    position: relative;
+}
+
+.diagrama .valor,
+.diagrama .name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+/*==========CONTROL DE AGUA ==========*/
+.diagrama-water .waterLevel {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+.grafico {
+    position: absolute;
+}
+
+.cup-borde,
+.cup {
+    width: 100px;
+    /* ancho del trapecio */
+    height: 0;
+    /* altura inicial 0 */
+    border-left: 50px solid transparent;
+    /* ancho del lado izquierdo */
+    border-right: 50px solid transparent;
+    /* ancho del lado derecho */
+    border-bottom: 200px solid #09f;
+    /* altura del lado inferior y color */
+    transform: perspective(500px) rotateX(45deg) rotate(180deg);
+    /* rotación y perspectiva */
+    overflow: hidden;
+}
+
+.cup {
+
+    border-bottom: 200px solid #faebebc0;
+    /* altura del lado inferior y color */
+    position: relative;
+    animation: wave 3s ease-in-out infinite;
+    /* añadir la animación wave */
+
+}
+
+
+
+@keyframes wave {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 40%,
+                /* Ajusta la altura aquí */
+                10% 41%,
+                /* Ajusta la altura aquí */
+                33% 47%,
+                /* Ajusta la altura aquí */
+                54% 53%,
+                /* Ajusta la altura aquí */
+                70% 54%,
+                /* Ajusta la altura aquí */
+                84% 52%,
+                /* Ajusta la altura aquí */
+                100% 45%,
+                /* Ajusta la altura aquí */
+                100% 100%,
+                0% 100%);
+
+    }
+
+    50% {
+        clip-path: polygon(0% 60%,
+                15% 65%,
+                34% 66%,
+                51% 62%,
+                67% 50%,
+                84% 45%,
+                100% 46%,
+                100% 100%,
+                0% 100%);
+
+    }
+}
+
+.diagrama,
+.diagrama-water {
+    display: none;
+}
+
+
+/*========== PLAN RECETAS==========*/
+
+.plan-recetas {
+    position: relative;
+    /* Agregar posición relativa */
+    overflow: hidden;
+    /* Ocultar el desbordamiento */
+}
+
+.plan-recetas h4 h2 small a {
+    margin: 0;
+    padding: 0;
+}
+
+
+.carrusel {
+    width: 100%;
+    /* Hacer que el carrusel tome el ancho completo */
+    margin: 0px 0px;
+    /* Eliminar el margen */
+    position: relative;
+}
+
+
+@media (min-width: 768px) {
+    .carrusel {
+
+        margin: 0 60px;
+    }
+}
+
+.carrusel-list {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 240px;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 10px 0px;
+    margin: 0 auto;
+    max-width: calc(100% - 60px);
+    overflow-x: hidden;
+    /* Ocultar desbordamiento horizontal */
+    position: relative;
+    /* Añadir posición relativa */
+
+}
+
+.carrusel-card {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: .5s ease-in-out;
+    overflow: hidden;
+}
+
+.card {
+    position: relative;
+    width: 120px;
+    padding: 0px 18px;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+}
+
+.card h4 {
+    position: absolute;
+    z-index: 1;
+    font-size: 22px;
+    line-height: 23px;
+    color: black;
+    padding: 15px;
+    -webkit-text-stroke: 1px var(--first-color);
+}
+
+.card h4 small {
+    font-size: 15px;
+    display: block;
+}
+
+.card a img {
+    object-fit: cover;
+    height: 180px;
+    width: 100px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+@media(min-width:768px) {
+    .card {
+        width: 180px;
+    }
+
+    .card a img {
+        width: 150px;
+    }
+}
+
+
+.carrusel-btn {
+    color: var(--first-color);
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.carrusel-btn.flecha-izquierda {
+    margin-right: 40px;
+}
+
+.carrusel-btn.flecha-derecha {
+    margin-left: 40px;
+}
+
+.carrusel-btn:is(:hover, :focus-visible) {
+    background-color: var(--first-color);
+    color: var(--body-color);
+}
+
+
+/* Ajustes para pantallas de al menos 768px de ancho */
+@media (min-width: 768px) {
+    .cards {
+        display: flex;
+        /* Hace que los elementos se distribuyan en una fila */
+        flex-wrap: nowrap;
+        /* Evita que los elementos se envuelvan a la siguiente línea */
+        justify-content: space-between;
+        /* Espacia uniformemente los elementos a lo largo del contenedor */
+    }
+
+    .control .box {
+        flex: 1;
+        /* Hace que cada caja ocupe el mismo espacio dentro del contenedor */
+        max-width: calc(33.33% - 10px);
+        /* Establece el ancho máximo de cada caja */
+        margin-bottom: 10px;
+        /* Espacio entre las cajas */
+        padding: 1px 1px;
+    }
+    .diagrama,.diagrama-water{display: block;}
+    .carrusel-btn {
+        display: none;
+    }
+
+    
+}
+
+
+/* Estilos para escritorios */
+@media (min-width: 1024px) {
+
+}
