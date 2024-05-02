@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/App/Assets/CSS/index.css">
+    <link rel="stylesheet" href="/App/Componets/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/App/Assets/CSS/style-dasboard.css">
+    
+    <title>NutriLife</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/App/Config/conexion-pages.js"> </script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#" class="logo">
+            <img src="/App/Assets/IMG/Index/logo-icon-verde.png" width="60" height="60" alt="NutriLife-Home">
+            <div class="logo-name"><span>NutriLife</span></div>
+        </a>
+        <ul class="side-menu">
+            <li class="active"><a href="#dashboard"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
+            <li><a href="#recetas"><i class='bx bx-food-menu'></i>Recetas</a></li>
+            <li><a href="#entrenamiento"><i class='bx bx-run'></i>Entrenamiento</a></li>
+            <li><a href="#especialistas"><i class='bx bx-message-square-dots' ></i>Especialistas</a></li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#" class="logout">
+                    <i class='bx bx-log-out-circle'></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- End of Sidebar -->
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Navbar -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button class="search-btn" type="submit"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="theme-toggle" hidden>
+            <label for="theme-toggle" class="theme-toggle"></label>
+            <a href="#" class="notif">
+                <i class='bx bx-bell'></i>
+                <span class="count">12</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="/App/Assets/IMG/Index/profile-1.jpg">
+            </a>
+        </nav>
+
+        <!-- End of Navbar -->
+        <main class="main-dashboard" id="dashboard"></main>
+        <main class="main-recetas" id="recetas"></main>
+        <main class="main-entrenamiento" id="entrenamiento"></main>
+        <main class="main-especialistas" id="especialistas"></main>
+
+    </div>
+
+    <script src="/App/Assets/JS/index.js"></script>
+</body>
+
+</html>
