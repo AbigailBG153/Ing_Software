@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SpecialistProfileResponseDTO {
     private Long specId;
     private String name;
-    private Long phoneNumber;
+    private String phoneNumber;
     private Integer age;
     private Integer score;
     private String ocupation;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,7 @@ public class SpecialistProfileController {
     }
 
     @PostMapping
-    public ResponseEntity<SpecialistProfileResponseDTO> createSpecialistProfile(@RequestBody SpecialistProfileRequestDTO specialistDTO) {
+    public ResponseEntity<SpecialistProfileResponseDTO> createSpecialistProfile(@Validated @RequestBody SpecialistProfileRequestDTO specialistDTO) {
         SpecialistProfileResponseDTO createdSpecialistProfile = specialistProfileService.createProfileSpecialist(specialistDTO);
         return new ResponseEntity<>(createdSpecialistProfile, HttpStatus.CREATED);
     }

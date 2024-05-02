@@ -10,7 +10,7 @@ import com.nutrilife.fitnessservice.model.entity.CustomerProfile;
 
 public interface CustomerProfileRepository extends JpaRepository<CustomerProfile, Long>{
     
-    @Query("SELECT cp FROM CustomerProfile cp WHERE u.name LIKE CONCAT('%', :name, '%')")
+    @Query("SELECT cp FROM CustomerProfile cp WHERE cp.name LIKE CONCAT('%', :name, '%')")
     Optional<CustomerProfile> getCustomerProfileByName(@Param("name") String name);
 
     @Query("SELECT cp FROM CustomerProfile cp WHERE cp.user.id =:userId")

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CustomerProfileResponseDTO {
     private Long custId;
     private String name;
-    private Long phoneNumber;
+    private String phoneNumber;
     private Integer age;
     private Float weight;
     private Float height;
