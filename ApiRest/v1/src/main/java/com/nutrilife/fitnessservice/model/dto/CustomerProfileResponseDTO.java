@@ -17,4 +17,6 @@ public class CustomerProfileResponseDTO {
     private String alergies;
     private String dietType;
     private String dietRestriction;
+    private String email;
+    private String password;
 }

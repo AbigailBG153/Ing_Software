@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,11 +39,24 @@ public class CustomerProfileController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<CustomerProfileResponseDTO>> getCustomerProfileByName(@PathVariable String name) {
+        List<CustomerProfileResponseDTO> customers = customerProfileService.getCustomerProfileByName(name);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/dietType/{dietType}")
+    public ResponseEntity<List<CustomerProfileResponseDTO>> findByDietType(@PathVariable String dietType) {
+        List<CustomerProfileResponseDTO> customers = customerProfileService.findByDietType(dietType);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<CustomerProfileResponseDTO> createCutomerProfile(@Validated @RequestBody CustomerProfileRequestDTO customerDTO) {
         CustomerProfileResponseDTO customer = customerProfileService.createProfileCustomer(customerDTO);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomerProfileResponseDTO> deleteCustomerProfile(@PathVariable Long id) {

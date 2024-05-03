@@ -9,6 +9,7 @@ import com.nutrilife.fitnessservice.exception.UserNotFound;
 import com.nutrilife.fitnessservice.mapper.SpecialistProfileMapper;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.SpecialistProfile;
 import com.nutrilife.fitnessservice.repository.SpecialistProfileRepository;
 
@@ -21,10 +22,12 @@ public class SpecialistProfileService {
     
     private final SpecialistProfileRepository specialistProfileRepository;
     private final SpecialistProfileMapper specialistProfileMapper;
-
+    private final  UserService userService;
     //Crear perfil del usuario especialista
     @Transactional
     public SpecialistProfileResponseDTO createProfileSpecialist(SpecialistProfileRequestDTO specialistProfileRequestDTO) {
+        UserResponseDTO userResponseDTO = userService.createUser(specialistProfileMapper.createUserRequestDTO(specialistProfileRequestDTO));
+
         SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO);
         specialistProfileRepository.save(specialistProfile);
         return specialistProfileMapper.convertToDTO(specialistProfile);
