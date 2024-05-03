@@ -20,7 +20,12 @@ public class RecipeMapper {
     }
 
     public RecipeResponseDTO convertToDTO(Recipe recipe) {
-        return modelMapper.map(recipe, RecipeResponseDTO.class);
+        RecipeResponseDTO recipeResponseDTO = modelMapper.map(recipe, RecipeResponseDTO.class);
+        // Llamar al método getIngredientNames() para obtener la lista de ingredientes
+        // como String
+        List<String> ingredientNames = recipe.getIngredientNames();
+        recipeResponseDTO.setIngredients(ingredientNames);
+        return recipeResponseDTO;
     }
 
     public List<RecipeResponseDTO> convertToListDTO(List<Recipe> recipes) {
@@ -28,4 +33,5 @@ public class RecipeMapper {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
 }

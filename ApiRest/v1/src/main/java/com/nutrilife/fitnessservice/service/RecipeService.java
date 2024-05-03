@@ -46,4 +46,73 @@ public class RecipeService {
     public void deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
     }
+
+    @Transactional
+    public RecipeResponseDTO updateRecipe(Long id, RecipeRequestDTO recipeRequestDTO) {
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new RecipeNotFoundException("Recipe not found with id: " + id));
+
+        if (recipeRequestDTO.getName() != null) {
+            recipe.setName(recipeRequestDTO.getName());
+        }
+        if (recipeRequestDTO.getDescription() != null) {
+            recipe.setDescription(recipeRequestDTO.getDescription());
+        }
+        if (recipeRequestDTO.getType() != null) {
+            recipe.setType(recipeRequestDTO.getType());
+        }
+        if (recipeRequestDTO.getNutritionalGoal() != null) {
+            recipe.setNutritionalGoal(recipeRequestDTO.getNutritionalGoal());
+        }
+        if (recipeRequestDTO.getTotalCalories() >= 0 && recipeRequestDTO.getTotalCalories() <= 3000) {
+            recipe.setTotalCalories(recipeRequestDTO.getTotalCalories());
+        }
+        if (recipeRequestDTO.getImage() != null) {
+            recipe.setImage(recipeRequestDTO.getImage());
+        }
+        if (recipeRequestDTO.getIngredients() != null) {
+            recipe.setIngredients(recipeRequestDTO.getIngredients());
+        }
+        if (recipeRequestDTO.getScore() >= 0 && recipeRequestDTO.getScore() <= 5) {
+            recipe.setScore(recipeRequestDTO.getScore());
+        }
+
+        recipe = recipeRepository.save(recipe);
+
+        return recipeMapper.convertToDTO(recipe);
+    }
+
+    @Transactional(readOnly = true)
+    public List<RecipeResponseDTO> getRecipesByNutritionalGoal(String nutritionalGoal) {
+        List<Recipe> recipes = recipeRepository.findByNutritionalGoal(nutritionalGoal);
+        if (recipes.isEmpty()) {
+            throw new RecipeNotFoundException("No recipes found for nutritional goal: " + nutritionalGoal);
+        }
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<RecipeResponseDTO> getRecipesByCaloriesRange(float minCalories, float maxCalories) {
+        List<Recipe> recipes = recipeRepository.findByTotalCaloriesBetween(minCalories, maxCalories);
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeResponseDTO> getTopRatedRecipes() {
+        List<Recipe> topRecipes = recipeRepository.findTop5ByOrderByScoreDesc();
+        return topRecipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeResponseDTO> getRecipesByType(String type) {
+        List<Recipe> recipes = recipeRepository.findByType(type);
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
 }
