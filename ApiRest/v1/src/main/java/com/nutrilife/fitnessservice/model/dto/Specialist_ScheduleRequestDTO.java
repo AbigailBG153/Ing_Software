@@ -1,18 +1,12 @@
 package com.nutrilife.fitnessservice.model.dto;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.Payload;
-import jakarta.validation.ReportAsSingleViolation;
+import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public class Specialist_ScheduleRequestDTO {
-   
+
     @NotBlank(message = "La fecha de inicio no puede ser vacio")
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}", message = "El formato de la fecha debe ser yyyy-MM-ddTHH:mm")
     private LocalDateTime startDate;
