@@ -42,4 +42,12 @@ public class IngredientController {
         ingredientService.deleteIngredient(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<IngredientResponseDTO> updateIngredient(@PathVariable Long id,
+            @RequestBody IngredientRequestDTO ingredientDTO) {
+        IngredientResponseDTO updatedIngredient = ingredientService.updateIngredient(id, ingredientDTO);
+        return ResponseEntity.ok(updatedIngredient);
+    }
+
 }
