@@ -18,5 +18,4 @@ public class CustomerProfileResponseDTO {
     private String dietType;
     private String dietRestriction;
     private String email;
-    private String password;
 }

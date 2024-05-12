@@ -12,6 +12,9 @@ import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.User;
 import com.nutrilife.fitnessservice.repository.UserRespository;
 
+import jakarta.validation.Valid;
+
+//import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
@@ -19,21 +22,26 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
+@Validated
 public class UserService {
     
     private final UserRespository userRespository;
     private final UserMapper userMapper;
 
-    @Transactional
-    public UserResponseDTO createUser(@Validated UserRequestDTO userRequestDTO) {
+
+    public User createUser(@Valid  UserRequestDTO userRequestDTO) {
+
+
+
         if (userRespository.existsByEmail(userRequestDTO.getEmail())) {
             throw new ValidationUserRegisterException("El email ya está registrado");
         }
 
+
         User user = userMapper.convertToEntity(userRequestDTO);
         userRespository.save(user);
-            
-        return userMapper.convertToDTO(user);
+        
+        return user;
 
     }
 

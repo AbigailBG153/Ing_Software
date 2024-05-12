@@ -2,7 +2,6 @@ package com.nutrilife.fitnessservice.model.dto;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -51,13 +50,13 @@ public class CustomerProfileRequestDTO {
     private String dietRestriction;
 
     
-    @NotBlank(message = "El correo electronico no puede ser vacio")
-    @Email
+    //@NotBlank(message = "El correo electronico no puede ser vacio")
+    //@Email
     private String email;
     
-    @NotBlank(message = "La contraseña no puede estar en blanco")
-    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 
-        message = "La contraseña debe contener al menos un número, una letra y un carácter especial")
+    //@NotBlank(message = "La contraseña no puede estar en blanco")
+    //@Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 
+    //    message = "La contraseña debe contener al menos un número, una letra y un carácter especial")
     private String password;
 }

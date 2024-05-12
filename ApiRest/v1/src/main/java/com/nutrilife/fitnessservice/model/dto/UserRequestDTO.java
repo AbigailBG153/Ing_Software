@@ -12,12 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequestDTO {
-    
 
     @NotBlank(message = "El correo electronico no puede ser vacio")
     @Email
     private String email;
-    
+
     @NotBlank(message = "La contraseña no puede estar en blanco")
     @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 

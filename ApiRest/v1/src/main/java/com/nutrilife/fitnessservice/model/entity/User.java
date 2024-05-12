@@ -29,10 +29,10 @@ public class User {
     @Column (name = "password", nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    private CustomerProfile customers;
+    //@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    //private CustomerProfile customers;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    private CustomerProfile specialists;
+    //@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    //private CustomerProfile specialists;
 
 }
