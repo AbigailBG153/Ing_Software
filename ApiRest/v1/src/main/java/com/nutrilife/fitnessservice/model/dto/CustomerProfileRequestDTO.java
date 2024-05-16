@@ -1,5 +1,7 @@
 package com.nutrilife.fitnessservice.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -49,14 +51,7 @@ public class CustomerProfileRequestDTO {
     @Size(max = 50, message = "Las restricciones dietéticas deben tener como máximo 50 caracteres")
     private String dietRestriction;
 
-    
-    //@NotBlank(message = "El correo electronico no puede ser vacio")
-    //@Email
     private String email;
-    
-    //@NotBlank(message = "La contraseña no puede estar en blanco")
-    //@Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 
-    //    message = "La contraseña debe contener al menos un número, una letra y un carácter especial")
+
     private String password;
 }

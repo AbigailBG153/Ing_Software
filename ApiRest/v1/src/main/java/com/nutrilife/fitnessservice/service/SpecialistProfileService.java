@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -32,7 +33,12 @@ public class SpecialistProfileService {
         
         SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO);
         specialistProfile.setUser(user);
-
+        try {
+            specialistProfile.setCv(specialistProfileRequestDTO.getCv().getBytes());
+            specialistProfile.setStudCertificate(specialistProfileRequestDTO.getStudCertificate().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace(); 
+        }
         specialistProfileRepository.save(specialistProfile);
         SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
         specDTO.setEmail(specialistProfile.getUser().getEmail());
