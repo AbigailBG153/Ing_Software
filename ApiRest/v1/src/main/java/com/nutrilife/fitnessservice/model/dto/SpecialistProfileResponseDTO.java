@@ -13,6 +13,7 @@ public class SpecialistProfileResponseDTO {
     private String phoneNumber;
     private Integer age;
     private Integer score;
+    private String studCertificate;
     private String ocupation;
     private String email;
 }

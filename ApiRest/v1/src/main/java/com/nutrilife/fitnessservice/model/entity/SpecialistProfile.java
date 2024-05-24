@@ -32,8 +32,8 @@ public class SpecialistProfile {
     @Column(name = "age", nullable = false)
     private Integer age;
     //@Lob
-    //@Column(name = "stud_certificate", nullable = false)
-    //private byte[] studCertificate;
+    @Column(name = "stud_certificate", nullable = true)
+    private String studCertificate;
     //@Lob
     //@Column(name = "cv", nullable = false)
     //private byte[] cv;

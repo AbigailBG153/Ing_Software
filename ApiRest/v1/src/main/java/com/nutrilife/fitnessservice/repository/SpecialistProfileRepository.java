@@ -15,4 +15,5 @@ public interface SpecialistProfileRepository extends JpaRepository<SpecialistPro
 
     @Query("SELECT sp FROM SpecialistProfile sp WHERE sp.name LIKE CONCAT('%', :name, '%')")
     Optional<SpecialistProfile> getSpecialistProfileByName(@Param("name") String name);
+
 }
