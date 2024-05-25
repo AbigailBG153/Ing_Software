@@ -9,8 +9,11 @@ import com.nutrilife.fitnessservice.exception.UserNotFound;
 import com.nutrilife.fitnessservice.mapper.CustomerProfileMapper;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.CustomerProfile;
+import com.nutrilife.fitnessservice.model.entity.User;
 import com.nutrilife.fitnessservice.repository.CustomerProfileRepository;
+
 
 import lombok.AllArgsConstructor;
 
@@ -20,13 +23,19 @@ public class CustomerProfileService {
     
     private final CustomerProfileRepository customerProfileRepository;
     private final CustomerProfileMapper customerProfileMapper;
+    private final  UserService userService;
 
     //Crear perfil del usuario cliente
     @Transactional
     public CustomerProfileResponseDTO createProfileCustomer(CustomerProfileRequestDTO customerProfileRequestDTO) {
+
+        UserResponseDTO userResponseDTO = userService.createUser(customerProfileMapper.createUserRequestDTO(customerProfileRequestDTO));
+        
         CustomerProfile customerProfile = customerProfileMapper.convertToEntity(customerProfileRequestDTO);
+
         customerProfileRepository.save(customerProfile);
         return customerProfileMapper.convertToDTO(customerProfile);
+        
     }
 
     //Mostra perfil de un usuario cliente en especifico por el userId
@@ -36,6 +45,22 @@ public class CustomerProfileService {
             .orElseThrow(() -> new UserNotFound("El usuario no existe"));
 
         return customerProfileMapper.convertToDTO(customerProfile);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CustomerProfileResponseDTO> getCustomerProfileByName(String name) {
+    List<CustomerProfile> customers = customerProfileRepository.getCustomerProfileByName(name)
+        .orElseThrow(() -> new UserNotFound("Nombre no encontrado"));
+
+    return customerProfileMapper.convertToListDTO(customers);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CustomerProfileResponseDTO> findByDietType(String dietType) {
+    List<CustomerProfile> customers = customerProfileRepository.findByDietType(dietType)
+        .orElseThrow(() -> new UserNotFound("Dieta no encontrada"));
+
+    return customerProfileMapper.convertToListDTO(customers);
     }
 
     @Transactional
@@ -56,22 +81,6 @@ public class CustomerProfileService {
     public CustomerProfileResponseDTO updateCustomerProfile(Long id, CustomerProfileRequestDTO customerProfileRequestDTO) {
         CustomerProfile customerProfile  = customerProfileRepository.findById(id)
             .orElseThrow(() -> new UserNotFound("Perfil de usuario no encontrado con el numero: "+id));
-
-        if (customerProfileRequestDTO.getName() != null) {
-            customerProfile.setName(customerProfileRequestDTO.getName());
-        }
-        if (customerProfileRequestDTO.getPhoneNumber() != null) {
-            customerProfile.setPhoneNumber(customerProfileRequestDTO.getPhoneNumber());
-        }
-        if (customerProfileRequestDTO.getWeight() != null) {
-            customerProfile.setWeight(customerProfileRequestDTO.getWeight());
-        }
-        if (customerProfileRequestDTO.getHeight() != null) {
-            customerProfile.setHeight(customerProfile.getHeight());
-        }
-        if (customerProfileRequestDTO.getDietType() != null) {
-            customerProfile.setDietType(customerProfileRequestDTO.getDietType());
-        }
 
         customerProfile = customerProfileRepository.save(customerProfile);
 

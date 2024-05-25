@@ -41,4 +41,37 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RecipeResponseDTO> updateRecipe(@PathVariable Long id,
+            @RequestBody RecipeRequestDTO recipeDTO) {
+        RecipeResponseDTO updatedRecipe = recipeService.updateRecipe(id, recipeDTO);
+        return ResponseEntity.ok(updatedRecipe);
+    }
+
+    @GetMapping("/byNutritionalGoal/{nutritionalGoal}")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByNutritionalGoal(@PathVariable String nutritionalGoal) {
+        List<RecipeResponseDTO> recipes = recipeService.getRecipesByNutritionalGoal(nutritionalGoal);
+        return new ResponseEntity<>(recipes, HttpStatus.OK);
+    }
+
+    @GetMapping("/calories")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByCaloriesRange(
+            @RequestParam float minCalories,
+            @RequestParam float maxCalories) {
+        List<RecipeResponseDTO> recipes = recipeService.getRecipesByCaloriesRange(minCalories, maxCalories);
+        return ResponseEntity.ok(recipes);
+    }
+
+    @GetMapping("/top-rated")
+    public ResponseEntity<List<RecipeResponseDTO>> getTopRatedRecipes() {
+        List<RecipeResponseDTO> topRatedRecipes = recipeService.getTopRatedRecipes();
+        return ResponseEntity.ok(topRatedRecipes);
+    }
+
+    @GetMapping("/by-type/{type}")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByType(@PathVariable String type) {
+        List<RecipeResponseDTO> recipes = recipeService.getRecipesByType(type);
+        return ResponseEntity.ok(recipes);
+    }
 }

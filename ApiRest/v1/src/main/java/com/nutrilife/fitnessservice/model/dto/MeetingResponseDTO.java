@@ -1,22 +1,22 @@
 package com.nutrilife.fitnessservice.model.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-import com.nutrilife.fitnessservice.model.enums.MeetStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MeetingResponseDTO {
-    private Long meetingId;
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private MeetStatus meetStatus;
-    private Long scheduleId; 
+
+public class MeetingResponseDTO{
+    private Long meetId;
+    private CustomerProfileResponseDTO customer;
+    private SpecialistProfileResponseDTO specialist;
+    private Specialist_ScheduleResponseDTO ScheduleId;
+    private String typePlatform;
+    private LocalDateTime registerDate;
 }

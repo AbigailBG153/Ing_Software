@@ -14,4 +14,6 @@ public class SpecialistProfileResponseDTO {
     private Integer age;
     private Integer score;
     private String ocupation;
+    private String email;
+    private String password;
 }

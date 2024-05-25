@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -38,8 +38,14 @@ public class Recipe {
     private String image;
 
     @Column(name = "score")
-    private String score;
+    private float score;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private List<Ingredient> ingredients;
+
+    public List<String> getIngredientNames() {
+        return this.ingredients.stream()
+                .map(Ingredient::getName)
+                .collect(Collectors.toList());
+    }
 }

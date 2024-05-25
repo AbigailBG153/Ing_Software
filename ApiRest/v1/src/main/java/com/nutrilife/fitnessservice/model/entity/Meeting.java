@@ -1,50 +1,58 @@
 package com.nutrilife.fitnessservice.model.entity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import com.nutrilife.fitnessservice.model.enums.MeetStatus;
-import com.nutrilife.fitnessservice.model.enums.ScheduleStatus;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "meetings")
-public class Meeting {
+@Table(name = "Meetings")
+public class Meeting{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "meeting_id")
-    private Long meetingId;
+    @Column (name="meet_id")
+    private Long meetId;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @ManyToOne
+    @JoinColumn(name = "meet-cust_id", nullable = false)
+    private CustomerProfile custId;
 
-    @Column(name = "start_time", nullable = false)
-    private LocalTime startTime;
+    @ManyToOne
+    @JoinColumn(name = "meet-spec_id", nullable = false)
+    private SpecialistProfile  specId;
 
-    @Column(name = "end_time", nullable = false)
-    private LocalTime endTime;
+    @ManyToOne
+    @JoinColumn(name = "meet-sche_id", nullable = false)
+    private Specialist_Schedule ScheduleId;
+    
+    @Column(name = "meeting_name", nullable = false)
+    private String meetingName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private MeetStatus status;
+    @Column(name = "type_platform", nullable = false)
+    private String typePlatform;
 
-    @OneToOne
-    @JoinColumn(name = "schedule_id", nullable = false)
-    private Schedule schedule;
+    @Column(name = "meeting_url", nullable = false)
+    private String meetingUrl;
+
+    @Column(name = "start_date", nullable = false)
+    private LocalDateTime startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private LocalDateTime endDate;
+    
+    @Column(name = "register_date", nullable = false)
+    private LocalDateTime registerDate;
+
+
 }

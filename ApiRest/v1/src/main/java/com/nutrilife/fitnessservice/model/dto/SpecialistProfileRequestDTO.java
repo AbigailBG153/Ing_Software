@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.model.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,15 +25,25 @@ public class SpecialistProfileRequestDTO {
     private String phoneNumber;
 
     @NotNull(message = "La edad no puede estar vacio")
-    @Min (value = 0, message = "La edad no debe ser un número positivo")
+    @Min (value = 0, message = "La edad debe ser un numero positivo")
     private Integer age;
 
-    @Min(value = 0, message = "La puntuacion debe ser un numero positvo")
+    @Min(value = 0, message = "La puntuacion debe ser un numero positivo")
     @Max(value = 5, message = "La puntuacion debe ser como maximo 5")
     private Integer score;
 
     @NotBlank(message = "La ocupacion no puede estar vacia")
     @Size(max=15, message = "La ocupacion debe tener como maximo 15 caracteres")
     private String ocupation;
+
+    @NotBlank(message = "El correo electronico no puede ser vacio")
+    @Email
+    private String email;
+    
+    @NotBlank(message = "La contraseña no puede estar en blanco")
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 
+        message = "La contraseña debe contener al menos un número, una letra y un carácter especial")
+    private String password;
 
 }
