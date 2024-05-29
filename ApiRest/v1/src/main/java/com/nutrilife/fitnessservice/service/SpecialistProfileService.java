@@ -31,14 +31,6 @@ public class SpecialistProfileService {
         return specialistProfileMapper.convertToDTO(specialistProfile);
     }
 
-    @Transactional(readOnly = true)
-    public SpecialistProfileResponseDTO getSpecialistProfileByUserId(Long id) {
-        SpecialistProfile specialistProfile = specialistProfileRepository.findByUserId(id)
-            .orElseThrow(() -> new SpecialistNotFoundException("Especialista no encontrado"));
-        
-        return specialistProfileMapper.convertToDTO(specialistProfile);
-    }
-
     @Transactional
         public SpecialistProfileResponseDTO getSpecialistProfileById(Long id) {
         SpecialistProfile specialistProfile = specialistProfileRepository.findById(id)
