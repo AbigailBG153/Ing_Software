@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nutrilife.fitnessservice.exception.SpecialistNotFoundException;
 import com.nutrilife.fitnessservice.exception.UserNotFound;
 import com.nutrilife.fitnessservice.mapper.SpecialistProfileMapper;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileResponseDTO;
-import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.SpecialistProfile;
 import com.nutrilife.fitnessservice.repository.SpecialistProfileRepository;
 
@@ -22,11 +22,9 @@ public class SpecialistProfileService {
     
     private final SpecialistProfileRepository specialistProfileRepository;
     private final SpecialistProfileMapper specialistProfileMapper;
-    private final  UserService userService;
   
     @Transactional
     public SpecialistProfileResponseDTO createProfileSpecialist(SpecialistProfileRequestDTO specialistProfileRequestDTO) {
-        UserResponseDTO userResponseDTO = userService.createUser(specialistProfileMapper.createUserRequestDTO(specialistProfileRequestDTO));
 
         SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO);
         specialistProfileRepository.save(specialistProfile);
@@ -36,7 +34,7 @@ public class SpecialistProfileService {
     @Transactional(readOnly = true)
     public SpecialistProfileResponseDTO getSpecialistProfileByUserId(Long id) {
         SpecialistProfile specialistProfile = specialistProfileRepository.findByUserId(id)
-            .orElseThrow(() -> new UserNotFound("El usuario no existe"));
+            .orElseThrow(() -> new SpecialistNotFoundException("Especialista no encontrado"));
         
         return specialistProfileMapper.convertToDTO(specialistProfile);
     }
@@ -44,7 +42,7 @@ public class SpecialistProfileService {
     @Transactional
         public SpecialistProfileResponseDTO getSpecialistProfileById(Long id) {
         SpecialistProfile specialistProfile = specialistProfileRepository.findById(id)
-            .orElseThrow(() -> new UserNotFound("El usuario no existe"));
+            .orElseThrow(() -> new SpecialistNotFoundException("Especialista no encontrado"));
             
         return specialistProfileMapper.convertToDTO(specialistProfile);
     }
