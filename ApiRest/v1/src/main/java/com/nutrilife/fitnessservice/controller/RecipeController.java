@@ -100,4 +100,13 @@ public class RecipeController {
         List<RecipeResponseDTO> recipes = recipeService.getRecipesByTypeAndNutritionalGoal(type, nutritionalGoal);
         return ResponseEntity.ok(recipes);
     }
+
+    @GetMapping("/byNutritionalGoalAndIngredients")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByNutritionalGoalAndIngredients(
+            @RequestParam String nutritionalGoal,
+            @RequestParam List<Long> ingredientIds) {
+        List<RecipeResponseDTO> recipes = recipeService.getRecipesByNutritionalGoalAndIngredients(nutritionalGoal,
+                ingredientIds);
+        return ResponseEntity.ok(recipes);
+    }
 }

@@ -140,4 +140,13 @@ public class RecipeService {
                 .map(recipeMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<RecipeResponseDTO> getRecipesByNutritionalGoalAndIngredients(String nutritionalGoal,
+            List<Long> ingredientIds) {
+        List<Recipe> recipes = recipeRepository.findByNutritionalGoalAndIngredients(nutritionalGoal, ingredientIds);
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
 }
