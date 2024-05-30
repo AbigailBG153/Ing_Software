@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.nutrilife.fitnessservice.model.dto.IngredientResponseDTO;
 import com.nutrilife.fitnessservice.model.dto.RecipeRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.RecipeResponseDTO;
+import com.nutrilife.fitnessservice.model.entity.Ingredient;
 import com.nutrilife.fitnessservice.model.entity.Recipe;
 import lombok.AllArgsConstructor;
 
@@ -19,7 +20,17 @@ public class RecipeMapper {
     private final ModelMapper modelMapper;
 
     public Recipe convertToEntity(RecipeRequestDTO recipeRequestDTO) {
-        return modelMapper.map(recipeRequestDTO, Recipe.class);
+        Recipe recipe = modelMapper.map(recipeRequestDTO, Recipe.class);
+        List<Long> ingredientIds = recipeRequestDTO.getIngredientIds();
+        List<Ingredient> ingredients = ingredientIds.stream()
+                .map(id -> {
+                    Ingredient ingredient = new Ingredient();
+                    ingredient.setId(id);
+                    return ingredient;
+                })
+                .collect(Collectors.toList());
+        recipe.setIngredients(ingredients);
+        return recipe;
     }
 
     public RecipeResponseDTO convertToDTO(Recipe recipe) {

@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.service;
 
+import com.nutrilife.fitnessservice.exception.IngredientNotFoundException;
 import com.nutrilife.fitnessservice.exception.RecipeNotFoundException;
 import com.nutrilife.fitnessservice.mapper.RecipeMapper;
 import com.nutrilife.fitnessservice.model.dto.RecipeRequestDTO;
@@ -76,7 +77,12 @@ public class RecipeService {
             recipe.setImage(recipeRequestDTO.getImage());
         }
         if (recipeRequestDTO.getIngredientIds() != null) {
-            List<Ingredient> ingredients = ingredientRepository.findAllById(recipeRequestDTO.getIngredientIds());
+            // Convertir lista de IDs de ingredientes a lista de objetos Ingredient
+            List<Ingredient> ingredients = recipeRequestDTO.getIngredientIds().stream()
+                    .map(ingredientId -> ingredientRepository.findById(ingredientId)
+                            .orElseThrow(() -> new IngredientNotFoundException(
+                                    "Ingredient not found with id: " + ingredientId)))
+                    .collect(Collectors.toList());
             recipe.setIngredients(ingredients);
         }
         if (recipeRequestDTO.getScore() >= 0 && recipeRequestDTO.getScore() <= 5) {
@@ -102,6 +108,9 @@ public class RecipeService {
     @Transactional(readOnly = true)
     public List<RecipeResponseDTO> getRecipesByCaloriesRange(float minCalories, float maxCalories) {
         List<Recipe> recipes = recipeRepository.findByTotalCaloriesBetween(minCalories, maxCalories);
+        if (recipes.isEmpty()) {
+            throw new RecipeNotFoundException("No recipes found within the specified calorie range");
+        }
         return recipes.stream()
                 .map(recipeMapper::convertToDTO)
                 .collect(Collectors.toList());
@@ -149,4 +158,5 @@ public class RecipeService {
                 .map(recipeMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
+
 }
