@@ -62,6 +62,15 @@ public class IngredientService {
         ingredient = ingredientRepository.save(ingredient);
 
         return ingredientMapper.convertToDTO(ingredient);
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<IngredientResponseDTO> findIngredientsByName(String name) {
+        List<Ingredient> ingredients = ingredientRepository.findByNameIgnoreCase(name);
+        return ingredients.stream()
+                .map(ingredientMapper::convertToDTO)
+                .collect(Collectors.toList());
     }
 
 }

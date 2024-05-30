@@ -50,4 +50,9 @@ public class IngredientController {
         return ResponseEntity.ok(updatedIngredient);
     }
 
+    @GetMapping("/byName")
+    public ResponseEntity<List<IngredientResponseDTO>> findIngredientsByName(@RequestParam String name) {
+        List<IngredientResponseDTO> ingredients = ingredientService.findIngredientsByName(name);
+        return new ResponseEntity<>(ingredients, HttpStatus.OK);
+    }
 }
