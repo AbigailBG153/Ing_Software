@@ -15,4 +15,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findTop5ByOrderByScoreDesc();
 
     List<Recipe> findByType(String type);
+
+    List<Recipe> findByIngredients_IdIn(List<Long> ingredientIds);
+
 }

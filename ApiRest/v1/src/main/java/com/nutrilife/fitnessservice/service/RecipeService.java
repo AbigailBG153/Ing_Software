@@ -120,4 +120,8 @@ public class RecipeService {
                 .map(recipeMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<Recipe> getRecipesByIngredients(List<Long> ingredientIds) {
+        return recipeRepository.findByIngredients_IdIn(ingredientIds);
+    }
 }

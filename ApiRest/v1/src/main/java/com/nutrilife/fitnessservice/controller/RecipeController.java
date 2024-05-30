@@ -1,7 +1,9 @@
 package com.nutrilife.fitnessservice.controller;
 
+import com.nutrilife.fitnessservice.mapper.RecipeMapper;
 import com.nutrilife.fitnessservice.model.dto.RecipeRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.RecipeResponseDTO;
+import com.nutrilife.fitnessservice.model.entity.Recipe;
 import com.nutrilife.fitnessservice.service.RecipeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
+
+    private final RecipeMapper recipeMapper;
 
     @GetMapping
     public ResponseEntity<List<RecipeResponseDTO>> getAllRecipes() {
@@ -74,4 +78,12 @@ public class RecipeController {
         List<RecipeResponseDTO> recipes = recipeService.getRecipesByType(type);
         return ResponseEntity.ok(recipes);
     }
+
+    @GetMapping("/byIngredients")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByIngredients(@RequestParam List<Long> ingredientIds) {
+        List<Recipe> recipes = recipeService.getRecipesByIngredients(ingredientIds);
+        List<RecipeResponseDTO> recipeDTOs = recipeMapper.convertToListDTO(recipes);
+        return new ResponseEntity<>(recipeDTOs, HttpStatus.OK);
+    }
+
 }
