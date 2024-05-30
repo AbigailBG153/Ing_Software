@@ -124,4 +124,13 @@ public class RecipeService {
     public List<Recipe> getRecipesByIngredients(List<Long> ingredientIds) {
         return recipeRepository.findByIngredients_IdIn(ingredientIds);
     }
+
+    public List<RecipeResponseDTO> getPopularRecipesByIngredients(List<Long> ingredientIds) {
+        List<Recipe> popularRecipes = recipeRepository.findPopularRecipesByIngredients(ingredientIds);
+        List<Recipe> filteredRecipes = popularRecipes.stream()
+                .filter(recipe -> recipe.getScore() >= 3.5f)
+                .collect(Collectors.toList());
+        return recipeMapper.convertToListDTO(filteredRecipes);
+    }
+
 }

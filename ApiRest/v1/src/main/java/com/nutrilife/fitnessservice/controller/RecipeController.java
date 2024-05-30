@@ -86,4 +86,11 @@ public class RecipeController {
         return new ResponseEntity<>(recipeDTOs, HttpStatus.OK);
     }
 
+    @GetMapping("/popular/byIngredients")
+    public ResponseEntity<List<RecipeResponseDTO>> getPopularRecipesByIngredients(
+            @RequestParam List<Long> ingredientIds) {
+        List<RecipeResponseDTO> popularRecipes = recipeService.getPopularRecipesByIngredients(ingredientIds);
+        return new ResponseEntity<>(popularRecipes, HttpStatus.OK);
+    }
+
 }
