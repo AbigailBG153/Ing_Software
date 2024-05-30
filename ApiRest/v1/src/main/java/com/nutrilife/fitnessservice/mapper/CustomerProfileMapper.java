@@ -8,7 +8,6 @@ import com.nutrilife.fitnessservice.model.dto.CustomerProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileResponseDTO;
 import com.nutrilife.fitnessservice.model.dto.UserRequestDTO;
 import com.nutrilife.fitnessservice.model.entity.CustomerProfile;
-import com.nutrilife.fitnessservice.model.entity.User;
 
 import lombok.AllArgsConstructor;
 

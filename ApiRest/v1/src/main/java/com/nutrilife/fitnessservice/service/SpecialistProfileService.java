@@ -1,8 +1,6 @@
 package com.nutrilife.fitnessservice.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,12 +28,11 @@ public class SpecialistProfileService {
     public SpecialistProfileResponseDTO createProfileSpecialist(SpecialistProfileRequestDTO specialistProfileRequestDTO) {
         User user = userService.createUser(specialistProfileMapper.createUserRequestDTO(specialistProfileRequestDTO));
         
-        SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO);
-        specialistProfile.setUser(user);
+        SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO,user);
+        
 
         specialistProfileRepository.save(specialistProfile);
         SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
-        specDTO.setEmail(specialistProfile.getUser().getEmail());
 
         return specDTO;
     }
@@ -46,7 +43,6 @@ public class SpecialistProfileService {
             .orElseThrow(() -> new UserNotFound("El usuario no existe"));
         
         SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
-        specDTO.setEmail(specialistProfile.getUser().getEmail());
 
         return specDTO;
     }
@@ -57,7 +53,6 @@ public class SpecialistProfileService {
             .orElseThrow(() -> new UserNotFound("El usuario no existe"));
             
         SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
-        specDTO.setEmail(specialistProfile.getUser().getEmail());
 
         return specDTO;
     }
@@ -67,11 +62,6 @@ public class SpecialistProfileService {
         List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findAll();
 
         List<SpecialistProfileResponseDTO> specDTOs = specialistProfileMapper.convertToListDTO(specialistProfiles);
-        List<String> emails = new ArrayList<>();
-        specialistProfiles.forEach(profile -> emails.add(profile.getUser().getEmail()));
-
-        IntStream.range(0, specDTOs.size())
-            .forEach(i -> specDTOs.get(i).setEmail(emails.get(i % emails.size())));
 
         return specDTOs;
     }
