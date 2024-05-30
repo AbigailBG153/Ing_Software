@@ -93,4 +93,11 @@ public class RecipeController {
         return new ResponseEntity<>(popularRecipes, HttpStatus.OK);
     }
 
+    @GetMapping("/byTypeAndNutritionalGoal")
+    public ResponseEntity<List<RecipeResponseDTO>> getRecipesByTypeAndNutritionalGoal(
+            @RequestParam String type,
+            @RequestParam String nutritionalGoal) {
+        List<RecipeResponseDTO> recipes = recipeService.getRecipesByTypeAndNutritionalGoal(type, nutritionalGoal);
+        return ResponseEntity.ok(recipes);
+    }
 }

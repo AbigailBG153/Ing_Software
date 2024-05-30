@@ -23,4 +23,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT DISTINCT r FROM Recipe r JOIN r.ingredients i WHERE i.id IN :ingredientIds AND r.score >= 3.5")
     List<Recipe> findPopularRecipesByIngredients(@Param("ingredientIds") List<Long> ingredientIds);
 
+    List<Recipe> findByTypeAndNutritionalGoal(String type, String nutritionalGoal);
 }

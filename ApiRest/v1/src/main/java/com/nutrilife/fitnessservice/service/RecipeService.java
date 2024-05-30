@@ -133,4 +133,11 @@ public class RecipeService {
         return recipeMapper.convertToListDTO(filteredRecipes);
     }
 
+    @Transactional(readOnly = true)
+    public List<RecipeResponseDTO> getRecipesByTypeAndNutritionalGoal(String type, String nutritionalGoal) {
+        List<Recipe> recipes = recipeRepository.findByTypeAndNutritionalGoal(type, nutritionalGoal);
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
 }
