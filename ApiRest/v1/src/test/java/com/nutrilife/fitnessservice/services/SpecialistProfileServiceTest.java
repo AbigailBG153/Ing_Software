@@ -335,6 +335,4 @@ public class SpecialistProfileServiceTest {
         verify(specialistProfileRepository, times(1)).deleteById(specialist.getSpecId());
     }
 
-    @Test
-
 }
