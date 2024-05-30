@@ -40,7 +40,8 @@ public class Recipe {
     @Column(name = "score")
     private float score;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "recipe_ingredient", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
     public List<String> getIngredientNames() {

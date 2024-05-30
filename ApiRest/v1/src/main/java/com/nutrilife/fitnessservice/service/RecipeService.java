@@ -4,7 +4,9 @@ import com.nutrilife.fitnessservice.exception.RecipeNotFoundException;
 import com.nutrilife.fitnessservice.mapper.RecipeMapper;
 import com.nutrilife.fitnessservice.model.dto.RecipeRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.RecipeResponseDTO;
+import com.nutrilife.fitnessservice.model.entity.Ingredient;
 import com.nutrilife.fitnessservice.model.entity.Recipe;
+import com.nutrilife.fitnessservice.repository.IngredientRepository;
 import com.nutrilife.fitnessservice.repository.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,13 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final RecipeMapper recipeMapper;
+    private final IngredientRepository ingredientRepository;
 
     @Transactional
     public RecipeResponseDTO createRecipe(RecipeRequestDTO recipeRequestDTO) {
         Recipe recipe = recipeMapper.convertToEntity(recipeRequestDTO);
+        List<Ingredient> ingredients = ingredientRepository.findAllById(recipeRequestDTO.getIngredientIds());
+        recipe.setIngredients(ingredients);
         recipeRepository.save(recipe);
         return recipeMapper.convertToDTO(recipe);
     }
@@ -70,8 +75,9 @@ public class RecipeService {
         if (recipeRequestDTO.getImage() != null) {
             recipe.setImage(recipeRequestDTO.getImage());
         }
-        if (recipeRequestDTO.getIngredients() != null) {
-            recipe.setIngredients(recipeRequestDTO.getIngredients());
+        if (recipeRequestDTO.getIngredientIds() != null) {
+            List<Ingredient> ingredients = ingredientRepository.findAllById(recipeRequestDTO.getIngredientIds());
+            recipe.setIngredients(ingredients);
         }
         if (recipeRequestDTO.getScore() >= 0 && recipeRequestDTO.getScore() <= 5) {
             recipe.setScore(recipeRequestDTO.getScore());
@@ -114,5 +120,4 @@ public class RecipeService {
                 .map(recipeMapper::convertToDTO)
                 .collect(Collectors.toList());
     }
-
 }

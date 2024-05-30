@@ -4,6 +4,7 @@ import lombok.Data;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +24,6 @@ public class Ingredient {
     @Column(name = "calories")
     private float calories;
 
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
+    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
+    private List<Recipe> recipes;
 }
