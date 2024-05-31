@@ -24,42 +24,37 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Validated
 public class UserService {
-    
+
     private final UserRespository userRespository;
     private final UserMapper userMapper;
 
-
-    public User createUser(@Valid  UserRequestDTO userRequestDTO) {
-
-
-
+    @Transactional
+    public UserResponseDTO createUser(@Validated UserRequestDTO userRequestDTO) {
         if (userRespository.existsByEmail(userRequestDTO.getEmail())) {
             throw new ValidationUserRegisterException("El email ya está registrado");
         }
 
-
         User user = userMapper.convertToEntity(userRequestDTO);
         userRespository.save(user);
-        
-        return user;
+
+        return userMapper.convertToDTO(user);
 
     }
 
     @Transactional(readOnly = true)
     public UserResponseDTO getUserById(Long id) {
         User user = userRespository.findById(id)
-            .orElseThrow(() -> new UserNotFound("Usuario no encontrado con el id: "+id));
+                .orElseThrow(() -> new UserNotFound("Usuario no encontrado con el id: " + id));
 
         return userMapper.convertToDTO(user);
     }
 
-
     @Transactional
     public UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO) {
         User existingUser = userRespository.findById(id)
-            .orElseThrow(() -> new UserNotFound("Usuario no encontrado con el id: "+id));
+                .orElseThrow(() -> new UserNotFound("Usuario no encontrado con el id: " + id));
 
-        if (!existingUser.getEmail().equals(userRequestDTO.getEmail()) 
+        if (!existingUser.getEmail().equals(userRequestDTO.getEmail())
                 && userRespository.existsByEmail(userRequestDTO.getEmail())) {
             throw new ValidationUserRegisterException("El nuevo email ya está registrado");
         }
@@ -75,7 +70,7 @@ public class UserService {
     public List<UserResponseDTO> getAllUsers() {
         List<User> users = userRespository.findAll();
         return userMapper.convertToListDTO(users);
-    } 
+    }
 
     @Transactional
     public void deleteUser(Long id) {

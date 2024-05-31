@@ -16,4 +16,5 @@ public class SpecialistProfileResponseDTO {
     private String studCertificate;
     private String ocupation;
     private String email;
+    private String password;
 }

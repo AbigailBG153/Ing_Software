@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.nutrilife.fitnessservice.model.entity.SpecialistProfile;
 
-public interface SpecialistProfileRepository extends JpaRepository<SpecialistProfile, Long>{
+public interface SpecialistProfileRepository extends JpaRepository<SpecialistProfile, Long> {
 
     @Query("SELECT sp FROM SpecialistProfile sp WHERE sp.user.id =:userId")
     Optional<SpecialistProfile> findByUserId(@Param("userId") Long userId);
@@ -16,4 +16,15 @@ public interface SpecialistProfileRepository extends JpaRepository<SpecialistPro
     @Query("SELECT sp FROM SpecialistProfile sp WHERE sp.name LIKE CONCAT('%', :name, '%')")
     Optional<SpecialistProfile> getSpecialistProfileByName(@Param("name") String name);
 
+    List<SpecialistProfile> findByName(String name);
+
+    List<SpecialistProfile> findByOcuppation(String occupation);
+
+    List<SpecialistProfile> findByAge(Integer age);
+
+    List<SpecialistProfile> findByAgeRange(Integer minAge, Integer maxAge);
+
+    List<SpecialistProfile> findByScore(Integer score);
+
+    List<SpecialistProfile> findByScoreRange(Integer minScore, Integer maxScore);
 }

@@ -24,11 +24,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
-    
+
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers(){
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         List<UserResponseDTO> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -39,19 +39,18 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    
-    //@PostMapping
-    //public ResponseEntity<UserResponseDTO> createUser(@Validated @RequestBody UserRequestDTO userDTO) {
-    //    UserResponseDTO createdUser = userService.createUser(userDTO);
-    //    return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    //}
+    @PostMapping
+    public ResponseEntity<UserResponseDTO> createUser(@Validated @RequestBody UserRequestDTO userDTO) {
+        UserResponseDTO createdUser = userService.createUser(userDTO);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @Validated @RequestBody UserRequestDTO userDTO) {
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id,
+            @Validated @RequestBody UserRequestDTO userDTO) {
         UserResponseDTO updatedUser = userService.updateUser(id, userDTO);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable Long id) {

@@ -16,23 +16,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table (name = "users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "user_id")
+    @Column(name = "user_id")
     private Long userId;
 
-    @Column (name = "email", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column (name = "password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    //@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    //private CustomerProfile customers;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private CustomerProfile customers;
 
-    //@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    //private CustomerProfile specialists;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private CustomerProfile specialists;
 
 }

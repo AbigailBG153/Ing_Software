@@ -11,90 +11,81 @@ import com.nutrilife.fitnessservice.exception.UserNotFound;
 import com.nutrilife.fitnessservice.mapper.CustomerProfileMapper;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.CustomerProfile;
 import com.nutrilife.fitnessservice.model.entity.User;
 import com.nutrilife.fitnessservice.repository.CustomerProfileRepository;
-
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class CustomerProfileService {
-    
+
     private final CustomerProfileRepository customerProfileRepository;
     private final CustomerProfileMapper customerProfileMapper;
-    private final  UserService userService;
+    private final UserService userService;
 
-    //Crear perfil del usuario cliente
+    // Crear perfil del usuario cliente
     @Transactional
     public CustomerProfileResponseDTO createProfileCustomer(CustomerProfileRequestDTO customerProfileRequestDTO) {
 
-        User user = userService.createUser(customerProfileMapper.createUserRequestDTO(customerProfileRequestDTO));
-        
+        UserResponseDTO userResponseDTO = userService
+                .createUser(customerProfileMapper.createUserRequestDTO(customerProfileRequestDTO));
+
         CustomerProfile customerProfile = customerProfileMapper.convertToEntity(customerProfileRequestDTO);
-        customerProfile.setUser(user);
 
         customerProfileRepository.save(customerProfile);
-        CustomerProfileResponseDTO custDTO = customerProfileMapper.convertToDTO(customerProfile);
-        custDTO.setEmail(customerProfile.getUser().getEmail());
-        return custDTO;
+        return customerProfileMapper.convertToDTO(customerProfile);
+
     }
 
-    //Mostra perfil de un usuario cliente en especifico por el userId
+    // Mostra perfil de un usuario cliente en especifico por el userId
     @Transactional(readOnly = true)
     public CustomerProfileResponseDTO getCustomerProfileByUserId(Long userId) {
         CustomerProfile customerProfile = customerProfileRepository.findByUserId(userId)
-            .orElseThrow(() -> new UserNotFound("El usuario no existe"));
+                .orElseThrow(() -> new UserNotFound("El usuario no existe"));
 
         return customerProfileMapper.convertToDTO(customerProfile);
     }
 
     @Transactional(readOnly = true)
     public List<CustomerProfileResponseDTO> getCustomerProfileByName(String name) {
-    List<CustomerProfile> customers = customerProfileRepository.getCustomerProfileByName(name)
-        .orElseThrow(() -> new UserNotFound("Nombre no encontrado"));
+        List<CustomerProfile> customers = customerProfileRepository.getCustomerProfileByName(name)
+                .orElseThrow(() -> new UserNotFound("Nombre no encontrado"));
 
-    return customerProfileMapper.convertToListDTO(customers);
+        return customerProfileMapper.convertToListDTO(customers);
     }
 
     @Transactional(readOnly = true)
     public List<CustomerProfileResponseDTO> findByDietType(String dietType) {
-    List<CustomerProfile> customers = customerProfileRepository.findByDietType(dietType)
-        .orElseThrow(() -> new UserNotFound("Dieta no encontrada"));
+        List<CustomerProfile> customers = customerProfileRepository.findByDietType(dietType)
+                .orElseThrow(() -> new UserNotFound("Dieta no encontrada"));
 
-    return customerProfileMapper.convertToListDTO(customers);
-    }
-
-    @Transactional(readOnly = true)
-    public CustomerProfileResponseDTO getCustomerProfileById(Long id) {
-        CustomerProfile customerProfile = customerProfileRepository.findById(id)
-            .orElseThrow(() -> new UserNotFound("El usuario no existe"));
-
-        CustomerProfileResponseDTO custDTO = customerProfileMapper.convertToDTO(customerProfile);
-        custDTO.setEmail(customerProfile.getUser().getEmail());
-        return custDTO;
-    }
-
-    @Transactional(readOnly = true)
-    public List<CustomerProfileResponseDTO> getAllCustomerProfile() {
-        List<CustomerProfile> customerProfiles = customerProfileRepository.findAll();
-
-        List<CustomerProfileResponseDTO> custDTOs = customerProfileMapper.convertToListDTO(customerProfiles);
-        List<String> emails = new ArrayList<>();
-        customerProfiles.forEach(profile -> emails.add(profile.getUser().getEmail()));
-
-        IntStream.range(0, custDTOs.size())
-            .forEach(i -> custDTOs.get(i).setEmail(emails.get(i % emails.size())));
-        return custDTOs;
+        return customerProfileMapper.convertToListDTO(customers);
     }
 
     @Transactional
-    public CustomerProfileResponseDTO updateCustomerProfile(Long id, CustomerProfileRequestDTO customerProfileRequestDTO) {
-        CustomerProfile customerProfile  = customerProfileRepository.findById(id)
-            .orElseThrow(() -> new UserNotFound("Perfil de usuario no encontrado con el numero: "+id));
+    public CustomerProfileResponseDTO getCustomerProfileById(Long id) {
+        CustomerProfile customerProfile = customerProfileRepository.findById(id)
+                .orElseThrow(() -> new UserNotFound("El usuario no existe"));
 
-        customerProfile.setAge(customerProfileRequestDTO.getAge()); 
+        return customerProfileMapper.convertToDTO(customerProfile);
+    }
+
+    @Transactional
+    public List<CustomerProfileResponseDTO> getAllCustomerProfile() {
+        List<CustomerProfile> customerProfiles = customerProfileRepository.findAll();
+        return customerProfileMapper.convertToListDTO(customerProfiles);
+    }
+
+    @Transactional
+    public CustomerProfileResponseDTO updateCustomerProfile(Long id,
+            CustomerProfileRequestDTO customerProfileRequestDTO) {
+        CustomerProfile customerProfile = customerProfileRepository.findById(id)
+                .orElseThrow(() -> new UserNotFound("Perfil de usuario no encontrado con el numero: " + id));
+
+        customerProfile.setAge(customerProfileRequestDTO.getAge());
         customerProfile.setAlergies(customerProfileRequestDTO.getAlergies());
         customerProfile.setDietRestriction(customerProfileRequestDTO.getDietRestriction());
         customerProfile.setDietType(customerProfileRequestDTO.getDietType());
@@ -109,7 +100,7 @@ public class CustomerProfileService {
     }
 
     @Transactional
-    public void deleteCustomerProfile(Long id){
+    public void deleteCustomerProfile(Long id) {
         customerProfileRepository.deleteById(id);
     }
 }

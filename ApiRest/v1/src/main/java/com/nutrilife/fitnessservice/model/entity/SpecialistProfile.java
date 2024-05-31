@@ -17,13 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table (name = "specProfiles")
+@Table(name = "specProfiles")
 public class SpecialistProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="spec_id")
+    @Column(name = "spec_id")
     private Long specId;
-
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -31,18 +30,18 @@ public class SpecialistProfile {
     private String phoneNumber;
     @Column(name = "age", nullable = false)
     private Integer age;
-    //@Lob
-    @Column(name = "stud_certificate", nullable = true)
-    private String studCertificate;
-    //@Lob
-    //@Column(name = "cv", nullable = false)
-    //private byte[] cv;
+    // @Lob
+    // @Column(name = "stud_certificate", nullable = false)
+    // private byte[] studCertificate;
+    // @Lob
+    // @Column(name = "cv", nullable = false)
+    // private byte[] cv;
     @Column(name = "score")
     private Integer score;
     @Column(name = "ocupation")
     private String ocupation;
 
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }

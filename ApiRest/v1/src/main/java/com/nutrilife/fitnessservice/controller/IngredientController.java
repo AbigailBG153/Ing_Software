@@ -8,6 +8,9 @@ import com.nutrilife.fitnessservice.model.entity.Recipe;
 import com.nutrilife.fitnessservice.service.IngredientService;
 import com.nutrilife.fitnessservice.service.RecipeService;
 
+import com.nutrilife.fitnessservice.model.dto.IngredientRequestDTO;
+import com.nutrilife.fitnessservice.model.dto.IngredientResponseDTO;
+import com.nutrilife.fitnessservice.service.IngredientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
