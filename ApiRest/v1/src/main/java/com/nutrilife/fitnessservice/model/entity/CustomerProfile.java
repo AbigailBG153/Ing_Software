@@ -21,7 +21,7 @@ public class CustomerProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="cust_id")
+    @Column(name = "cust_id")
     private Long custId;
 
     @Column(name = "name", nullable = false)
@@ -42,6 +42,6 @@ public class CustomerProfile {
     private String dietRestriction;
 
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }
