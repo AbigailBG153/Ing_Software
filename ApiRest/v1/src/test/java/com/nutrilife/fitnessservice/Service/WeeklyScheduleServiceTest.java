@@ -1,4 +1,4 @@
-package com.nutrilife.fitnessservice.Service;
+package com.nutrilife.fitnessservice.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -60,7 +60,7 @@ class WeeklyScheduleServiceTest {
 
     @InjectMocks
     private WeeklyScheduleService weeklyScheduleService;
-    
+
     private LocalDate date;
     private DayOfWeek dayOfWeek;
 
@@ -74,20 +74,20 @@ class WeeklyScheduleServiceTest {
     private WeeklyScheduleResponseDTO weeklyScheduleResponseDTO;
     private WeeklyScheduleRequestDTO weeklyScheduleRequestDTO;
     private WeeklyScheduleMapper weeklyScheduleMapperTest;
+
     @BeforeEach
     void setUp() {
 
         scheduleMapperTest = new ScheduleMapper(new ModelMapper());
 
         weeklyScheduleMapperTest = new WeeklyScheduleMapper(new ModelMapper(), scheduleMapperTest);
-        
+
         date = LocalDate.of(2024, 5, 27);
         dayOfWeek = LocalDate.of(2024, 5, 27).getDayOfWeek();
         specialistProfileId = 1L;
         specialistProfile = new SpecialistProfile();
         specialistProfile.setSpecId(1L);
-        
-        
+
         weeklyScheduleRequestDTO = new WeeklyScheduleRequestDTO();
         weeklyScheduleRequestDTO.setStartDate(LocalDate.of(2024, 5, 27));
         weeklyScheduleRequestDTO.setEndDate(LocalDate.of(2024, 6, 2));
@@ -95,11 +95,11 @@ class WeeklyScheduleServiceTest {
 
         weeklySchedule = new WeeklySchedule();
         weeklySchedule.setWeeklyScheduleId(1L);
-        weeklySchedule.setStartDate(weeklyScheduleRequestDTO .getStartDate());
-        weeklySchedule.setEndDate(weeklyScheduleRequestDTO .getEndDate());
+        weeklySchedule.setStartDate(weeklyScheduleRequestDTO.getStartDate());
+        weeklySchedule.setEndDate(weeklyScheduleRequestDTO.getEndDate());
         weeklySchedule.setStatus(WeeklyScheduleStatus.DISABLED); // Establecer el estado predeterminado
         weeklySchedule.setSpecialistProfile(specialistProfile);
-        
+
         scheduleRequestDTO = new ScheduleRequestDTO();
         scheduleRequestDTO.setDayOfWeek(LocalDate.of(2024, 5, 27).getDayOfWeek().toString());
         scheduleRequestDTO.setDate(LocalDate.of(2024, 5, 27));
@@ -115,7 +115,6 @@ class WeeklyScheduleServiceTest {
         schedule.setStartTime(scheduleRequestDTO.getStartTime());
         schedule.setEndTime(scheduleRequestDTO.getEndTime());
         schedule.setWeeklySchedule(weeklySchedule);
-        
 
         weeklySchedule.setScheduleList(Arrays.asList(schedule));
         specialistProfile.setWeeklySchedules(Arrays.asList(weeklySchedule));
@@ -128,7 +127,6 @@ class WeeklyScheduleServiceTest {
         scheduleResponseDTO.setEndTime(schedule.getEndTime());
         scheduleResponseDTO.setMeeting(null);
 
-
         weeklyScheduleResponseDTO = new WeeklyScheduleResponseDTO();
         weeklyScheduleResponseDTO.setWeeklyScheduleId(1L);
         weeklyScheduleResponseDTO.setSpecialistId(1L);
@@ -140,11 +138,13 @@ class WeeklyScheduleServiceTest {
 
     @Test
     void testGetAllWeeklySchedules() {
-        
+
         when(weeklyScheduleRepository.findAll()).thenReturn(Arrays.asList(weeklySchedule));
-        when(weeklyScheduleMapper.convertToListDTO(Arrays.asList(weeklySchedule))).thenReturn(Arrays.asList(weeklyScheduleResponseDTO));
-        
-        List<WeeklyScheduleResponseDTO> weeklyScheduleResponseDTOs = weeklyScheduleMapperTest.convertToListDTO(Arrays.asList(weeklySchedule));
+        when(weeklyScheduleMapper.convertToListDTO(Arrays.asList(weeklySchedule)))
+                .thenReturn(Arrays.asList(weeklyScheduleResponseDTO));
+
+        List<WeeklyScheduleResponseDTO> weeklyScheduleResponseDTOs = weeklyScheduleMapperTest
+                .convertToListDTO(Arrays.asList(weeklySchedule));
         assertNotNull(weeklyScheduleResponseDTOs);
 
         List<WeeklyScheduleResponseDTO> result = weeklyScheduleService.getAllWeeklySchedules();
@@ -153,7 +153,7 @@ class WeeklyScheduleServiceTest {
         verify(weeklyScheduleRepository).findAll();
         verify(weeklyScheduleMapper).convertToListDTO(Arrays.asList(weeklySchedule));
     }
-    
+
     @Test
     void testDeleteWeeklySchedule() {
         when(weeklyScheduleRepository.findById(anyLong())).thenReturn(Optional.of(weeklySchedule));
@@ -184,19 +184,20 @@ class WeeklyScheduleServiceTest {
         when(scheduleMapper.craeteScheduleRequestDTO(any(LocalDate.class), any(DayOfWeek.class), any(LocalTime.class)))
                 .thenReturn(scheduleRequestDTO);
         when(scheduleMapper.convertToEntity(scheduleRequestDTO)).thenReturn(schedule);
-        
+
         WeeklySchedule weeklySchedule = weeklyScheduleMapperTest.convertToEntity(weeklyScheduleRequestDTO);
         assertNotNull(weeklySchedule);
         WeeklyScheduleResponseDTO weeklyScheduleResponseDTO = weeklyScheduleMapperTest.convertToDTO(weeklySchedule);
         assertNotNull(weeklyScheduleResponseDTO);
-        
+
         Schedule schedule = scheduleMapperTest.convertToEntity(scheduleRequestDTO);
         assertNotNull(schedule);
-        ScheduleRequestDTO scheduleRequestDTO = scheduleMapperTest.craeteScheduleRequestDTO(date, dayOfWeek, LocalTime.now());
+        ScheduleRequestDTO scheduleRequestDTO = scheduleMapperTest.craeteScheduleRequestDTO(date, dayOfWeek,
+                LocalTime.now());
         assertNotNull(scheduleRequestDTO);
 
-
-        WeeklyScheduleResponseDTO responseDTO = weeklyScheduleService.createWeeklySchedule(specialistProfileId, weeklyScheduleRequestDTO);
+        WeeklyScheduleResponseDTO responseDTO = weeklyScheduleService.createWeeklySchedule(specialistProfileId,
+                weeklyScheduleRequestDTO);
         assertNotNull(responseDTO);
         assertEquals(1L, responseDTO.getWeeklyScheduleId());
     }
@@ -213,14 +214,13 @@ class WeeklyScheduleServiceTest {
         verify(weeklyScheduleRepository, never()).save(any());
     }
 
-
     @Test
     void testGenerateSchedulesForDay() {
         // Configurar el comportamiento esperado del mock scheduleMapper
         when(scheduleMapper.craeteScheduleRequestDTO(any(LocalDate.class), any(DayOfWeek.class), any(LocalTime.class)))
                 .thenReturn(scheduleRequestDTO);
         when(scheduleMapper.convertToEntity(scheduleRequestDTO)).thenReturn(schedule);
-        
+
         // Llamar al método a probar
         List<Schedule> schedulesList = weeklyScheduleService.generateSchedulesForDay(date, dayOfWeek, weeklySchedule);
 
@@ -229,20 +229,17 @@ class WeeklyScheduleServiceTest {
         schedulesList.forEach(s -> assertEquals(date, s.getDate()));
     }
 
-
-    
     @Test
     void testGetAllWeeklySchedules_Specialist() {
         when(specialistProfileRepository.findById(1L)).thenReturn(Optional.of(specialistProfile));
         when(weeklyScheduleMapper.convertToListDTO(specialistProfile.getWeeklySchedules()))
                 .thenReturn(Arrays.asList(weeklyScheduleResponseDTO));
 
-                
-        List<WeeklyScheduleResponseDTO> weeklyScheduleResponseDTOs = weeklyScheduleMapperTest.convertToListDTO(specialistProfile.getWeeklySchedules());
+        List<WeeklyScheduleResponseDTO> weeklyScheduleResponseDTOs = weeklyScheduleMapperTest
+                .convertToListDTO(specialistProfile.getWeeklySchedules());
         assertNotNull(weeklyScheduleResponseDTOs);
 
-        List<WeeklyScheduleResponseDTO> result = weeklyScheduleService.
-        getAllWeeklySchedules_Specialist(1L);
+        List<WeeklyScheduleResponseDTO> result = weeklyScheduleService.getAllWeeklySchedules_Specialist(1L);
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(weeklyScheduleResponseDTO, result.get(0));
@@ -261,6 +258,7 @@ class WeeklyScheduleServiceTest {
             weeklyScheduleService.getAllWeeklySchedules_Specialist(specialistId);
         });
     }
+
     @Test
     void testUpdateWeeklySchedule_Specialist_SuccessfulUpdate() {
         // Arrange
@@ -272,29 +270,30 @@ class WeeklyScheduleServiceTest {
         when(specialistProfileRepository.findById(specialistId)).thenReturn(Optional.of(specialistProfile));
         when(weeklyScheduleRepository.save(weeklySchedule)).thenReturn(weeklySchedule);
         when(weeklyScheduleMapper.convertToDTO(weeklySchedule)).thenReturn(weeklyScheduleResponseDTO);
-        
+
         WeeklyScheduleResponseDTO weeklyScheduleResponseDTO = weeklyScheduleMapperTest.convertToDTO(weeklySchedule);
         assertNotNull(weeklyScheduleResponseDTO);
         // Act
-        WeeklyScheduleResponseDTO result = weeklyScheduleService.updateWeeklySchedule_Specialist(id, weeklyScheduleRequestDTO, specialistId);
+        WeeklyScheduleResponseDTO result = weeklyScheduleService.updateWeeklySchedule_Specialist(id,
+                weeklyScheduleRequestDTO, specialistId);
 
         // Assert
         assertNotNull(result);
         assertEquals(WeeklyScheduleStatus.ACTIVE, weeklySchedule.getStatus());
     }
 
-    
     @Test
     void testGetByWeeklyScheduleId_Specialist() {
         when(specialistProfileRepository.findById(1L)).thenReturn(Optional.of(specialistProfile));
         when(weeklyScheduleMapper.convertToDTO(weeklySchedule)).thenReturn(weeklyScheduleResponseDTO);
-        
+
         WeeklyScheduleResponseDTO weeklyScheduleResponseDTO = weeklyScheduleMapperTest.convertToDTO(weeklySchedule);
         assertNotNull(weeklyScheduleResponseDTO);
-        
-        WeeklyScheduleResponseDTO result = weeklyScheduleService.getByWeeklyScheduleId_Specialist(1L,1L);
+
+        WeeklyScheduleResponseDTO result = weeklyScheduleService.getByWeeklyScheduleId_Specialist(1L, 1L);
         assertNotNull(result);
     }
+
     @Test
     void testGetByWeeklyScheduleId_Specialist_SpecialistNotFound() {
         when(specialistProfileRepository.findById(specialistProfileId)).thenReturn(Optional.empty());
