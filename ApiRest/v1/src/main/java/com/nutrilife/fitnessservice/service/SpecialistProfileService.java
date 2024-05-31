@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nutrilife.fitnessservice.exception.SpecialistNotFoundException;
-import com.nutrilife.fitnessservice.exception.UserNotFound;
 import com.nutrilife.fitnessservice.mapper.SpecialistProfileMapper;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileResponseDTO;
@@ -46,9 +45,64 @@ public class SpecialistProfileService {
     }
 
     @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByName(String name) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByName(name);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialista no encontrado con el nombre: " + name);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+    @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByOccupation(String occupation) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByOcuppation(occupation);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialista no encontrado con la ocupación: " + occupation);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+    @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByAge(Integer age) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByAge(age);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialista no encontrado con la edad: " + age);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+    @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByAgeRange(Integer minAge, Integer maxAge) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByAgeRange(minAge, maxAge);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialistas no encontrados en el rango de edad: " + minAge + " to " + maxAge);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+    @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByScore(Integer score) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByScore(score);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialista no encontrado con el puntaje: " + score);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+    @Transactional
+    public List<SpecialistProfileResponseDTO> getSpecialistProfilesByScoreRange(Integer minScore, Integer maxScore) {
+        List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findByScoreRange(minScore, maxScore);
+        if (specialistProfiles.isEmpty()) {
+            throw new SpecialistNotFoundException("Especialistas no encontrados en el rango de puntuación: " + minScore + " to " + maxScore);
+        }
+        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+    }
+
+
+    @Transactional
     public SpecialistProfileResponseDTO updateSpecialistProfile(Long id, SpecialistProfileRequestDTO specialistProfileRequestDTO) {
         SpecialistProfile specialistProfile = specialistProfileRepository.findById(id)
-            .orElseThrow(() -> new UserNotFound("Perfil de usuario no encontrado con el numero: "+id));
+            .orElseThrow(() -> new SpecialistNotFoundException("Perfil de especialista no encontrado con el id: "+id));
         
     if (specialistProfileRequestDTO.getName() != null) {
         specialistProfile.setName(specialistProfileRequestDTO.getName());
