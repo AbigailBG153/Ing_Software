@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -14,7 +15,7 @@ public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipe_id")
+    @Column(name = "training_id")
     private Long id;
 
     @Column(name = "name")
@@ -37,4 +38,7 @@ public class Training {
 
     @Column(name = "video")
     private String video;
+
+    @Column(name = "date")
+    private LocalDate date;
 }

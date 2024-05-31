@@ -1,10 +1,10 @@
 package com.nutrilife.fitnessservice.mapper;
 
-import com.nutrilife.fitnessservice.model.dto.TrainingRequestDTO;
-import com.nutrilife.fitnessservice.model.dto.TrainingResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.*;
 import com.nutrilife.fitnessservice.model.entity.Training;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import java.time.LocalDate;
 
 @Component
 public class TrainingMapper {
@@ -22,5 +22,15 @@ public class TrainingMapper {
     public TrainingResponseDTO convertToDTO(Training training) {
         return modelMapper.map(training, TrainingResponseDTO.class);
     }
-}
 
+    public void updateEntityFromDTO(TrainingUpdateDTO dto, Training entity) {
+        modelMapper.map(dto, entity);
+    }
+
+    public TrainingReportDTO convertTrainingReportDTO(Object[] result) {
+        TrainingReportDTO dto = new TrainingReportDTO();
+        dto.setCount((Long) result[0]);
+        dto.setDate((LocalDate) result[1]);
+        return dto;
+    }
+}
