@@ -1,8 +1,6 @@
 package com.nutrilife.fitnessservice.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,16 +26,33 @@ public class SpecialistProfileService {
     @Transactional
     public SpecialistProfileResponseDTO createProfileSpecialist(
             SpecialistProfileRequestDTO specialistProfileRequestDTO) {
+        User user = userService.createUser(specialistProfileMapper.createUserRequestDTO(specialistProfileRequestDTO));
 
-        SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO);
+        SpecialistProfile specialistProfile = specialistProfileMapper.convertToEntity(specialistProfileRequestDTO,
+                user);
+
         specialistProfileRepository.save(specialistProfile);
-        return specialistProfileMapper.convertToDTO(specialistProfile);
+        SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
+
+        return specDTO;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
+    public SpecialistProfileResponseDTO getSpecialistProfileByUserId(Long id) {
+        SpecialistProfile specialistProfile = specialistProfileRepository.findByUserId(id)
+                .orElseThrow(() -> new UserNotFound("El usuario no existe"));
+
+        SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
+
+        return specDTO;
+    }
+
+    @Transactional(readOnly = true)
     public SpecialistProfileResponseDTO getSpecialistProfileById(Long id) {
         SpecialistProfile specialistProfile = specialistProfileRepository.findById(id)
-                .orElseThrow(() -> new SpecialistNotFoundException("Especialista no encontrado"));
+                .orElseThrow(() -> new UserNotFound("El usuario no existe"));
+
+        SpecialistProfileResponseDTO specDTO = specialistProfileMapper.convertToDTO(specialistProfile);
 
         return specialistProfileMapper.convertToDTO(specialistProfile);
     }
@@ -45,7 +60,10 @@ public class SpecialistProfileService {
     @Transactional
     public List<SpecialistProfileResponseDTO> getAllSpecialistProfile() {
         List<SpecialistProfile> specialistProfiles = specialistProfileRepository.findAll();
-        return specialistProfileMapper.convertToListDTO(specialistProfiles);
+
+        List<SpecialistProfileResponseDTO> specDTOs = specialistProfileMapper.convertToListDTO(specialistProfiles);
+
+        return specDTOs;
     }
 
     @Transactional
