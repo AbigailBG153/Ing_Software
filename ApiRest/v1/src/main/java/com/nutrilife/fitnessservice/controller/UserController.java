@@ -45,11 +45,11 @@ public class UserController {
     //    return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     //}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @Validated @RequestBody UserRequestDTO userDTO) {
-        UserResponseDTO updatedUser = userService.updateUser(id, userDTO);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-    }
+    //@PutMapping("/{id}")
+    //public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @Validated @RequestBody UserRequestDTO userDTO) {
+    //    UserResponseDTO updatedUser = userService.updateUser(id, userDTO);
+    //    return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    //}
 
 
     @DeleteMapping("/{id}")

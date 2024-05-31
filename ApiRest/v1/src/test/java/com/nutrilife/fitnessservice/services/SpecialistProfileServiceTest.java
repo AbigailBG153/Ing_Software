@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -188,29 +186,28 @@ public class SpecialistProfileServiceTest {
 
         assertNotNull(result);
         assertEquals(id, result.getSpecId());
+
+        verify(specialistProfileRepository, times(1)).findByUserId(id);
+        verify(specialistProfileMapper1, times(1)).convertToDTO(any(SpecialistProfile.class));
     }
 
     @Test
     public void testGetSpecialistProfileByUserId_NonExistingUserId() {
 
         Long id = 999L;
-        SpecialistProfileRequestDTO requestDTO = new SpecialistProfileRequestDTO();
-        requestDTO.setAge(25);
-        requestDTO.setEmail("test1@mail.com");
-        requestDTO.setName("User Test");
-        requestDTO.setOcupation("Specialist");
-        requestDTO.setPassword("password%test1");
-        requestDTO.setPhoneNumber("1234567890");
-        requestDTO.setScore(4);
+        User user = new User();
+        user.setEmail("test1@mail.com");
+        SpecialistProfile specialist = new SpecialistProfile();
+        specialist.setSpecId(id);
+        specialist.setUser(user);
 
-        when(specialistProfileRepository.findById(id)).thenReturn(Optional.empty());
+        when(specialistProfileRepository.findByUserId(id)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFound.class, () -> {
-            specialistProfileService.updateSpecialistProfile(id, requestDTO);
+            specialistProfileService.getSpecialistProfileByUserId(id);
         });
 
-        verify(specialistProfileRepository, times(1)).findById(id);
-        verify(specialistProfileRepository, times(0)).save(any(SpecialistProfile.class));
+        verify(specialistProfileRepository, times(1)).findByUserId(id);
         verify(specialistProfileMapper1, times(0)).convertToDTO(any(SpecialistProfile.class));
     }
 
@@ -239,6 +236,9 @@ public class SpecialistProfileServiceTest {
 
         assertNotNull(result);
         assertEquals(id, result.getSpecId());
+
+        verify(specialistProfileRepository, times(1)).findById(id);
+        verify(specialistProfileMapper1, times(1)).convertToDTO(any(SpecialistProfile.class));
     }
 
     @Test
@@ -252,6 +252,8 @@ public class SpecialistProfileServiceTest {
 
         assertThrows(UserNotFound.class, () -> specialistProfileService.getSpecialistProfileById(id));
 
+        verify(specialistProfileRepository, times(1)).findById(id);
+        verify(specialistProfileMapper1, times(0)).convertToDTO(any(SpecialistProfile.class));
     }
 
     @Test
@@ -316,6 +318,30 @@ public class SpecialistProfileServiceTest {
     }
 
     @Test
+    public void testUpdateSpecialistProfile_NonExistingUserId() {
+        Long id = 999L;
+
+        SpecialistProfileRequestDTO requestDTO = new SpecialistProfileRequestDTO();
+        requestDTO.setAge(25);
+        requestDTO.setEmail("test1@mail.com");
+        requestDTO.setName("User Test");
+        requestDTO.setOcupation("Specialist");
+        requestDTO.setPassword("password%test1");
+        requestDTO.setPhoneNumber("1234567890");
+        requestDTO.setScore(4);
+
+        when(specialistProfileRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(UserNotFound.class, () -> {
+            specialistProfileService.updateSpecialistProfile(id, requestDTO);
+        });
+
+        verify(specialistProfileRepository, times(1)).findById(id);
+        verify(specialistProfileRepository, times(0)).save(any(SpecialistProfile.class));
+        verify(specialistProfileMapper1, times(0)).convertToDTO(any(SpecialistProfile.class));
+    }
+
+    @Test
     public void testDeleteSpecialistProfile_ExistingUserId() {
         SpecialistProfile specialist = new SpecialistProfile();
         specialist.setAge(25);
@@ -327,7 +353,6 @@ public class SpecialistProfileServiceTest {
         
         doThrow(new UserNotFound()).when(specialistProfileRepository).deleteById(specialist.getSpecId());
 
-        // Act & Assert
         assertThrows(UserNotFound.class, () -> {
             specialistProfileService.deleteSpecialistProfile(specialist.getSpecId());
         });
