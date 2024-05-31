@@ -1,8 +1,10 @@
 package com.nutrilife.fitnessservice.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,9 @@ import com.nutrilife.fitnessservice.exception.IngredientNotFoundException;
 import com.nutrilife.fitnessservice.model.dto.IngredientRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.IngredientResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.Ingredient;
+import com.nutrilife.fitnessservice.model.entity.Recipe;
 import com.nutrilife.fitnessservice.repository.IngredientRepository;
+import com.nutrilife.fitnessservice.repository.RecipeRepository;
 import com.nutrilife.fitnessservice.service.IngredientService;
 import com.nutrilife.fitnessservice.mapper.IngredientMapper;
 
@@ -29,6 +33,9 @@ public class IngredientServiceTest {
 
     @Mock
     private IngredientMapper ingredientMapper;
+
+    @Mock
+    private RecipeRepository recipeRepository;
 
     @InjectMocks
     private IngredientService ingredientService;
@@ -153,13 +160,20 @@ public class IngredientServiceTest {
 
     @Test
     void deleteIngredient_Success() {
+        // Arrange
+        Long ingredientId = 1L;
 
         // Act
-        ingredientService.deleteIngredient(1L);
+        ingredientService.deleteIngredient(ingredientId);
 
         // Assert
-        verify(ingredientRepository).deleteById(1L);
-        verifyNoMoreInteractions(ingredientRepository, ingredientMapper);
+        verify(recipeRepository).findByIngredients_IdIn(List.of(ingredientId));
+        List<Recipe> recipes = Collections.emptyList(); // Lista vacía por defecto
+        if (!recipes.isEmpty()) {
+            verify(recipeRepository).save(any());
+        }
+        verify(ingredientRepository).deleteById(ingredientId);
+        verifyNoMoreInteractions(recipeRepository, ingredientRepository);
     }
 
     @Test

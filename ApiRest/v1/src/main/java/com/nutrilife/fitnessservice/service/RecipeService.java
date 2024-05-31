@@ -159,4 +159,14 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
+    public List<RecipeResponseDTO> convertToDTOListFromRecipe(List<Recipe> recipes) {
+        return recipes.stream()
+                .map(recipeMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<RecipeResponseDTO> convertToDTOListFromRecipeResponse(List<RecipeResponseDTO> recipes) {
+        return recipes;
+    }
+
 }

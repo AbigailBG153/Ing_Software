@@ -21,6 +21,7 @@ public class RecipeMapper {
 
     public Recipe convertToEntity(RecipeRequestDTO recipeRequestDTO) {
         Recipe recipe = modelMapper.map(recipeRequestDTO, Recipe.class);
+        // Seteamos los ingredientes manualmente
         List<Long> ingredientIds = recipeRequestDTO.getIngredientIds();
         List<Ingredient> ingredients = ingredientIds.stream()
                 .map(id -> {
@@ -48,4 +49,25 @@ public class RecipeMapper {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+
+    public RecipeRequestDTO convertToResponseDTO(RecipeResponseDTO recipeResponseDTO) {
+        RecipeRequestDTO recipeRequestDTO = new RecipeRequestDTO();
+        recipeRequestDTO.setName(recipeResponseDTO.getName());
+        recipeRequestDTO.setDescription(recipeResponseDTO.getDescription());
+        recipeRequestDTO.setType(recipeResponseDTO.getType());
+        recipeRequestDTO.setNutritionalGoal(recipeResponseDTO.getNutritionalGoal());
+        recipeRequestDTO.setTotalCalories(recipeResponseDTO.getTotalCalories());
+        recipeRequestDTO.setImage(recipeResponseDTO.getImage());
+
+        // Mapeo de la lista de IngredientResponseDTO a una lista de IDs
+        List<Long> ingredientIds = recipeResponseDTO.getIngredients().stream()
+                .map(IngredientResponseDTO::getId)
+                .collect(Collectors.toList());
+        recipeRequestDTO.setIngredientIds(ingredientIds);
+
+        recipeRequestDTO.setScore(recipeResponseDTO.getScore());
+        // Asegúrate de mapear correctamente los demás campos según tu implementación
+        return recipeRequestDTO;
+    }
+
 }

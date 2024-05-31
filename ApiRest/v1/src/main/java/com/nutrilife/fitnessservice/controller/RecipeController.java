@@ -1,6 +1,5 @@
 package com.nutrilife.fitnessservice.controller;
 
-import com.nutrilife.fitnessservice.mapper.RecipeMapper;
 import com.nutrilife.fitnessservice.model.dto.RecipeRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.RecipeResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.Recipe;
@@ -19,8 +18,6 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
-
-    private final RecipeMapper recipeMapper;
 
     @GetMapping
     public ResponseEntity<List<RecipeResponseDTO>> getAllRecipes() {
@@ -82,7 +79,7 @@ public class RecipeController {
     @GetMapping("/byIngredients")
     public ResponseEntity<List<RecipeResponseDTO>> getRecipesByIngredients(@RequestParam List<Long> ingredientIds) {
         List<Recipe> recipes = recipeService.getRecipesByIngredients(ingredientIds);
-        List<RecipeResponseDTO> recipeDTOs = recipeMapper.convertToListDTO(recipes);
+        List<RecipeResponseDTO> recipeDTOs = recipeService.convertToDTOListFromRecipe(recipes);
         return new ResponseEntity<>(recipeDTOs, HttpStatus.OK);
     }
 
