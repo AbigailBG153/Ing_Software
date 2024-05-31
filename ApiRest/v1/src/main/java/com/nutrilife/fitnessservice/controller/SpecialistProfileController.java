@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileRequestDTO;
@@ -37,6 +38,57 @@ public class SpecialistProfileController {
     public ResponseEntity<SpecialistProfileResponseDTO> getSpecialistProfileById(@PathVariable Long id) {
         SpecialistProfileResponseDTO specialist = specialistProfileService.getSpecialistProfileById(id);
         return new ResponseEntity<>(specialist, HttpStatus.OK);
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfilesByName(@RequestParam String name) {
+        List<SpecialistProfileResponseDTO> specialists = specialistProfileService.getSpecialistProfilesByName(name);
+        if (specialists.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(specialists);
+    }
+
+    @GetMapping("/{occupation}")
+    public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfilesByOccupation(@RequestParam String occupation) {
+        List<SpecialistProfileResponseDTO> specialists = specialistProfileService.getSpecialistProfilesByName(occupation);
+        if (specialists.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(specialists);
+    }
+
+    @GetMapping("/{age}")
+    public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfilesByAge(@RequestParam Integer age) {
+        List<SpecialistProfileResponseDTO> specialists = specialistProfileService.getSpecialistProfilesByAge(age);
+        if (specialists.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(specialists);
+    }
+
+
+    @GetMapping("/{minAge, maxAge}")
+    public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfileByAgeRange(@RequestParam(required = false) Integer minAge, @RequestParam(required = false) Integer maxAge) {
+        
+        if (minAge != null && maxAge != null) {
+            List<SpecialistProfileResponseDTO> specialists = specialistProfileService.getSpecialistProfilesByAgeRange(minAge, maxAge);
+            if (specialists.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            return ResponseEntity.ok(specialists);
+        }
+        
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/{score}")
+    public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfilesByScore(@RequestParam Integer score) {
+        List<SpecialistProfileResponseDTO> specialists = specialistProfileService.getSpecialistProfilesByScore(score);
+        if (specialists.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(specialists);
     }
 
     @PostMapping
