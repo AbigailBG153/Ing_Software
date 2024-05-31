@@ -54,4 +54,5 @@ public class SpecialistProfileMapper {
 
         return specDTOs;
     }
+
 }

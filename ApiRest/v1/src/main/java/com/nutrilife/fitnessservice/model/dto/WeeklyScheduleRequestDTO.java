@@ -2,8 +2,6 @@ package com.nutrilife.fitnessservice.model.dto;
 
 import java.time.LocalDate;
 
-import com.nutrilife.fitnessservice.model.enums.WeeklyScheduleStatus;
-
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeeklyScheduleRequestDTO {
-    
+
     @NotNull(message = "La fecha de inicio no debe estar vacía")
     @Future(message = "La fecha de inicio debe ser una fecha futura")
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}", message = "El formato de la fecha debe ser 'yyyy-MM-dd'")

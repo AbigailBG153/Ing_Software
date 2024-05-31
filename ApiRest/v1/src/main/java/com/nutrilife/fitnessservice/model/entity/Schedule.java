@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.model.entity;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -10,7 +11,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,13 +26,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="schedules")
+@Table(name = "schedules")
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
     private Long scheduleId;
-    
+
     @ManyToOne
     @JoinColumn(name = "weekly_schedule_id")
     private WeeklySchedule weeklySchedule;
@@ -53,6 +53,8 @@ public class Schedule {
     @Column(name = "status")
     private ScheduleStatus status;
 
-    @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "meeting_id")
     private Meeting meeting;
+
 }

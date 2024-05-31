@@ -1,5 +1,4 @@
-package com.nutrilife.fitnessservice.Controller;
-
+package com.nutrilife.fitnessservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -41,7 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ScheduleControllerTest {
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -53,10 +51,11 @@ public class ScheduleControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/schedules"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @Test
     void testUpdateScheduleStatus() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/schedules/{id}", "747"))
-            .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }

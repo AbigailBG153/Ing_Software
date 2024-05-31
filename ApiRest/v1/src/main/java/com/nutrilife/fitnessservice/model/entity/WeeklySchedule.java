@@ -3,6 +3,7 @@ package com.nutrilife.fitnessservice.model.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.nutrilife.fitnessservice.model.dto.ScheduleResponseDTO;
 import com.nutrilife.fitnessservice.model.enums.WeeklyScheduleStatus;
 
 import jakarta.persistence.CascadeType;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="weekly_schedules")
+@Table(name = "weekly_schedules")
 public class WeeklySchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

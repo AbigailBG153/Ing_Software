@@ -22,6 +22,7 @@ public class SpecialistProfileService {
 
     private final SpecialistProfileRepository specialistProfileRepository;
     private final SpecialistProfileMapper specialistProfileMapper;
+    private final UserService userService;
 
     @Transactional
     public SpecialistProfileResponseDTO createProfileSpecialist(

@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,7 @@ public interface SpecialistProfileRepository extends JpaRepository<SpecialistPro
 
     List<SpecialistProfile> findByName(String name);
 
-    List<SpecialistProfile> findByOcuppation(String occupation);
+    List<SpecialistProfile> findByOccupation(String occupation);
 
     List<SpecialistProfile> findByAge(Integer age);
 

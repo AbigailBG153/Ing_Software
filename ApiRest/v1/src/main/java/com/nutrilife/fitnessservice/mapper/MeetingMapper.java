@@ -9,8 +9,11 @@ import org.springframework.stereotype.Component;
 import com.nutrilife.fitnessservice.model.dto.MeetingRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.MeetingResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.Meeting;
+import com.nutrilife.fitnessservice.model.entity.Schedule;
+import com.nutrilife.fitnessservice.model.enums.MeetStatus;
 
 import lombok.AllArgsConstructor;
+
 @Component
 @AllArgsConstructor
 public class MeetingMapper {
@@ -28,5 +31,15 @@ public class MeetingMapper {
         return meetings.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public MeetingRequestDTO createMeetingRequestDTO(Schedule schedule) {
+        MeetingRequestDTO meetingRequestDTO = new MeetingRequestDTO();
+        meetingRequestDTO.setDate(schedule.getDate());
+        meetingRequestDTO.setStartTime(schedule.getStartTime());
+        meetingRequestDTO.setEndTime(schedule.getEndTime());
+        meetingRequestDTO.setStatus(MeetStatus.PENDING.toString());
+
+        return meetingRequestDTO;
     }
 }

@@ -29,7 +29,7 @@ public class UserService {
     private final UserMapper userMapper;
 
     @Transactional
-    public UserResponseDTO createUser(@Validated UserRequestDTO userRequestDTO) {
+    public User createUser(@Validated UserRequestDTO userRequestDTO) {
         if (userRespository.existsByEmail(userRequestDTO.getEmail())) {
             throw new ValidationUserRegisterException("El email ya está registrado");
         }
@@ -37,8 +37,7 @@ public class UserService {
         User user = userMapper.convertToEntity(userRequestDTO);
         userRespository.save(user);
 
-        return userMapper.convertToDTO(user);
-
+        return user;
     }
 
     @Transactional(readOnly = true)

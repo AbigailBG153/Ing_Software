@@ -1,5 +1,4 @@
-package com.nutrilife.fitnessservice.Controller;
-
+package com.nutrilife.fitnessservice.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,7 +39,7 @@ import com.nutrilife.fitnessservice.repository.ScheduleRepository;
 public class MeetingControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    
+
     @Autowired
     private MeetingRepository meetingRepository;
 
@@ -48,7 +47,8 @@ public class MeetingControllerTest {
     private ScheduleRepository scheduleRepository;
 
     private Schedule schedule;
-    private Meeting  meeting ;
+    private Meeting meeting;
+
     @BeforeEach
     public void setUp() {
 
@@ -61,35 +61,33 @@ public class MeetingControllerTest {
         schedule.setEndTime(LocalTime.of(12, 0));
         schedule.setWeeklySchedule(null);
         scheduleRepository.save(schedule);
-    
-    
-    }
 
+    }
 
     @Test
     void testGetAllMeetings() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meetings/allMeetings","1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/meetings/allMeetings", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @Test
     void testGetMeetingsByCustomerId() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/meetings/customer/{customerId}","1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/meetings/customer/{customerId}", "1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     void testGetMeetingById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/meetings")
-                        .param("MeetingId", "15"))
+                .param("MeetingId", "15"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-
     @Test
-    void testCreateMeeting() throws  Exception{
-        
-        mockMvc.perform(MockMvcRequestBuilders.post("/meetings/customer/{customerId}","1")
-        .param("scheduleId","1"))
+    void testCreateMeeting() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/meetings/customer/{customerId}", "1")
+                .param("scheduleId", "1"))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
@@ -103,6 +101,7 @@ public class MeetingControllerTest {
                 .content(asJsonString(meetingRequestDTO)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
     @Test
     void testDeleteMeeting() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/meetings")
@@ -120,7 +119,5 @@ public class MeetingControllerTest {
             throw new RuntimeException(e);
         }
     }
-
-
 
 }

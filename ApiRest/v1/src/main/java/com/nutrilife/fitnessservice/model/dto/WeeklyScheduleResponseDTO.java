@@ -16,5 +16,5 @@ public class WeeklyScheduleResponseDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private String status;
-    private List<ScheduleResponseDTO> schedules;
+    private List<ScheduleResponseDTO> schedulesList;
 }

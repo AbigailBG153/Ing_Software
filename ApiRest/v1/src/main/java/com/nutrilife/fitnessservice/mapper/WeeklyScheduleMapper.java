@@ -4,10 +4,12 @@ import java.util.stream.Collectors;
 
 import com.nutrilife.fitnessservice.model.dto.ScheduleRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.ScheduleResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.WeeklyScheduleRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.WeeklyScheduleResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.Schedule;
 import com.nutrilife.fitnessservice.model.entity.WeeklySchedule;
 import com.nutrilife.fitnessservice.model.enums.ScheduleStatus;
+import com.nutrilife.fitnessservice.model.enums.WeeklyScheduleStatus;
 
 import lombok.AllArgsConstructor;
 
@@ -19,36 +21,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-
 @Component
 @AllArgsConstructor
 public class WeeklyScheduleMapper {
 
     private final ModelMapper modelMapper;
-    
-    public ScheduleRequestDTO craeteScheduleRequestDTO(LocalDate date, DayOfWeek dayOfWeek,
-    LocalTime startTime){
-        ScheduleRequestDTO scheduleRequestDTO = new ScheduleRequestDTO();
-        scheduleRequestDTO.setDayOfWeek(dayOfWeek.toString());
-        scheduleRequestDTO.setDate(date);
-        scheduleRequestDTO.setStartTime(startTime);
-        scheduleRequestDTO.setEndTime(startTime.plusHours(1));
-        scheduleRequestDTO.setStatus(ScheduleStatus.DISABLED.toString());
-        return scheduleRequestDTO;
-    } 
+    private ScheduleMapper scheduleMapper;
+
+    public WeeklySchedule convertToEntity(WeeklyScheduleRequestDTO weeklyScheduleRequestDTO) {
+        return modelMapper.map(weeklyScheduleRequestDTO, WeeklySchedule.class);
+    }
+
     public WeeklyScheduleResponseDTO convertToDTO(WeeklySchedule weeklySchedule) {
         WeeklyScheduleResponseDTO responseDTO = modelMapper.map(weeklySchedule, WeeklyScheduleResponseDTO.class);
         if (weeklySchedule.getScheduleList() != null) {
             List<ScheduleResponseDTO> schedules = weeklySchedule.getScheduleList().stream()
-                    .map(this::convertScheduleToDTO)
+                    .map(scheduleMapper::convertToDTO)
                     .collect(Collectors.toList());
-            responseDTO.setSchedules(schedules);
+            responseDTO.setSchedulesList(schedules);
         }
         return responseDTO;
-    }
-
-    public ScheduleResponseDTO convertScheduleToDTO(Schedule schedule) {
-        return modelMapper.map(schedule, ScheduleResponseDTO.class);
     }
 
     public List<WeeklyScheduleResponseDTO> convertToListDTO(List<WeeklySchedule> weeklySchedules) {
@@ -56,7 +48,5 @@ public class WeeklyScheduleMapper {
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
-    
-    
-}
 
+}

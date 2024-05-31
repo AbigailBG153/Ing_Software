@@ -1,4 +1,4 @@
-package com.nutrilife.fitnessservice.Service;
+package com.nutrilife.fitnessservice.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,6 +38,7 @@ class ScheduleServiceTest {
     private Schedule schedule;
     private ScheduleResponseDTO scheduleResponseDTO;
     private ScheduleMapper scheduleMapperTest;
+
     @BeforeEach
     void setUp() {
 
@@ -55,10 +56,10 @@ class ScheduleServiceTest {
     void testGetAllSchedules() {
         when(scheduleRepository.findAll()).thenReturn(Arrays.asList(schedule));
         when(scheduleMapper.convertToListDTO(anyList())).thenReturn(Arrays.asList(scheduleResponseDTO));
-        
+
         List<ScheduleResponseDTO> scheduleResponseDTOs = scheduleMapperTest.convertToListDTO(Arrays.asList(schedule));
         assertNotNull(scheduleResponseDTOs);
-        
+
         List<ScheduleResponseDTO> result = scheduleService.getAllSchedules();
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -69,10 +70,10 @@ class ScheduleServiceTest {
         when(scheduleRepository.findById(1L)).thenReturn(Optional.of(schedule));
         when(scheduleRepository.save(any(Schedule.class))).thenReturn(schedule);
         when(scheduleMapper.convertToDTO(any(Schedule.class))).thenReturn(scheduleResponseDTO);
-        
+
         ScheduleResponseDTO scheduleResponseDTO = scheduleMapperTest.convertToDTO(schedule);
         assertNotNull(scheduleResponseDTO);
-        
+
         ScheduleResponseDTO result = scheduleService.updateScheduleStatus(1L);
         assertNotNull(result);
         assertEquals(ScheduleStatus.ACTIVE, schedule.getStatus());

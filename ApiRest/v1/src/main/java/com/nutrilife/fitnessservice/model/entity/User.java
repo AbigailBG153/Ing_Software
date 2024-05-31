@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.model.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,11 +27,5 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    private CustomerProfile customers;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
-    private CustomerProfile specialists;
 
 }

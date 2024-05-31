@@ -14,4 +14,3 @@ public class TrainingReportDTO {
     private LocalDate date;
     private Long count;
 }
-

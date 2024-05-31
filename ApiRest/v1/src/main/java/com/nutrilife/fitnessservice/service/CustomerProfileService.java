@@ -30,14 +30,13 @@ public class CustomerProfileService {
     @Transactional
     public CustomerProfileResponseDTO createProfileCustomer(CustomerProfileRequestDTO customerProfileRequestDTO) {
 
-        UserResponseDTO userResponseDTO = userService
-                .createUser(customerProfileMapper.createUserRequestDTO(customerProfileRequestDTO));
+        User user = userService.createUser(customerProfileMapper.createUserRequestDTO(customerProfileRequestDTO));
 
-        CustomerProfile customerProfile = customerProfileMapper.convertToEntity(customerProfileRequestDTO);
+        CustomerProfile customerProfile = customerProfileMapper.convertToEntity(customerProfileRequestDTO, user);
 
         customerProfileRepository.save(customerProfile);
-        return customerProfileMapper.convertToDTO(customerProfile);
-
+        CustomerProfileResponseDTO custDTO = customerProfileMapper.convertToDTO(customerProfile);
+        return custDTO;
     }
 
     // Mostra perfil de un usuario cliente en especifico por el userId

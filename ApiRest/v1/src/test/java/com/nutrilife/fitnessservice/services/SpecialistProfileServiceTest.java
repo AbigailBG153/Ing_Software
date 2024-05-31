@@ -36,17 +36,15 @@ import com.nutrilife.fitnessservice.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class SpecialistProfileServiceTest {
-    
+
     @Mock
     private UserService userService;
 
     @Mock
     private SpecialistProfileRepository specialistProfileRepository;
 
-
     @Mock
     private SpecialistProfileMapper specialistProfileMapper1;
-
 
     private SpecialistProfileMapper specialistProfileMapper;
 
@@ -69,16 +67,16 @@ public class SpecialistProfileServiceTest {
         requestDTO.setPassword("password%test1");
         requestDTO.setPhoneNumber("1234567890");
         requestDTO.setScore(4);
-    
+
         User user = new User();
         user.setEmail(requestDTO.getEmail());
         user.setPassword(requestDTO.getPassword());
         user.setUserId(1L);
-    
+
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setEmail(requestDTO.getEmail());
         userRequestDTO.setPassword(requestDTO.getPassword());
-    
+
         SpecialistProfile specialist = new SpecialistProfile();
         specialist.setSpecId(1L);
         specialist.setAge(requestDTO.getAge());
@@ -87,7 +85,7 @@ public class SpecialistProfileServiceTest {
         specialist.setPhoneNumber(requestDTO.getPhoneNumber());
         specialist.setScore(requestDTO.getScore());
         specialist.setUser(user);
-        
+
         SpecialistProfileResponseDTO responseDTO = new SpecialistProfileResponseDTO();
         responseDTO.setAge(specialist.getAge());
         responseDTO.setEmail(specialist.getUser().getEmail());
@@ -97,13 +95,13 @@ public class SpecialistProfileServiceTest {
         responseDTO.setScore(specialist.getScore());
         responseDTO.setSpecId(specialist.getSpecId());
         responseDTO.setStudCertificate(specialist.getStudCertificate());
-    
+
         when(specialistProfileMapper1.createUserRequestDTO(requestDTO)).thenReturn(userRequestDTO);
         when(userService.createUser(userRequestDTO)).thenReturn(user);
         when(specialistProfileMapper1.convertToEntity(requestDTO, user)).thenReturn(specialist);
         when(specialistProfileRepository.save(specialist)).thenReturn(specialist);
         when(specialistProfileMapper1.convertToDTO(specialist)).thenReturn(responseDTO);
-        
+
         UserRequestDTO mapper1 = specialistProfileMapper.createUserRequestDTO(requestDTO);
         assertNotNull(mapper1);
         SpecialistProfile mapper2 = specialistProfileMapper.convertToEntity(requestDTO, user);
@@ -112,7 +110,7 @@ public class SpecialistProfileServiceTest {
         assertNotNull(mapper3);
 
         SpecialistProfileResponseDTO result = specialistProfileService.createProfileSpecialist(requestDTO);
-    
+
         assertNotNull(result);
         assertEquals(specialist.getSpecId(), result.getSpecId());
         assertEquals(specialist.getAge(), result.getAge());
@@ -121,7 +119,7 @@ public class SpecialistProfileServiceTest {
         assertEquals(specialist.getOcupation(), result.getOcupation());
         assertEquals(specialist.getScore(), result.getScore());
         assertEquals(specialist.getStudCertificate(), result.getStudCertificate());
-    
+
         verify(specialistProfileMapper1, times(1)).createUserRequestDTO(requestDTO);
         verify(userService, times(1)).createUser(userRequestDTO);
         verify(specialistProfileMapper1, times(1)).convertToEntity(requestDTO, user);
@@ -142,16 +140,16 @@ public class SpecialistProfileServiceTest {
         SpecialistProfile specialist2 = new SpecialistProfile();
         specialist2.setSpecId(2L);
         specialist2.setUser(user2);
-        List<SpecialistProfile> specialistList = Arrays.asList(specialist1,specialist2);
+        List<SpecialistProfile> specialistList = Arrays.asList(specialist1, specialist2);
 
         when(specialistProfileRepository.findAll()).thenReturn(specialistList);
-    
+
         SpecialistProfileResponseDTO responseDTO1 = new SpecialistProfileResponseDTO();
         responseDTO1.setSpecId(specialist1.getSpecId());
         SpecialistProfileResponseDTO responseDTO2 = new SpecialistProfileResponseDTO();
         responseDTO2.setSpecId(specialist2.getSpecId());
 
-        List<SpecialistProfileResponseDTO> expectedResponse = Arrays.asList(responseDTO1,responseDTO2);
+        List<SpecialistProfileResponseDTO> expectedResponse = Arrays.asList(responseDTO1, responseDTO2);
         when(specialistProfileMapper1.convertToListDTO(specialistList)).thenReturn(expectedResponse);
 
         List<SpecialistProfileResponseDTO> mapper1 = specialistProfileMapper.convertToListDTO(specialistList);
@@ -214,7 +212,7 @@ public class SpecialistProfileServiceTest {
         verify(specialistProfileMapper1, times(0)).convertToDTO(any(SpecialistProfile.class));
     }
 
-    @Test 
+    @Test
     public void testGetSpecialistProfileById_ExistingId() {
 
         Long id = 1L;
@@ -243,12 +241,13 @@ public class SpecialistProfileServiceTest {
 
     @Test
     public void testGetSpecialistProfileById_NonExistingId() {
-        
+
         Long id = 999L;
         SpecialistProfile specialist = new SpecialistProfile();
         specialist.setSpecId(id);
-        //when(specialistProfileRepository.findById(id)).thenReturn(Optional.empty());
-        doThrow(new UserNotFound("Perfil de usuario no encontrado con el numero: "+id)).when(specialistProfileRepository).findById(id);
+        // when(specialistProfileRepository.findById(id)).thenReturn(Optional.empty());
+        doThrow(new UserNotFound("Perfil de usuario no encontrado con el numero: " + id))
+                .when(specialistProfileRepository).findById(id);
 
         assertThrows(UserNotFound.class, () -> specialistProfileService.getSpecialistProfileById(id));
 
@@ -324,7 +323,7 @@ public class SpecialistProfileServiceTest {
         specialist.setPhoneNumber("1234567890");
         specialist.setScore(4);
         specialist.setSpecId(1L);
-        
+
         doThrow(new UserNotFound()).when(specialistProfileRepository).deleteById(specialist.getSpecId());
 
         // Act & Assert

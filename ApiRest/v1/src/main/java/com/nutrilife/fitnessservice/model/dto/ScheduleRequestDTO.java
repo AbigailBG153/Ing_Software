@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 
 public class ScheduleRequestDTO {
 
-    
     @NotNull(message = "Los dias de la semana no pueden estar vacios")
     @Pattern(regexp = "^(Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo)$", message = "El día de la semana debe estar en el formato correcto (Lunes, Martes, Miércoles, etc.)")
     private String dayOfWeek;
@@ -40,6 +39,4 @@ public class ScheduleRequestDTO {
     @Pattern(regexp = "DISABLED|ACTIVE|OCCUPIED", message = "El estatus debe ser 'DISABLED', 'ACTIVE' o 'OCCUPIED'")
     private String status;
 
-    
-    
 }

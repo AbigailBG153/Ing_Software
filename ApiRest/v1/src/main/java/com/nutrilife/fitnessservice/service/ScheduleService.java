@@ -19,7 +19,6 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleMapper scheduleMapper;
 
-
     public List<ScheduleResponseDTO> getAllSchedules() {
         List<Schedule> schedules = scheduleRepository.findAll();
         return scheduleMapper.convertToListDTO(schedules);
@@ -38,5 +37,4 @@ public class ScheduleService {
         }
     }
 
-    
 }

@@ -63,6 +63,7 @@ public class SpecialistProfileController {
                 .ok()
                 .header(HttpHeaders.CONTENT_TYPE, contentType)
                 .body(resource);
+    }
 
     @GetMapping("/{name}")
     public ResponseEntity<List<SpecialistProfileResponseDTO>> getSpecialistProfilesByName(@RequestParam String name) {

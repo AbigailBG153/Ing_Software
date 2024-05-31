@@ -1,4 +1,4 @@
-package com.nutrilife.fitnessservice.Service;
+package com.nutrilife.fitnessservice.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -59,7 +59,7 @@ class MeetingServiceTest {
 
     @Mock
     private MeetingMapper meetingMapper;
-    
+
     @Mock
     private CustomerProfileRepository customerProfileRepository;
 
@@ -75,9 +75,10 @@ class MeetingServiceTest {
     private MeetingRequestDTO meetingRequestDTO;
     private MeetingMapper meetingMapperTest;
     private ScheduleMapper scheduleMapperTest;
+
     @BeforeEach
     void setUp() {
-        
+
         meetingMapperTest = new MeetingMapper(new ModelMapper());
         scheduleMapperTest = new ScheduleMapper(new ModelMapper());
 
@@ -89,7 +90,8 @@ class MeetingServiceTest {
 
         weeklySchedule = new WeeklySchedule();
         weeklySchedule.setSpecialistProfile(specialistProfile);
-        weeklySchedule.setStartDate(LocalDate.now().with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY)));
+        weeklySchedule.setStartDate(
+                LocalDate.now().with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY)));
         weeklySchedule.setEndDate(weeklySchedule.getStartDate().plusDays(6));
 
         schedule = new Schedule();
@@ -100,14 +102,13 @@ class MeetingServiceTest {
         schedule.setEndTime(LocalTime.of(11, 0));
         schedule.setWeeklySchedule(weeklySchedule);
 
-    
         meetingRequestDTO = new MeetingRequestDTO();
         meetingRequestDTO.setScheduleId(1L);
         meetingRequestDTO.setStatus(MeetStatus.COMPLETED.toString());
         meetingRequestDTO.setDate(schedule.getDate());
         meetingRequestDTO.setStartTime(schedule.getStartTime());
         meetingRequestDTO.setEndTime(schedule.getEndTime());
-        
+
         meeting = new Meeting();
         meeting.setMeetingId(1L);
         meeting.setSchedule(schedule);
@@ -126,21 +127,22 @@ class MeetingServiceTest {
         meetingResponseDTO.setDate(schedule.getDate());
         meetingResponseDTO.setStartTime(schedule.getStartTime());
         meetingResponseDTO.setEndTime(schedule.getEndTime());
-        
+
         weeklySchedule.setScheduleList(Arrays.asList(schedule));
         specialistProfile.setWeeklySchedules(Arrays.asList(weeklySchedule));
         customerProfile.setMeetings(Arrays.asList(meeting));
     }
+
     @Test
     void testGetAllMeetings() {
         when(meetingRepository.findAll()).thenReturn(Arrays.asList(meeting));
         when(meetingMapper.convertToListDTO(anyList())).thenReturn(Arrays.asList(new MeetingResponseDTO()));
-        
-        //test meetingMapper 
+
+        // test meetingMapper
         List<MeetingResponseDTO> meetingList = meetingMapperTest.convertToListDTO(Arrays.asList(meeting));
         assertNotNull(meetingList);
-        
-        //test metodo 
+
+        // test metodo
         List<MeetingResponseDTO> result = meetingService.getAllMeetings();
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -150,7 +152,7 @@ class MeetingServiceTest {
     void testgetMeetingById() {
         when(meetingRepository.findById(1L)).thenReturn(Optional.of(meeting));
         when(meetingMapper.convertToDTO(any(Meeting.class))).thenReturn(meetingResponseDTO);
-        
+
         MeetingResponseDTO meetingResponseDTO = meetingMapperTest.convertToDTO(meeting);
         assertNotNull(meetingResponseDTO);
 
@@ -187,14 +189,12 @@ class MeetingServiceTest {
         Meeting meeting = meetingMapperTest.convertToEntity(meetingRequestDTO);
         assertNotNull(meeting);
 
-    
         MeetingResponseDTO result = meetingService.createMeeting(1L, 1L);
         assertNotNull(result);
         assertEquals(1L, result.getCustomerId());
         verify(meetingRepository, times(1)).save(any(Meeting.class));
         verify(scheduleRepository, times(1)).save(any(Schedule.class));
     }
-
 
     @Test
     void testCreateMeeting_CustomerNotFound() {
@@ -232,8 +232,6 @@ class MeetingServiceTest {
         assertEquals("Cannot create a meeting for a schedule that is not ACTIVE.", exception.getMessage());
     }
 
-
-
     @Test
     void testUpdateMeeting() {
         when(scheduleRepository.findById(1L)).thenReturn(Optional.of(schedule));
@@ -244,13 +242,11 @@ class MeetingServiceTest {
         MeetingResponseDTO meetingResponseDTO = meetingMapperTest.convertToDTO(meeting);
         assertNotNull(meetingResponseDTO);
 
-
         MeetingResponseDTO result = meetingService.updateMeeting(1L, meetingRequestDTO);
         assertEquals(1L, result.getMeetingId());
         assertEquals(MeetStatus.COMPLETED, result.getMeetStatus());
         verify(meetingRepository, times(1)).save(any(Meeting.class));
     }
-    
 
     @Test
     void updateMeeting_scheduleNotFound() {
@@ -286,7 +282,7 @@ class MeetingServiceTest {
         meetingService.deleteMeeting(1L);
         verify(meetingRepository, times(1)).delete(any(Meeting.class));
     }
-    
+
     @Test
     void testDeleteMeeting_meetingNotFound() {
         when(meetingRepository.findById(1L)).thenReturn(Optional.empty());
@@ -344,7 +340,7 @@ class MeetingServiceTest {
     void testGetMeetingByCustomerId() {
         when(customerProfileRepository.findById(1L)).thenReturn(Optional.of(customerProfile));
         when(meetingMapper.convertToListDTO(anyList())).thenReturn(Arrays.asList(meetingResponseDTO));
-        
+
         List<MeetingResponseDTO> meetingResponseDTOs = meetingMapperTest.convertToListDTO(Arrays.asList(meeting));
         assertNotNull(meetingResponseDTOs);
 
@@ -365,6 +361,5 @@ class MeetingServiceTest {
         verify(customerProfileRepository, times(1)).findById(1L);
         verify(meetingMapper, times(0)).convertToListDTO(anyList());
     }
-
 
 }

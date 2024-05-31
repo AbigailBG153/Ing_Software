@@ -48,7 +48,8 @@ public class TrainingController {
     }
 
     @GetMapping("/report")
-    public List<TrainingReportDTO> generateTrainingReport(@RequestParam String startDate, @RequestParam String endDate) {
+    public List<TrainingReportDTO> generateTrainingReport(@RequestParam String startDate,
+            @RequestParam String endDate) {
         return trainingService.generateTrainingReport(startDate, endDate);
     }
 }

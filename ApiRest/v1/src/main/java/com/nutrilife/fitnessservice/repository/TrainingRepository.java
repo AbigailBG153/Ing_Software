@@ -16,5 +16,6 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     boolean existsByName(String name);
 
     @Query("SELECT COUNT(t), t.date FROM Training t WHERE t.date BETWEEN :startDate AND :endDate GROUP BY t.date")
-    List<Object[]> getTrainingCountByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<Object[]> getTrainingCountByDateRange(@Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
 }

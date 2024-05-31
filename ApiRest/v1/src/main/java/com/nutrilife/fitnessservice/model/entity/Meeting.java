@@ -1,58 +1,55 @@
 package com.nutrilife.fitnessservice.model.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import com.nutrilife.fitnessservice.model.enums.MeetStatus;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "Meetings")
-public class Meeting{
+@Table(name = "meetings")
+public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="meet_id")
-    private Long meetId;
+    @Column(name = "meeting_id")
+    private Long meetingId;
+
+    @Column(name = "date")
+    private LocalDate date;
+
+    @Column(name = "start_time", nullable = false)
+    private LocalTime startTime;
+
+    @Column(name = "end_time", nullable = false)
+    private LocalTime endTime;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private MeetStatus status;
+
+    @OneToOne(mappedBy = "meeting", cascade = CascadeType.ALL)
+    private Schedule schedule;
 
     @ManyToOne
-    @JoinColumn(name = "meet-cust_id", nullable = false)
-    private CustomerProfile custId;
-
-    @ManyToOne
-    @JoinColumn(name = "meet-spec_id", nullable = false)
-    private SpecialistProfile  specId;
-
-    @ManyToOne
-    @JoinColumn(name = "meet-sche_id", nullable = false)
-    private Specialist_Schedule ScheduleId;
-    
-    @Column(name = "meeting_name", nullable = false)
-    private String meetingName;
-
-    @Column(name = "type_platform", nullable = false)
-    private String typePlatform;
-
-    @Column(name = "meeting_url", nullable = false)
-    private String meetingUrl;
-
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
-
-    @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
-    
-    @Column(name = "register_date", nullable = false)
-    private LocalDateTime registerDate;
-
+    @JoinColumn(name = "customer_profile_id", nullable = true)
+    private CustomerProfile customerProfile;
 
 }
