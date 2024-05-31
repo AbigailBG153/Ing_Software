@@ -1,11 +1,9 @@
 package com.nutrilife.fitnessservice.controller;
 
-import com.nutrilife.fitnessservice.model.dto.TrainingRequestDTO;
-import com.nutrilife.fitnessservice.model.dto.TrainingResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.*;
 import com.nutrilife.fitnessservice.service.TrainingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +15,40 @@ public class TrainingController {
 
     private final TrainingService trainingService;
 
-    @GetMapping
-    public ResponseEntity<List<TrainingResponseDTO>> getAllTrainings() {
-        List<TrainingResponseDTO> trainings = trainingService.getAllTrainings();
-        return new ResponseEntity<>(trainings, HttpStatus.OK);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TrainingResponseDTO createTraining(@RequestBody TrainingRequestDTO trainingRequestDTO) {
+        return trainingService.createTraining(trainingRequestDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingResponseDTO> getTrainingById(@PathVariable Long id) {
-        TrainingResponseDTO training = trainingService.getTrainingById(id);
-        return new ResponseEntity<>(training, HttpStatus.OK);
+    public TrainingResponseDTO getTrainingById(@PathVariable Long id) {
+        return trainingService.getTrainingById(id);
     }
 
-    @PostMapping
-    public ResponseEntity<TrainingResponseDTO> createTraining(@RequestBody TrainingRequestDTO trainingDTO) {
-        TrainingResponseDTO training = trainingService.createTraining(trainingDTO);
-        return new ResponseEntity<>(training, HttpStatus.CREATED);
+    @GetMapping
+    public List<TrainingResponseDTO> getAllTrainings() {
+        return trainingService.getAllTrainings();
+    }
+
+    @PutMapping("/{id}")
+    public TrainingResponseDTO updateTraining(@PathVariable Long id, @RequestBody TrainingUpdateDTO trainingUpdateDTO) {
+        return trainingService.updateTraining(id, trainingUpdateDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTraining(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTraining(@PathVariable Long id) {
         trainingService.deleteTraining(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/type/{type}")
+    public List<TrainingResponseDTO> getTrainingsByExerciseType(@PathVariable String type) {
+        return trainingService.getTrainingsByExerciseType(type);
+    }
+
+    @GetMapping("/report")
+    public List<TrainingReportDTO> generateTrainingReport(@RequestParam String startDate, @RequestParam String endDate) {
+        return trainingService.generateTrainingReport(startDate, endDate);
     }
 }
