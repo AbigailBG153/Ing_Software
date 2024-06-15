@@ -38,6 +38,12 @@ public class CustomerProfileController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
+    @GetMapping("/userid/{userId}")
+    public ResponseEntity<CustomerProfileResponseDTO> getCustomerProfileByUserId(@PathVariable Long userId) {
+        CustomerProfileResponseDTO customer = customerProfileService.getCustomerProfileByUserId(userId);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<List<CustomerProfileResponseDTO>> getCustomerProfileByName(@PathVariable String name) {
         List<CustomerProfileResponseDTO> customers = customerProfileService.getCustomerProfileByName(name);
@@ -50,7 +56,7 @@ public class CustomerProfileController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("singup-cust")
     public ResponseEntity<CustomerProfileResponseDTO> createCutomerProfile(@Validated @RequestBody CustomerProfileRequestDTO customerDTO) {
         CustomerProfileResponseDTO customer = customerProfileService.createProfileCustomer(customerDTO);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);

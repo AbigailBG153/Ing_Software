@@ -31,6 +31,7 @@ public class CustomerProfileMapper {
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setEmail(customerProfileRequestDTO.getEmail());
         userRequestDTO.setPassword(customerProfileRequestDTO.getPassword());
+        userRequestDTO.setRole(customerProfileRequestDTO.getRole());
         return userRequestDTO;
     }
     public CustomerProfileResponseDTO convertToDTO(CustomerProfile customerProfile){

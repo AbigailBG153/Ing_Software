@@ -26,7 +26,7 @@ public class CustomerProfileService {
     private final CustomerProfileMapper customerProfileMapper;
     private final  UserService userService;
 
-    //Crear perfil del usuario cliente
+    //Crear perfil del usuario cliente - Registrarse
     @Transactional
     public CustomerProfileResponseDTO createProfileCustomer(CustomerProfileRequestDTO customerProfileRequestDTO) {
 

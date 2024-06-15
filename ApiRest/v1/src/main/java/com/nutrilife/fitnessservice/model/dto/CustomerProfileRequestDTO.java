@@ -1,5 +1,7 @@
 package com.nutrilife.fitnessservice.model.dto;
 
+import com.nutrilife.fitnessservice.model.entity.enums.Role;
+
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -59,4 +61,6 @@ public class CustomerProfileRequestDTO {
     //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\\[\\]{}<>+=-_]).+$", 
     //    message = "La contraseña debe contener al menos un número, una letra y un carácter especial")
     private String password;
+
+    private Role role;
 }

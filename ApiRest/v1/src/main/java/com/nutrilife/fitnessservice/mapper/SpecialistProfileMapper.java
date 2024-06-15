@@ -27,6 +27,7 @@ public class SpecialistProfileMapper {
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setEmail(specialistProfileRequestDTO.getEmail());
         userRequestDTO.setPassword(specialistProfileRequestDTO.getPassword());
+        userRequestDTO.setRole(specialistProfileRequestDTO.getRole());
         return userRequestDTO;
     }
 

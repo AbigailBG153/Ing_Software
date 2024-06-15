@@ -2,6 +2,7 @@ package com.nutrilife.fitnessservice.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nutrilife.fitnessservice.exception.UserNotFound;
@@ -10,6 +11,7 @@ import com.nutrilife.fitnessservice.mapper.UserMapper;
 import com.nutrilife.fitnessservice.model.dto.UserRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.UserResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.User;
+import com.nutrilife.fitnessservice.model.entity.enums.Role;
 import com.nutrilife.fitnessservice.repository.UserRespository;
 
 import jakarta.validation.Valid;
@@ -27,18 +29,21 @@ public class UserService {
     
     private final UserRespository userRespository;
     private final UserMapper userMapper;
-
+    private PasswordEncoder passwordEncoder;
 
     public User createUser(@Valid  UserRequestDTO userRequestDTO) {
-
-
 
         if (userRespository.existsByEmail(userRequestDTO.getEmail())) {
             throw new ValidationUserRegisterException("El email ya está registrado");
         }
 
-
         User user = userMapper.convertToEntity(userRequestDTO);
+
+        user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+
+        Role role = Role.valueOf(userRequestDTO.getRole().name());
+        user.setRole(role);
+
         userRespository.save(user);
         
         return user;
@@ -53,6 +58,13 @@ public class UserService {
         return userMapper.convertToDTO(user);
     }
 
+    @Transactional(readOnly = true)
+    public UserResponseDTO findByEmail(String email) {
+        User user = userRespository.findByEmail(email)
+            .orElseThrow(() -> new UserNotFound("El email no existe"));
+
+        return userMapper.convertToDTO(user);
+    }
 
     @Transactional
     public UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO) {

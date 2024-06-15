@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nutrilife.fitnessservice.model.dto.CustomerProfileResponseDTO;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.SpecialistProfileResponseDTO;
 import com.nutrilife.fitnessservice.service.SpecialistProfileService;
@@ -46,6 +47,12 @@ public class SpecialistProfileController {
         return new ResponseEntity<>(specialist, HttpStatus.OK);
     }
 
+    @GetMapping("/userid/{userId}")
+    public ResponseEntity<SpecialistProfileResponseDTO> getSpecialistProfileByUserId(@PathVariable Long userId) {
+        SpecialistProfileResponseDTO specialist = specialistProfileService.getSpecialistProfileByUserId(userId);
+        return new ResponseEntity<>(specialist, HttpStatus.OK);
+    }
+
     @PostMapping("/upload")
     public ResponseEntity<SpecialistProfileResponseDTO> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("email") String email) {
         SpecialistProfileResponseDTO specialist = storageService.store(multipartFile, email);
@@ -63,7 +70,7 @@ public class SpecialistProfileController {
                 .body(resource);
     }
 
-    @PostMapping
+    @PostMapping("/singup-spec")
     public ResponseEntity<SpecialistProfileResponseDTO> createSpecialistProfile(@Validated @RequestBody SpecialistProfileRequestDTO specialistDTO) {
         SpecialistProfileResponseDTO createdSpecialistProfile = specialistProfileService.createProfileSpecialist(specialistDTO);
         return new ResponseEntity<>(createdSpecialistProfile, HttpStatus.CREATED);
