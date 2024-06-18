@@ -47,6 +47,26 @@ public class TrainingController {
         return trainingService.getTrainingsByExerciseType(type);
     }
 
+    @GetMapping("/name/{name}")
+    public List<TrainingResponseDTO> getTrainingsByName(@PathVariable String name) {
+        return trainingService.getTrainingsByName(name);
+    }
+
+    @GetMapping("/goal/{goal}")
+    public List<TrainingResponseDTO> getTrainingsByPhysicalGoal(@PathVariable String goal) {
+        return trainingService.getTrainingsByPhysicalGoal(goal);
+    }
+
+    @GetMapping("/duration/{duration}")
+    public List<TrainingResponseDTO> getTrainingsByDuration(@PathVariable float duration) {
+        return trainingService.getTrainingsByDuration(duration);
+    }
+
+    @GetMapping("/kcalories/{kCalories}")
+    public List<TrainingResponseDTO> getTrainingsByKCalories(@PathVariable float kCalories) {
+        return trainingService.getTrainingsByKCalories(kCalories);
+    }
+
     @GetMapping("/report")
     public List<TrainingReportDTO> generateTrainingReport(@RequestParam String startDate, @RequestParam String endDate) {
         return trainingService.generateTrainingReport(startDate, endDate);

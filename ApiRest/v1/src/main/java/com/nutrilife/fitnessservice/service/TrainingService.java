@@ -71,6 +71,38 @@ public class TrainingService {
     }
 
     @Transactional(readOnly = true)
+    public List<TrainingResponseDTO> getTrainingsByName(String name) {
+        List<Training> trainings = trainingRepository.findByName(name);
+        return trainings.stream()
+                .map(trainingMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrainingResponseDTO> getTrainingsByPhysicalGoal(String physicalGoal) {
+        List<Training> trainings = trainingRepository.findByPhysicalGoal(physicalGoal);
+        return trainings.stream()
+                .map(trainingMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrainingResponseDTO> getTrainingsByDuration(float duration) {
+        List<Training> trainings = trainingRepository.findByDuration(duration);
+        return trainings.stream()
+                .map(trainingMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrainingResponseDTO> getTrainingsByKCalories(float kCalories) {
+        List<Training> trainings = trainingRepository.findByKCalories(kCalories);
+        return trainings.stream()
+                .map(trainingMapper::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<TrainingReportDTO> generateTrainingReport(String startDateStr, String endDateStr) {
         LocalDate startDate = LocalDate.parse(startDateStr);
         LocalDate endDate = LocalDate.parse(endDateStr);

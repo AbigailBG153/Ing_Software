@@ -16,5 +16,5 @@ public class TrainingUpdateDTO {
     private float duration;
     private float kCalories;
     private String video;
+    private int qualification;
 }
-

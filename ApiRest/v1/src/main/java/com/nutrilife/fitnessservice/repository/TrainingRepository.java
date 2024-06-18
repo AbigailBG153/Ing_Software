@@ -17,4 +17,9 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
 
     @Query("SELECT COUNT(t), t.date FROM Training t WHERE t.date BETWEEN :startDate AND :endDate GROUP BY t.date")
     List<Object[]> getTrainingCountByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    List<Training> findByName(String name);
+    List<Training> findByPhysicalGoal(String physicalGoal);
+    List<Training> findByDuration(float duration);
+    List<Training> findByKCalories(float kCalories);
 }

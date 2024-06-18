@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,6 +46,7 @@ public class TrainingServiceTest {
         requestDTO.setDuration(60.0f);
         requestDTO.setKCalories(500.0f);
         requestDTO.setVideo("video_url");
+        requestDTO.setQualification(3);
 
         Training training = new Training();
         training.setId(1L);
@@ -106,6 +106,13 @@ public class TrainingServiceTest {
         Long id = 2L;
         TrainingUpdateDTO updateDTO = new TrainingUpdateDTO();
         updateDTO.setName("Updated Training");
+        updateDTO.setDescription("Updated description");
+        updateDTO.setExerciseType("Strength");
+        updateDTO.setPhysicalGoal("Muscle Gain");
+        updateDTO.setDuration(75.0f);
+        updateDTO.setKCalories(600.0f);
+        updateDTO.setVideo("updated_video_url");
+        updateDTO.setQualification(4);
 
         Training training = new Training();
         training.setId(id);
@@ -170,5 +177,67 @@ public class TrainingServiceTest {
 
         // Assert
         assertEquals(expectedReport.size(), result.size());
+    }
+
+    // Add new test methods for the additional search functionalities
+
+    @Test
+    public void testGetTrainingsByName() {
+        // Arrange
+        String name = "Training 1";
+        List<Training> trainings = List.of(new Training());
+        when(trainingRepository.findByName(name)).thenReturn(trainings);
+        when(trainingMapper.convertToDTO(trainings.get(0))).thenReturn(new TrainingResponseDTO());
+
+        // Act
+        List<TrainingResponseDTO> result = trainingService.getTrainingsByName(name);
+
+        // Assert
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testGetTrainingsByPhysicalGoal() {
+        // Arrange
+        String goal = "Weight Loss";
+        List<Training> trainings = List.of(new Training());
+        when(trainingRepository.findByPhysicalGoal(goal)).thenReturn(trainings);
+        when(trainingMapper.convertToDTO(trainings.get(0))).thenReturn(new TrainingResponseDTO());
+
+        // Act
+        List<TrainingResponseDTO> result = trainingService.getTrainingsByPhysicalGoal(goal);
+
+        // Assert
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testGetTrainingsByDuration() {
+        // Arrange
+        float duration = 60.0f;
+        List<Training> trainings = List.of(new Training());
+        when(trainingRepository.findByDuration(duration)).thenReturn(trainings);
+        when(trainingMapper.convertToDTO(trainings.get(0))).thenReturn(new TrainingResponseDTO());
+
+        // Act
+        List<TrainingResponseDTO> result = trainingService.getTrainingsByDuration(duration);
+
+        // Assert
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testGetTrainingsByKCalories() {
+        // Arrange
+        float kCalories = 500.0f;
+        List<Training> trainings = List.of(new Training());
+        when(trainingRepository.findByKCalories(kCalories)).thenReturn(trainings);
+        when(trainingMapper.convertToDTO(trainings.get(0))).thenReturn(new TrainingResponseDTO());
+
+        // Act
+        List<TrainingResponseDTO> result = trainingService.getTrainingsByKCalories(kCalories);
+
+        // Assert
+        assertFalse(result.isEmpty());
     }
 }

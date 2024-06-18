@@ -34,11 +34,14 @@ public class Training {
     private float duration;
 
     @Column(name = "k_calories")
-    private float kCalories;
+    private float KCalories;
 
     @Column(name = "video")
     private String video;
 
     @Column(name = "date")
     private LocalDate date;
+    
+    @Column(name = "qualification")
+    private int qualification;
 }
