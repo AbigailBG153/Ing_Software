@@ -22,8 +22,8 @@ public class TrainingControllerIntegrationTest {
     @Test
     public void testCreateTraining() throws Exception {
         TrainingRequestDTO requestDTO = new TrainingRequestDTO();
-        requestDTO.setName("Training 3");
-        requestDTO.setDescription("Test training");
+        requestDTO.setName("Training 5");
+        requestDTO.setDescription("Test training 3");
         requestDTO.setExerciseType("Cardio");
         requestDTO.setPhysicalGoal("Weight Loss");
         requestDTO.setDuration(60.0f);
@@ -67,7 +67,7 @@ public class TrainingControllerIntegrationTest {
 
     @Test
     public void testDeleteTraining() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/trainings/{id}", 3L))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/trainings/{id}", 8L))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
