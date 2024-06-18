@@ -91,7 +91,7 @@ public class TrainingServiceTest {
     @Test
     public void testUpdateTraining_NotFound() {
         // Arrange
-        Long id = 2L;
+        Long id = 9L;
         TrainingUpdateDTO updateDTO = new TrainingUpdateDTO();
 
         when(trainingRepository.findById(id)).thenReturn(Optional.empty());
@@ -103,7 +103,7 @@ public class TrainingServiceTest {
     @Test
     public void testUpdateTraining_Successful() {
         // Arrange
-        Long id = 4L;
+        Long id = 2L;
         TrainingUpdateDTO updateDTO = new TrainingUpdateDTO();
         updateDTO.setName("Updated Training");
 
