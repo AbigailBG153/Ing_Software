@@ -1,0 +1,13 @@
+
+<div class="container-card">
+    <div *ngFor="let specialist of lastFiveSpecialists" class="card">
+        <h3>{{ specialist.name }}</h3>
+        <p>{{ specialist.occupation }}</p>
+        <p>Edad: {{ specialist.age }}</p>
+        <p>Puntaje: {{ specialist.score }}</p>
+        <button class="btn-primary" (click)="open(specialist.specId)">Programar reunión</button>
+    </div>
+
+</div>
+
+<app-meeting [isSpecialistId]="selectedSpecialistId"></app-meeting>
