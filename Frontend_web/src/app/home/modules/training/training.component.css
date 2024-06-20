@@ -1,0 +1,109 @@
+.training-container {
+    padding: 20px;
+  }
+  
+  .weekdays-bar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .day-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .card-content {
+    padding: 10px;
+  }
+  
+  .card-content p {
+    margin: 10px 0;
+  }
+  
+  .card-content button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .filter-btn {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .filter-menu {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+  }
+  
+  .filter-section h4 {
+    margin-bottom: 10px;
+  }
+  
+  .filter-section button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .filter-section button:hover {
+    background-color: #45a049;
+  }
+  
+  

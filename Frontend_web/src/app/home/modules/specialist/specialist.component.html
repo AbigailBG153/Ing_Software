@@ -1,0 +1,105 @@
+<style>
+    /* Estilos CSS */
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container-meeting .open-meeting {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Fondo semi-transparente */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .meeting-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-close {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .status-disabled {
+        background-color: lightgray;
+        color: black;
+        /* Cambiar el color del texto según el fondo */
+    }
+
+    .status-occupied {
+        background-color: tomato;
+        color: white;
+        /* Cambiar el color del texto según el fondo */
+    }
+</style>
+
+<div class="container-card">
+    <p>cards works!</p>
+    <button class="btn-primary" (click)="open($event)">Meeting</button>
+</div>
+
+<div class="container-meeting" style="display: none;">
+    <div class="meeting-content">
+        <div *ngIf="uniqueDays.length > 0; else noSchedules">
+            <h3>Horarios de la semana</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th *ngFor="let day of uniqueDays">{{ day }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let hour of hours">
+                        <tr>
+                            <td>{{ hour }} - {{ getNextHour(hour) }}</td>
+                            <td *ngFor="let day of uniqueDays" [ngClass]="getCellStyle(day, hour)">
+                                <div *ngIf="scheduleByDayAndHour[day] && scheduleByDayAndHour[day][hour]">
+                                    {{ scheduleByDayAndHour[day][hour].status === 'DISABLED' ? 'Desactivado' : 'Ocupado'
+                                    }}
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noSchedules>
+            <p>No hay horarios disponibles para esta semana.</p>
+        </ng-template>
+
+        <button class="btn-close" (click)="close($event)">Cerrar</button>
+    </div>
+</div>

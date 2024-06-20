@@ -1,0 +1,61 @@
+<div class="training-container">
+  <div class="weekdays-bar">
+    <button *ngFor="let day of weekDays" class="day-btn" (click)="selectDay(day)">{{ day }}</button>
+  </div>
+  <button class="filter-btn" (click)="toggleFilterMenu()">Filtro</button>
+  
+  <div *ngIf="showFilterMenu" class="filter-menu">
+    <h3>Filtrar por:</h3>
+    <div class="filter-section">
+      <h4>Tipo</h4>
+      <button (click)="filterByType('Cardio')">Cardio</button>
+      <button (click)="filterByType('Fuerza')">Fuerza</button>
+      <button (click)="filterByType('Flexibilidad')">Flexibilidad</button>
+    </div>
+    <div class="filter-section">
+      <h4>Calorías</h4>
+      <button *ngFor="let kcal of kcalOptions" (click)="filterByKcal(kcal)">{{ kcal }}</button>
+    </div>
+    <div class="filter-section">
+      <h4>Objetivo</h4>
+      <button (click)="filterByGoal('Perder peso')">Perder peso</button>
+      <button (click)="filterByGoal('Ganar Músculo')">Ganar Músculo</button>
+      <button (click)="filterByGoal('Mejorar movilidad')">Mejorar movilidad</button>
+    </div>
+    <div class="filter-section">
+      <h4>Duración (minutos)</h4>
+      <button *ngFor="let duration of durationOptions" (click)="filterByDuration(duration)">{{ duration }}</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>{{ exercisesTitle }}</h2>
+    <div class="cards-container">
+      <div class="card" *ngFor="let exercise of exercises">
+        <img src="IMG/Index/logo-icon-verde.png" alt="{{ exercise.name }}">
+        <div class="card-content">
+          <p>{{ exercise.name }}</p>
+          <p>{{ exercise.description }}</p>
+          <p>Duración: {{ exercise.duration }} mins</p>
+          <button (click)="chooseExercise(exercise)">Elegir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Ejercicios con más calificación</h2>
+    <div class="cards-container">
+      <div class="card" *ngFor="let exercise of topRatedExercises">
+        <img src="IMG/Index/logo-icon-verde.png" alt="{{ exercise.name }}">
+        <div class="card-content">
+          <p>{{ exercise.name }}</p>
+          <p>{{ exercise.description }}</p>
+          <p>Duración: {{ exercise.duration }} mins</p>
+          <p>Calificación: {{ exercise.qualification }}</p>
+          <button (click)="chooseExercise(exercise)">Elegir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
