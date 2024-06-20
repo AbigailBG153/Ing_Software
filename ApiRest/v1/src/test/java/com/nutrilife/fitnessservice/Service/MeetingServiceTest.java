@@ -245,7 +245,7 @@ class MeetingServiceTest {
         assertNotNull(meetingResponseDTO);
 
 
-        MeetingResponseDTO result = meetingService.updateMeeting(1L, meetingRequestDTO);
+        MeetingResponseDTO result = meetingService.updateMeeting(1L);
         assertEquals(1L, result.getMeetingId());
         assertEquals(MeetStatus.COMPLETED, result.getMeetStatus());
         verify(meetingRepository, times(1)).save(any(Meeting.class));
@@ -257,7 +257,7 @@ class MeetingServiceTest {
         when(scheduleRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> {
-            meetingService.updateMeeting(1L, meetingRequestDTO);
+            meetingService.updateMeeting(1L);
         });
 
         verify(scheduleRepository, times(1)).findById(1L);
@@ -271,7 +271,7 @@ class MeetingServiceTest {
         when(meetingRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> {
-            meetingService.updateMeeting(1L, meetingRequestDTO);
+            meetingService.updateMeeting(1L);
         });
 
         verify(scheduleRepository, times(1)).findById(1L);
