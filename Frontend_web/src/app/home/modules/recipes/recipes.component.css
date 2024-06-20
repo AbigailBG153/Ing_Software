@@ -1,0 +1,54 @@
+/* src/app/components/recipe-list/recipe-list.component.css */
+
+.example-card {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Asegura que la tarjeta ocupe todo el espacio vertical disponible */
+}
+
+.example-card-image {
+  height: 100px; /* Asegura que la tarjeta ocupe todo el espacio vertical disponible */
+}
+
+.recipe-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 500px; /* Altura máxima del contenedor con scroll */
+  overflow-y: auto; /* Añade scroll vertical cuando sea necesario */
+  padding: 10px;
+}
+
+.recipe-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mat-card-image {
+  height: 200px; /* Altura fija para las imágenes */
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  object-fit: cover; /* Ajusta la imagen para que cubra todo el espacio disponible */
+}
+
+.recipe-card {
+  width: calc(
+    33.33% - 20px
+  ); /* Ajusta el ancho de cada tarjeta para mostrar tres por fila */
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+  .recipe-card {
+    width: calc(
+      50% - 20px
+    ); /* Mostrar dos tarjetas por fila en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe-card {
+    width: 100%; /* Mostrar una tarjeta por fila en pantallas pequeñas */
+  }
+}

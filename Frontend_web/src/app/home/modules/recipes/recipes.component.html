@@ -1,0 +1,39 @@
+<!-- src/app/components/recipe-list/recipe-list.component.html -->
+<div>
+  <h2>Recipe List</h2>
+  <div class="recipe-container">
+    <div class="recipe-row" *ngFor="let row of recipeRows">
+      <div *ngFor="let recipe of row" class="recipe-card">
+        <mat-card class="example-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>{{ recipe.name }}</mat-card-title>
+            <mat-card-subtitle>{{
+              recipe.type | capitalizeFirst
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="recipe.image"
+            alt="Image of {{ recipe.name }}"
+          />
+          <mat-card-content>
+            <p>{{ recipe.description }}</p>
+            <p>
+              <strong>Nutritional Goal:</strong> {{ recipe.nutritionalGoal }}
+            </p>
+            <p><strong>Total Calories:</strong> {{ recipe.totalCalories }}</p>
+            <p><strong>Score:</strong> {{ recipe.score }}</p>
+            <div>
+              <h4>Ingredients:</h4>
+              <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">
+                  - {{ ingredient.name | capitalizeFirst }}
+                </li>
+              </ul>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
