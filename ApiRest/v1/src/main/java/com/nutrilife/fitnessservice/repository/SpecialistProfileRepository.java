@@ -1,5 +1,6 @@
 package com.nutrilife.fitnessservice.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,15 @@ public interface SpecialistProfileRepository extends JpaRepository<SpecialistPro
 
     @Query("SELECT sp FROM SpecialistProfile sp WHERE sp.name LIKE CONCAT('%', :name, '%')")
     Optional<SpecialistProfile> getSpecialistProfileByName(@Param("name") String name);
+
+    List<SpecialistProfile> findByName(String name);
+
+    List<SpecialistProfile> findByOccupation(String occupation);
+
+    List<SpecialistProfile> findByAge(Integer age);
+
+    @Query("SELECT sp FROM SpecialistProfile sp WHERE sp.age BETWEEN :minAge AND :maxAge")
+    List<SpecialistProfile> findByAgeRange(@Param("minAge") Integer minAge, @Param("maxAge") Integer maxAge);
+
+
 }

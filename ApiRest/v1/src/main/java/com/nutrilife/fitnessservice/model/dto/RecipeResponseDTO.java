@@ -3,6 +3,7 @@ package com.nutrilife.fitnessservice.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +17,10 @@ public class RecipeResponseDTO {
     private String nutritionalGoal;
     private float totalCalories;
     private String image;
-    private String ingredients;
-    private int score;
+    private List<String> ingredients;
+    private float score;
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
 }

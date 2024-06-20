@@ -46,4 +46,22 @@ public class IngredientService {
     public void deleteIngredient(Long id) {
         ingredientRepository.deleteById(id);
     }
+
+    @Transactional
+    public IngredientResponseDTO updateIngredient(Long id, IngredientRequestDTO ingredientRequestDTO) {
+        Ingredient ingredient = ingredientRepository.findById(id)
+                .orElseThrow(() -> new IngredientNotFoundException("Ingredient not found with id: " + id));
+
+        if (ingredientRequestDTO.getName() != null) {
+            ingredient.setName(ingredientRequestDTO.getName());
+        }
+        if (ingredientRequestDTO.getCalories() >= 0) {
+            ingredient.setCalories(ingredientRequestDTO.getCalories());
+        }
+
+        ingredient = ingredientRepository.save(ingredient);
+
+        return ingredientMapper.convertToDTO(ingredient);
+    }
+
 }

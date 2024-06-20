@@ -29,7 +29,6 @@ public class MeetingRequestDTO {
     private LocalTime endTime;
 
     @NotNull(message = "El estatus no debe estar vacio ")
-    @Pattern(regexp = "PENDING|COMPLETED|PAID", message = "El estatus debe ser 'PENDING', 'COMPLETED' o 'PAID'")
     private String status;
     
     private Long ScheduleId;

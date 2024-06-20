@@ -48,4 +48,8 @@ public class CustomerProfileRequestDTO {
 
     @Size(max = 50, message = "Las restricciones dietéticas deben tener como máximo 50 caracteres")
     private String dietRestriction;
+
+    private String email;
+
+    private String password;
 }

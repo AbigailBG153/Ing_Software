@@ -38,11 +38,24 @@ public class CustomerProfileController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<CustomerProfileResponseDTO>> getCustomerProfileByName(@PathVariable String name) {
+        List<CustomerProfileResponseDTO> customers = customerProfileService.getCustomerProfileByName(name);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/dietType/{dietType}")
+    public ResponseEntity<List<CustomerProfileResponseDTO>> findByDietType(@PathVariable String dietType) {
+        List<CustomerProfileResponseDTO> customers = customerProfileService.findByDietType(dietType);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<CustomerProfileResponseDTO> createCutomerProfile(@Validated @RequestBody CustomerProfileRequestDTO customerDTO) {
         CustomerProfileResponseDTO customer = customerProfileService.createProfileCustomer(customerDTO);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CustomerProfileResponseDTO> deleteCustomerProfile(@PathVariable Long id) {

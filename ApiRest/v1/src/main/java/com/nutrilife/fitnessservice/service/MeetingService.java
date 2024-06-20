@@ -116,16 +116,17 @@ public class MeetingService {
         return responseDTO ;
     }
 
-    public MeetingResponseDTO updateMeeting(Long meetingId, MeetingRequestDTO requestDTO) {
-        
+    public MeetingResponseDTO updateMeeting(Long meetingId) {
         Meeting meeting = meetingRepository.findById(meetingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Meeting not found with id: " + meetingId));
-        
-        meeting.setStatus(MeetStatus.valueOf(requestDTO.getStatus()));
-        
+    
+        // Convertir el status de la reunión a enum MeetStatus
+        meeting.setStatus(MeetStatus.NO_ASSIST);
+    
         Meeting updatedMeeting = meetingRepository.save(meeting);
         return meetingMapper.convertToDTO(updatedMeeting);
     }
+    
     
     public void deleteMeeting(Long meetingId) {
         Meeting meeting = meetingRepository.findById(meetingId)

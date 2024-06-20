@@ -2,6 +2,7 @@ package com.nutrilife.fitnessservice.service;
 
 import org.springframework.stereotype.Service;
 import com.nutrilife.fitnessservice.mapper.ScheduleMapper;
+import com.nutrilife.fitnessservice.model.dto.ScheduleRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.ScheduleResponseDTO;
 import com.nutrilife.fitnessservice.model.entity.Schedule;
 import com.nutrilife.fitnessservice.model.enums.ScheduleStatus;
@@ -37,6 +38,13 @@ public class ScheduleService {
             throw new RuntimeException("Schedule not found with id " + scheduleId);
         }
     }
+    @Transactional
+    public void updateAllSchedules() {
+        List<Schedule> schedules = scheduleRepository.findAll();
 
-    
+        for (Schedule schedule : schedules) {
+            schedule.setStatus(ScheduleStatus.DISABLED);
+        }
+    }
+
 }

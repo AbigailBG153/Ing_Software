@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileRequestDTO;
 import com.nutrilife.fitnessservice.model.dto.CustomerProfileResponseDTO;
+import com.nutrilife.fitnessservice.model.dto.UserRequestDTO;
 import com.nutrilife.fitnessservice.model.entity.CustomerProfile;
+//import com.nutrilife.fitnessservice.model.entity.User;
 
 import lombok.AllArgsConstructor;
 
@@ -17,11 +19,25 @@ public class CustomerProfileMapper {
     private final ModelMapper modelMapper;
 
     public CustomerProfile convertToEntity(CustomerProfileRequestDTO customerProfileRequestDTO){
-        return modelMapper.map(customerProfileRequestDTO, CustomerProfile.class);
+        
+        CustomerProfile customerProfile = modelMapper.map(customerProfileRequestDTO, CustomerProfile.class);
+
+        //customerProfile.getUser().setEmail(customerProfileRequestDTO.getEmail());
+        //customerProfile.getUser().setPassword(customerProfileRequestDTO.getPassword());
+        return customerProfile;
     }
 
+    public UserRequestDTO createUserRequestDTO(CustomerProfileRequestDTO customerProfileRequestDTO) {
+        UserRequestDTO userRequestDTO = new UserRequestDTO();
+        userRequestDTO.setEmail(customerProfileRequestDTO.getEmail());
+        userRequestDTO.setPassword(customerProfileRequestDTO.getPassword());
+        return userRequestDTO;
+    }
     public CustomerProfileResponseDTO convertToDTO(CustomerProfile customerProfile){
-        return modelMapper.map(customerProfile, CustomerProfileResponseDTO.class);
+        CustomerProfileResponseDTO customerProfileResponseDTO = modelMapper.map(customerProfile, CustomerProfileResponseDTO.class);
+        //customerProfileResponseDTO.setEmail(customerProfile.getUser().getEmail());
+        //customerProfileResponseDTO.setPassword(customerProfile.getUser().getPassword());
+        return customerProfileResponseDTO;
     }
 
     public List<CustomerProfileResponseDTO> convertToListDTO(List<CustomerProfile> profiles){
@@ -29,4 +45,5 @@ public class CustomerProfileMapper {
             .map(this::convertToDTO)
             .toList();
     }
+
 }

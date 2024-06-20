@@ -1,6 +1,7 @@
 package com.nutrilife.fitnessservice.model.enums;
 
-public enum MeetStatus {
+public enum MeetStatus{
     PENDING,
-    COMPLETED
+    COMPLETED,
+    NO_ASSIST
 }
