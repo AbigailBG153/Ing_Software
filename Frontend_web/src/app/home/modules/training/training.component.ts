@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TrainingService } from './service/training.service';
 import { TrainingResponseDTO } from './interfaces/training.interface';
 
@@ -19,7 +20,7 @@ export class TrainingComponent implements OnInit {
   kcalOptions: number[] = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550];
   durationOptions: number[] = [15, 20, 30, 45, 60];
 
-  constructor(private trainingService: TrainingService) { }
+  constructor(private trainingService: TrainingService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.loadInitialExercises();
@@ -83,5 +84,22 @@ export class TrainingComponent implements OnInit {
 
   closeExercise(): void {
     this.selectedExercise = null;
+  }
+
+  getSanitizedUrl(video: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(video);
+  }
+
+  getImageForType(type: string): string {
+    switch (type) {
+      case 'Cardio':
+        return 'IMG/Entrenamiento/Cardio.jpeg';
+      case 'Fuerza':
+        return 'IMG/Entrenamiento/Fuerza.jpeg';
+      case 'Flexibilidad':
+        return 'IMG/Entrenamiento/Flexibilidad.png';
+      default:
+        return 'assets/images/default.jpg';
+    }
   }
 }

@@ -27,35 +27,57 @@
       <button *ngFor="let duration of durationOptions" (click)="filterByDuration(duration)">{{ duration }}</button>
     </div>
   </div>
+  <!-- Sección de ejercicios y filtros -->
+  <div *ngIf="!selectedExercise">
+    <div class="section">
+      <h2>{{ exercisesTitle }}</h2>
+      <div class="cards-container">
+        <div class="card" *ngFor="let exercise of exercises" (click)="chooseExercise(exercise)">
+          <img [src]="getImageForType(exercise.exerciseType)" alt="{{ exercise.name }}">
+          <div class="card-content">
+            <p>{{ exercise.name }}</p>
+            <p>{{ exercise.description }}</p>
+            <p>Duración: {{ exercise.duration }} mins</p>
+            <button>Ver Ejercicio</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="section">
-    <h2>{{ exercisesTitle }}</h2>
-    <div class="cards-container">
-      <div class="card" *ngFor="let exercise of exercises">
-        <img src="IMG/Index/logo-icon-verde.png" alt="{{ exercise.name }}">
-        <div class="card-content">
-          <p>{{ exercise.name }}</p>
-          <p>{{ exercise.description }}</p>
-          <p>Duración: {{ exercise.duration }} mins</p>
-          <button (click)="chooseExercise(exercise)">Elegir</button>
+    <div class="section">
+      <h2>Ejercicios con más calificación</h2>
+      <div class="cards-container">
+        <div class="card" *ngFor="let exercise of topRatedExercises" (click)="chooseExercise(exercise)">
+          <img [src]="getImageForType(exercise.exerciseType)" alt="{{ exercise.name }}">
+          <div class="card-content">
+            <p>{{ exercise.name }}</p>
+            <p>{{ exercise.description }}</p>
+            <p>Duración: {{ exercise.duration }} mins</p>
+            <p>Calificación: {{ exercise.qualification }}</p>
+            <button>Ver Ejercicio</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <h2>Ejercicios con más calificación</h2>
-    <div class="cards-container">
-      <div class="card" *ngFor="let exercise of topRatedExercises">
-        <img src="IMG/Index/logo-icon-verde.png" alt="{{ exercise.name }}">
-        <div class="card-content">
-          <p>{{ exercise.name }}</p>
-          <p>{{ exercise.description }}</p>
-          <p>Duración: {{ exercise.duration }} mins</p>
-          <p>Calificación: {{ exercise.qualification }}</p>
-          <button (click)="chooseExercise(exercise)">Elegir</button>
-        </div>
+  <!-- Sección de detalle del ejercicio -->
+  <div class="section" *ngIf="selectedExercise">
+    <div class="exercise-detail">
+      <h2>{{ selectedExercise.name }}</h2>
+      <div class="video-container">
+        <iframe width="960" height="540" 
+                [src]="getSanitizedUrl(selectedExercise.video)"
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+        </iframe>
       </div>
+      <div class="exercise-info">
+        <p>{{ selectedExercise.description }}</p>
+        <p>Duración: {{ selectedExercise.duration }} mins</p>
+        <p>Calificación: {{ selectedExercise.qualification }}</p>
+      </div>
+      <button class="close-btn" (click)="closeExercise()">Cerrar</button>
     </div>
   </div>
 </div>
