@@ -1,10 +1,53 @@
 /* src/app/components/recipe-list/recipe-list.component.css */
 
+h2 {
+  margin-bottom: 20px; /* Ajusta el valor según el espacio que desees */
+}
+
+/* Contenedor flexible para los filtros */
+.filters-container {
+  display: flex;
+  align-items: flex-start; /* Alinea los elementos al inicio del contenedor */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Ajustar el ancho de los formularios para que quepan bien en línea */
+.tipo-form-field,
+.objetivo-form-field {
+  flex: 1; /* Distribuir el espacio equitativamente */
+  max-width: 30%; /* Limitar el ancho máximo de los formularios */
+}
+
+.calories-slider-container {
+  flex: 1; /* Asegura que el contenedor del slider ocupe una parte proporcional del espacio */
+  max-width: 40%; /* Limitar el ancho máximo del contenedor del slider */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinear contenido a la izquierda */
+}
+
+/* Centrar el texto del rango de calorías sobre el slider */
+.calories-range-text {
+  margin-bottom: 10px; /* Espacio entre el texto y el slider */
+  font-size: 14px; /* Tamaño de fuente */
+  color: #666; /* Color de texto */
+  padding: 0 10px;
+  pointer-events: none; /* Para evitar que interfiera con el slider */
+}
+
 .example-card {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   height: 100%; /* Asegura que la tarjeta ocupe todo el espacio vertical disponible */
+}
+
+.mat-card-image {
+  height: 150px; /* Altura máxima para la imagen */
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  object-fit: cover; /* Ajusta la imagen para que cubra todo el espacio disponible */
+  overflow: hidden; /* Recorta la imagen si es más grande que el contenedor */
 }
 
 .example-card-image {
@@ -24,12 +67,6 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
-
-.mat-card-image {
-  height: 200px; /* Altura fija para las imágenes */
-  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
-  object-fit: cover; /* Ajusta la imagen para que cubra todo el espacio disponible */
 }
 
 .recipe-card {
