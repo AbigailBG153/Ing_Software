@@ -1,0 +1,128 @@
+@import url('../../../../../app.component.css');
+
+.bottom-data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+.bottom-data>div {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    max-height: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 100%; 
+    flex: 1 1 48%; 
+}
+
+
+.container-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.specialists-row {
+    display: flex;
+    gap: 16px; /* Ajusta el espacio entre las tarjetas */
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+    align-items: center;
+    justify-content: center;
+}
+.container-card h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.card {
+    background: var(--light);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 200px;
+    height: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.card p {
+    font-size: 14px;
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.card .btn-primary {
+    background: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.card .btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color: tomato;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: rgb(122, 29, 13);
+}
+.stars {
+    display: flex;
+    gap: 4px; /* Ajusta el espacio entre las estrellas si es necesario */
+}
+
+.stars img {
+    width: 20px; /* Ajusta el tamaño de las estrellas si es necesario */
+    height: auto;
+}
+
+.container-card .foto-perfil{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 576px) {
+
+    .bottom-data .header {
+        min-width: 340px;
+    }
+    .specialists-row {
+        flex-direction: column; /* Alinea las tarjetas en columna en pantallas pequeñas */
+    }
+}

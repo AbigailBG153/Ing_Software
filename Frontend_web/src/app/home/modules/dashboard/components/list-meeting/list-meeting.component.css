@@ -1,0 +1,193 @@
+@import url('../../../../../app.component.css');
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header .left h1 {
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.header .left .breadcrumb {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.header .left .breadcrumb li {
+    color: var(--dark);
+}
+
+.header .left .breadcrumb li a {
+    color: var(--dark-grey);
+    pointer-events: none;
+}
+
+.header .left .breadcrumb li a.active {
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.header .report {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+}
+
+
+.bottom-data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+.bottom-data>div {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    max-height: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.bottom-data .header {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bottom-data .header h3 {
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.bottom-data .header .bx {
+    cursor: pointer;
+}
+
+.bottom-data .ListMeeting {
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+.bottom-data .ListMeeting table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bottom-data .ListMeeting table th {
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+.bottom-data .ListMeeting table td {
+    padding: 16px 0;
+}
+
+.bottom-data .ListMeeting table tr td:first-child {
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+.bottom-data .ListMeeting table td img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bottom-data .ListMeeting table tbody tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-data .ListMeeting table tbody tr:hover {
+    background: var(--grey);
+}
+
+.bottom-data .ListMeeting table tr td .status {
+    font-size: 10px;
+    padding: 6px 16px;
+    color: var(--light);
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.bottom-data .ListMeeting table tr td .status.completed {
+    background: var(--success);
+}
+
+.bottom-data .ListMeeting table tr td .status.pending {
+    background: var(--warning);
+}
+
+.bottom-data .ListMeeting table tr td .status.no_asist {
+    background: var(--danger);
+}
+
+.bottom-data .bx {
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content select {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@media screen and (max-width: 576px) {
+
+
+    .bottom-data .header {
+        min-width: 340px;
+    }
+
+    .bottom-data .ListMeeting table {
+        min-width: 340px;
+    }
+
+}

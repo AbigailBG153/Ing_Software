@@ -1,0 +1,14 @@
+
+<div class="container-meeting modal">
+    <div class="schedules-table modal-content">
+        <span class="close" (click)="close($event)">&times;</span>
+        <div class="specialist-info">
+            <h2>{{ specialistProfile?.occupation }}</h2>
+            <h4>{{ specialistProfile?.name}}</h4>
+        </div>
+        <!-- Ejemplo de cómo podrías pasar el valor a ScheduleComponent -->
+        <app-schedule [specialistId]="isSpecialistId"></app-schedule>
+        
+        <button class="btn-close" (click)="close($event)">Cerrar</button>
+    </div>
+</div>

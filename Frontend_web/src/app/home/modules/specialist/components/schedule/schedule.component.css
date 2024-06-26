@@ -1,0 +1,76 @@
+
+@import url('../meeting/meeting.component.css');
+.modal{
+    z-index: 11;
+}
+.schedules-table {
+    overflow: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.legend {
+    margin-bottom: 10px;
+}
+
+.legend-item {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.legend-item span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+
+.status-disabled {
+    background-color: lightgray;
+}
+
+.status-occupied {
+    background-color: tomato;
+}
+
+.status-active {
+    background-color: #8bc34a;
+}
+
+.modal {
+    display: block;
+    z-index: 1000;
+    
+}
+.modal-content{
+    margin-top: 20%;
+    max-width: 300px;
+}
+
+@media (max-width: 768px) {
+    th, td {
+        padding: 6px;
+        font-size: 10px;
+    }
+    
+
+    .legend-item {
+        margin-bottom: 5px;
+    }
+}
