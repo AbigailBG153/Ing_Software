@@ -1,0 +1,35 @@
+<div class="bottom-data">
+    <div class="ListMeeting" *ngIf="meetings">
+        <div class="header">
+            <i class='bx bx-receipt'></i>
+            <h3>Reuniones</h3>
+            <i class='bx bx-filter'></i>
+            <i class='bx bx-search'></i>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reunion</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let meeting of meetings; let i = index">
+                    <ng-container *ngIf="specialistResponseDTOs.length > 0 && specialistResponseDTOs[i]">
+                        <td>
+                            Reunión con {{ specialistResponseDTOs[i].name }}
+                        </td>
+                        <td>{{ meeting.date }}</td>
+                        <td>{{ meeting.startTime }}-{{ meeting.endTime }}</td>
+                        <td>
+                            <span class="status" [ngClass]="getStatusClass(meeting.meetStatus)">{{ meeting.meetStatus
+                                }}</span>
+                        </td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

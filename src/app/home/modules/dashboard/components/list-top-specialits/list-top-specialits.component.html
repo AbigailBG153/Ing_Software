@@ -1,0 +1,39 @@
+<div class="bottom-data">
+
+    <div class="container-card">
+        <h2>Top 3 Nutricionistas</h2>
+        <div class="specialists-row">
+            <div *ngFor="let specialist of topNutricionistas" class="card">
+                <img class="foto-perfil" src="IMG/Especialistas/foto-nutricionista.png">
+                <h3>{{ specialist.name }}</h3>
+                <p>{{ specialist.occupation }}</p>
+                <p>
+                    <span class="stars">
+                        <img *ngFor="let star of generateStars(specialist.score)"
+                            [src]="star === 'full' ? 'IMG/Especialistas/estrella-rellena.svg' : 'IMG/Especialistas/estrella.svg'"
+                            alt="Star">
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-card">
+        <h2>Top 3 Entrenadores</h2>
+        <div class="specialists-row">
+            <div *ngFor="let specialist of topEntrenadores" class="card">
+                <img class="foto-perfil" src="IMG/Especialistas/foto-entrenador.png">
+                <h3>{{ specialist.name }}</h3>
+                <p>{{ specialist.occupation }}</p>
+                <p>
+                    <span class="stars">
+                        <img *ngFor="let star of generateStars(specialist.score)"
+                            [src]="star === 'full' ? 'IMG/Especialistas/estrella-rellena.svg' : 'IMG/Especialistas/estrella.svg'"
+                            alt="Star">
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

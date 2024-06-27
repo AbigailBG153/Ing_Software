@@ -1,0 +1,50 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { computed, inject, Injectable, signal } from '@angular/core';
+
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { LoginRequest } from '../interfaces/login-request';
+import { LoginResponse } from '../interfaces/login-response';
+
+const authKey = 'banking_auth';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl = 'http://localhost:8080/ApiRest/v1';
+  private http = inject(HttpClient);
+  private _auth = signal<LoginResponse | null>(null);
+
+  auth = computed(() => this._auth());
+
+  constructor() {
+    const authString = localStorage.getItem(authKey);
+
+    if (authString) {
+      this._auth.set(JSON.parse(authString));
+    }
+  }
+
+  login(authRequest: LoginRequest) {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/token`, authRequest)
+      .pipe(
+        map(response => {
+          localStorage.setItem(authKey, JSON.stringify(response));
+          this._auth.set(response);
+          return response.user;
+        })
+      );
+  }
+
+
+
+  logout() {
+  localStorage.removeItem(authKey);
+  //this._auth = undefined;
+  this._auth.set(null);
+  }
+
+
+
+}

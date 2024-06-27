@@ -1,0 +1,35 @@
+<body>
+    <div class="container">
+        <div class="cover">
+            <img src="IMG/Login/Login_img.jpg" alt="">
+            <div class="text">
+                <span class="text-1">Start your journey to a <br> healthier life</span>
+                <span class="text-2">Let's get connected</span>
+            </div>
+        </div>
+        <div class="forms">
+            <div class="form-content">
+                <div class="login-form">
+                    <div class="title">Login</div>
+                    <form [formGroup]="form" (ngSubmit)="login()">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input type="text" placeholder="Enter your email" formControlName="email">
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" placeholder="Enter your password" formControlName="password">
+                            </div>
+                            <div class="text"><a href="#">Forgot password?</a></div>
+                            <div class="button input-box">
+                                <input type="submit" value="Submit">
+                            </div>
+                            <div class="text sign-up-text">Don't have an account? <label (click)="navigateToRegister()">Sigup now</label></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

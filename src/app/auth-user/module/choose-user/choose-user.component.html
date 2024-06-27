@@ -1,0 +1,25 @@
+<body>
+    <div class="container" [ngClass]="{ 'active': isRegisterActive }" id="container">
+        <div class="form-container sign-in">
+          <app-register-customer></app-register-customer>
+        </div>
+        <div class="form-container sign-up">
+          <app-register-specialist></app-register-specialist>
+        </div>
+        <div class="toggle-container">
+          <div class="toggle">
+            <div class="toggle-panel toggle-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class="ghost" id="login" (click)="toggleRegister(false)">Customer</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start journey with us</p>
+              <button class="ghost" id="register" (click)="toggleRegister(true)">Specialist</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</body>

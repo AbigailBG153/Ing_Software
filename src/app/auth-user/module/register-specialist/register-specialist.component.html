@@ -1,0 +1,19 @@
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="signup()">
+    <h1>Specialist Register</h1>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-google"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+    <span>or use your email for registration</span>
+    <div class="form-data">
+        <input type="text" placeholder="Name" formControlName="name"/>
+        <input type="text" placeholder="Phone Number" formControlName ="phoneNumber"/>
+        <input type="number" placeholder="Age" formControlName="age"/>
+        <input type="text" placeholder="Ocupation" formControlName="ocupation"/>
+        <input type="email" placeholder="Email" formControlName="email"/>
+        <input type="password" placeholder="Password" formControlName="password"/>
+    </div>
+    <button type="submit">Sign Up</button>
+  </form>
+  

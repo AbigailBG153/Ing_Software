@@ -1,0 +1,100 @@
+<div>
+  <h2>Recetas</h2>
+
+  <div class="filters-container">
+    <mat-form-field appearance="fill" class="tipo-form-field">
+      <mat-label>Tipo</mat-label>
+      <mat-select [(ngModel)]="selectedType">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="vegetariano">Vegetariano</mat-option>
+        <mat-option value="no vegetariano">No vegetariano</mat-option>
+        <mat-option value="vegano">Vegano</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="objetivo-form-field">
+      <mat-label>Objetivo Nutricional</mat-label>
+      <mat-select [(ngModel)]="selectedGoal">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="Perder peso">Perder peso</mat-option>
+        <mat-option value="Ganar masa muscular">Ganar masa múscular</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="calories-slider-container">
+      <p class="calories-range-text">
+        Rango de calorías: {{ caloriesRange[0] }} - {{ caloriesRange[1] }}
+      </p>
+      <mat-slider min="0" max="1000" step="1" [(ngModel)]="caloriesRange">
+        <!-- Start thumb -->
+        <input
+          matSliderStartThumb
+          type="range"
+          [min]="0"
+          [max]="caloriesRange[1]"
+          [value]="caloriesRange[0]"
+          (input)="handleStartThumbInput($event)"
+        />
+
+        <input
+          matSliderEndThumb
+          type="range"
+          [min]="caloriesRange[0]"
+          [max]="1000"
+          [value]="caloriesRange[1]"
+          (input)="handleEndThumbInput($event)"
+        />
+      </mat-slider>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="onFilterButtonClicked()">
+    Aplicar Filtros
+  </button>
+
+  <button mat-raised-button color="primary" (click)="toggleTopRatedRecipes()">
+    {{
+      showTopRated
+        ? "Mostrar Recetas Filtradas"
+        : "Cargar Top 5 Recetas Populares"
+    }}
+  </button>
+
+  <div class="recipe-container">
+    <div class="recipe-row" *ngFor="let row of recipeRows">
+      <div *ngFor="let recipe of row" class="recipe-card">
+        <mat-card class="example-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>{{ recipe.name }}</mat-card-title>
+            <mat-card-subtitle>{{
+              recipe.type | capitalizeFirst
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="recipe.image"
+            alt="Image of {{ recipe.name }}"
+            style="height: 250px; width: 100%; object-fit: cover"
+          />
+          <mat-card-content>
+            <p>{{ recipe.description }}</p>
+            <p>
+              <strong>Objetivo Nutricional:</strong>
+              {{ recipe.nutritionalGoal }}
+            </p>
+            <p><strong>Calorias Totales:</strong> {{ recipe.totalCalories }}</p>
+            <p><strong>Puntuación:</strong> {{ recipe.score }}</p>
+            <div>
+              <h4>Ingredientes:</h4>
+              <ul class="ingredients-container">
+                <li *ngFor="let ingredient of recipe.ingredients">
+                  - {{ ingredient.name | capitalizeFirst }}
+                </li>
+              </ul>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

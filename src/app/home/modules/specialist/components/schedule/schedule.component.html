@@ -1,0 +1,54 @@
+<div class="schedule" *ngIf="errorMessage; else scheduleContent">
+    <div class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+</div>
+<ng-template #scheduleContent>
+    <h3>Horarios de la semana 2024</h3>
+    <div class="legend">
+        <div class="legend-item ">
+            <span class="status-disabled"></span> Desactivado
+        </div>
+        <div class="legend-item ">
+            <span class="status-occupied"></span> Ocupado
+        </div>
+        <div class="legend-item ">
+            <span class="status-active"></span> Activado
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th *ngFor="let day of uniqueDays">
+                    <div>{{ getShortDayOfWeek(day) }}</div>
+                    <div>{{ getDayFromDate(uniqueDate[uniqueDays.indexOf(day)]) }}</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let hour of hours">
+                <tr>
+                    <td>{{ hour }} - {{ getNextHour(hour) }}</td>
+                    <td *ngFor="let day of uniqueDays" [ngClass]="getCellStyle(day, hour)" (click)="selectCell(day, hour)">
+                        <div *ngIf="scheduleByDayAndHour[day] && scheduleByDayAndHour[day][hour]">
+                            {{ scheduleByDayAndHour[day][hour].scheduleId }}
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-template>
+
+<div class="content-confirmation modal" *ngIf="selectedSchedule">
+    <div class="content-info modal-content">
+        <h3>Detalles de la Reunion</h3>
+        <p>Día: {{ selectedSchedule.dayOfWeek }}</p>
+        <p>Fecha: {{ selectedSchedule.date }}</p>
+        <p>Hora de inicio: {{ selectedSchedule.startTime }}</p>
+        <p>Hora de final: {{ selectedSchedule.endTime }}</p>
+        <button (click)="cancelMeeting()">Cancelar</button>
+        <button (click)="confirmMeeting()">Crear Reunión</button>
+    </div>
+</div>

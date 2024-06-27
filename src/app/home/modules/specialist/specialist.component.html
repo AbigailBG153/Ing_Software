@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="content">
+        <!-- Botón para abrir el modal de filtro -->
+        <button class="filter-btn" (click)="toggleFilter()">Filtro</button>
+
+        <!-- Modal de filtro -->
+        <div class="filter-modal" [ngClass]="{'visible': filterVisible}">
+            <div class="filter-content">
+                <h3>Filtrar por:</h3>
+                <div class="filter-category">
+                    <h4>Ocupación</h4>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('occupation', 'Nutricionista')">Nutricionista</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('occupation', 'Entrenador')">Entrenador</button>
+                </div>
+                <div class="filter-category">
+                    <h4>Edad</h4>
+                    <input type="number" id="input-edad" class="input-edad" placeholder="Ingrese la edad">
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('age', getInputValue('input-edad'))">Buscar</button>
+                </div>
+                <div class="filter-category">
+                    <h4>Rango de Edad</h4>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('ageRange', 20, 30)">20-30</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('ageRange', 31, 40)">31-40</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('ageRange', 41, 50)">41-50</button>
+                </div>
+                <div class="filter-category">
+                    <h4>Estrellas</h4>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('score', 1)">1</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('score', 2)">2</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('score', 3)">3</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('score', 4)">4</button>
+                    <button class="filter-option" (click)="applyFilterAndCloseModal('score', 5)">5</button>
+                </div>
+                <button class="filter-option-clear" (click)="clearFilters()">Limpiar Todo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container-card">
+            <div *ngFor="let specialist of filteredSpecialists" class="card">
+                <h3>{{ specialist.name }}</h3>
+                <p>{{ specialist.occupation }}</p>
+                <p>Edad: {{ specialist.age }}</p>
+                <p>Puntaje: {{ specialist.score }}
+                    <span class="score">
+                        <img *ngFor="let star of generateStars(specialist.score)" 
+                            [src]="star === 'full' ? 'IMG/Especialistas/estrella-rellena.svg' : 'IMG/Especialistas/estrella.svg'" 
+                            alt="Star"
+                            class="estrella">
+                    </span>
+                </p>
+                <button class="btn-primary" (click)="open(specialist.specId)">Programar reunión</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<app-meeting [isSpecialistId]="selectedSpecialistId"></app-meeting>
+
