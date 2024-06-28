@@ -1,0 +1,29 @@
+<div class="sidebar">
+    <a href="#" class="logo">
+        <img class="logo-img" src="IMG/Index/logo-icon-verde.png" width="60" height="60" alt="NutriLife-Home">
+        <div class="logo-name"><span>NutriLife</span></div>
+        <button class="sidebar-close-btn"><i class='bx bx-x'></i></button>
+    </a>
+    <ul class="side-menu">
+        <li class="link-active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/dashboard"><i class='bx bxs-dashboard'></i>Dashboard</a>
+        </li>   
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/recipes"><i class='bx bx-food-menu'></i>Recetas</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/training"><i class='bx bx-run'></i>Entrenamiento</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/specialist"><i class='bx bx-message-square-dots'></i>Especialistas</a>
+        </li>
+    </ul>
+    <ul class="side-menu">
+        <li>
+            <a href="#" class="logout">
+                <i class='bx bx-log-out-circle'></i>
+                Logout
+            </a>
+        </li>
+    </ul>
+</div>
