@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SignUpCustomerService {
   
-  private apiUrl = 'http://localhost:8080/ApiRest/v1';  
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1';  
 
   constructor(private http: HttpClient) { }
 

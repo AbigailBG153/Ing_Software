@@ -9,7 +9,7 @@ import { ScheduleRequestDTO } from '../interfaces/meetingRequest.interface';
 })
 export class ScheduleService {
 
-  private apiUrl = 'http://localhost:8080/ApiRest/v1';  
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1';  
   constructor(private http: HttpClient) { }
 
   getDailySchedulesForCurrentWeek(specialistId: number): Observable<ScheduleResponseDTO[]> {

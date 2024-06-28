@@ -10,7 +10,7 @@ import { MeetingRequestDTO } from '../interfaces/meetingRequest.interface';
 })
 export class MeetingService {
 
-  private apiUrl = 'http://localhost:8080/ApiRest/v1/meetings';  
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1/meetings';  
 
   constructor(private http: HttpClient) { }
 

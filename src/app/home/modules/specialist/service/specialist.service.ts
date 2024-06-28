@@ -6,7 +6,7 @@ import { SpecialistResponseDTO } from '../interfaces/meetingResponse.interface'
   providedIn: 'root'
 })
 export class SpecialistService {
-  private apiUrl = 'http://localhost:8080/ApiRest/v1/specialists';  
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1/specialists';  
 
   constructor(private http: HttpClient) { }
 

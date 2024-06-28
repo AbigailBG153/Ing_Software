@@ -8,7 +8,7 @@ import { RecipeResponseDTO } from '../interfaces/recipes.interfaces';
 })
 export class RecipesService {
 
-  private apiUrl = 'http://localhost:8080/ApiRest/v1/recipes';
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1/recipes';
 
   constructor(private http: HttpClient) { }
 

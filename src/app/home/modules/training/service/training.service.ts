@@ -8,7 +8,7 @@ import { TrainingResponseDTO } from '../interfaces/training.interface';
 })
 export class TrainingService {
 
-  private apiUrl = 'http://localhost:8080/ApiRest/v1/trainings';
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1/trainings';
 
   constructor(private http: HttpClient) { }
 

@@ -12,7 +12,7 @@ const authKey = 'banking_auth';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/ApiRest/v1';
+  private apiUrl = 'https://nutrilifeapi-d.onrender.com/ApiRest/v1';
   private http = inject(HttpClient);
   private _auth = signal<LoginResponse | null>(null);
 
