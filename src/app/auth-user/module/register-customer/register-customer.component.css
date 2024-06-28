@@ -1,34 +1,22 @@
-
-.container{
-    background-color: #fff;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    position: relative;
-    overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
-}
-
-.container p{
+.container p {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
 }
 
-.container span{
+.container span {
     font-size: 12px;
 }
 
-.container a{
+.container a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
-.container button{
+.container button {
     background-color: var(--primary);
     color: #fff;
     font-size: 12px;
@@ -42,12 +30,34 @@
     cursor: pointer;
 }
 
-.container button.hidden{
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.toggle-password-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #ccc;
+}
+
+.toggle-password-icon.active {
+    color: #555;
+}
+
+.container button.hidden {
     background-color: transparent;
     border-color: #fff;
 }
 
-.container form{
+.container form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -57,7 +67,7 @@
     height: 100%;
 }
 
-.container input{
+.container input {
     background-color: #eee;
     border: none;
     margin: 8px 0;
@@ -68,16 +78,17 @@
     outline: none;
 }
 
-.form-container{
+.form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
-.form-container h1{
+.form-container h1 {
     font-size: 31px;
 }
+
 .form-data {
     max-height: 300px;
     overflow-y: scroll;
@@ -87,32 +98,32 @@
 .form-data::-webkit-scrollbar {
     width: 4px;
 }
-  
+
 .form-data::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 8px;
 }
-  
+
 .form-data::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
 }
-  
+
 .form-data::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
-.sign-in{
+.sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-.container.active .sign-in{
+.container.active .sign-in {
     transform: translateX(100%);
 }
 
-.sign-up{
+.sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
@@ -123,33 +134,37 @@
     border-left: 5px solid #42A948;
 }
 
-.ng-invalid:not(form).ng-touched{
+.ng-invalid:not(form).ng-touched {
     border-left: 5px solid #a94442;
 }
 
-.container.active .sign-up{
+.container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
     animation: move 0.6s;
 }
 
-@keyframes move{
-    0%, 49.99%{
+@keyframes move {
+
+    0%,
+    49.99% {
         opacity: 0;
         z-index: 1;
     }
-    50%, 100%{
+
+    50%,
+    100% {
         opacity: 1;
         z-index: 5;
     }
 }
 
-.social-icons{
+.social-icons {
     margin: 20px 0;
 }
 
-.social-icons a{
+.social-icons a {
     border: 1px solid #ccc;
     border-radius: 20%;
     display: inline-flex;
@@ -160,7 +175,7 @@
     height: 40px;
 }
 
-.toggle-container{
+.toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -172,12 +187,12 @@
     z-index: 1000;
 }
 
-.container.active .toggle-container{
+.container.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
 }
 
-.toggle{
+.toggle {
     background-color: var(--primary);
     height: 100%;
     background: linear-gradient(to right, #5c6bc0, var(--primary));
@@ -190,11 +205,11 @@
     transition: all 0.6s ease-in-out;
 }
 
-.container.active .toggle{
+.container.active .toggle {
     transform: translateX(50%);
 }
 
-.toggle-panel{
+.toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -209,19 +224,19 @@
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
+.toggle-left {
     transform: translateX(-200%);
 }
 
-.container.active .toggle-left{
+.container.active .toggle-left {
     transform: translateX(0);
 }
 
-.toggle-right{
+.toggle-right {
     right: 0;
     transform: translateX(0);
 }
 
-.container.active .toggle-right{
+.container.active .toggle-right {
     transform: translateX(200%);
 }

@@ -1,16 +1,13 @@
+@import url('./modal.css');
 /* Google Font Link */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins" , sans-serif;
-}
-body{
+.container-general{
     min-height: 100vh;
     display: flex;
+    background: linear-gradient(135deg, #b5e48c, #76c893, #52b788);
     align-items: center;
     justify-content: center;
     padding: 30px;
+    
 }
 .container{
     position: relative;
@@ -20,6 +17,7 @@ body{
     padding: 40px 30px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     perspective: 2700px;
+    border-radius: 30px;
 }
 .container .cover{
     position: absolute;
@@ -33,16 +31,7 @@ body{
     transform-style: preserve-3d;
 }
 
-.container .cover::before,
-.container .cover::after{
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: var(--primary);
-    opacity: 0.5;
-    z-index: 12;
-}
+
 .container .cover::after{
     opacity: 0.3;
     transform: rotateY(180deg);
@@ -54,6 +43,7 @@ body{
     width: 100%;
     object-fit: cover;
     z-index: 10;
+    border-radius: 0px 30px 30px 0px;
 }
 .container .cover .text{
     position: absolute;
@@ -66,11 +56,12 @@ body{
     justify-content: center;
 }
 .cover .text .text-1,
-.cover .text .text-2{
+.cover .text .text-2 {
     font-size: 26px;
     font-weight: 600;
     color: #fff;
     text-align: center;
+    text-shadow: -1px -1px 0 #0f530c, 1px -1px 0 #0f530c, -1px 1px 0 #0f530c, 1px 1px 0 #0f530c;
 }
 .cover .text .text-2{
     font-size: 15px;

@@ -4,6 +4,8 @@ import { forkJoin, Subscription } from 'rxjs';
 import { MeetingResponseDTO, SpecialistResponseDTO } from './../../../specialist/interfaces/meetingResponse.interface';
 import { SpecialistService } from './../../../specialist/service/specialist.service';
 import { MeetingRequestDTO } from './../../../specialist/interfaces/meetingRequest.interface';
+import { CustomerProfileService } from '../../../../customer/service/customer.service';
+import { CustomerProfileResponseDTO } from '../../../../customer/interfaces/customer-response';
 
 @Component({
   selector: 'app-list-meeting',
@@ -16,7 +18,7 @@ export class ListMeetingComponent  implements OnInit, OnDestroy {
   private updateInterval: any;
   private intervalTime = 30000; // Intervalo de actualización en milisegundos (30 segundos)
   activeDropdownIndex: number | null = null;
-  constructor(private meetingService: MeetingService, private specialistService: SpecialistService) { }
+  constructor(private meetingService: MeetingService, private specialistService: SpecialistService,private customerService:CustomerProfileService) { }
 
   ngOnInit(): void {
     this.loadMeetings();
@@ -29,18 +31,23 @@ export class ListMeetingComponent  implements OnInit, OnDestroy {
   }
 
   loadMeetings() {
-    const customerId = 1; // Reemplaza con el ID del cliente deseado
-    this.meetingService.getMeetingsByCustomerId(customerId)
-      .subscribe(
-        meetings => {
-          console.log('Meetings loaded:', meetings.length);
-          this.processMeetings(meetings);
-        },
-        error => {
-          console.error('Error loading meetings:', error);
-          // Manejo de errores aquí
-        }
-      );
+    const userId = Number(localStorage.getItem('userId'));
+    this.customerService.getProfileByUserId(userId).subscribe(
+      (resonse: CustomerProfileResponseDTO)=>{
+        const customerId = resonse.custId; // Reemplaza con el ID del cliente deseado
+        this.meetingService.getMeetingsByCustomerId(customerId)
+        .subscribe(
+            meetings => {
+              console.log('Meetings loaded:', meetings);
+              this.processMeetings(meetings);
+              
+            },
+            error => {
+              console.error('Error loading meetings:', error);
+            }
+        );
+      }
+    )
   }
 
   processMeetings(meetings: MeetingResponseDTO[]) {

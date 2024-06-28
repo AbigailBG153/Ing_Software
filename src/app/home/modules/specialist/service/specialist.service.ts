@@ -15,7 +15,7 @@ export class SpecialistService {
   }
 
   getSpecialistProfileById(id: number): Observable<SpecialistResponseDTO> {
-    return this.http.get<SpecialistResponseDTO>(`${this.apiUrl}/SearchById/${id}`);
+    return this.http.get<SpecialistResponseDTO>(`${this.apiUrl}/${id}`);
   }
 
   getSpecialistsByOccupation(occupation: string): Observable<SpecialistResponseDTO[]> {

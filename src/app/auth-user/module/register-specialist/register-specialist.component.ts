@@ -44,7 +44,7 @@ export class RegisterSpecialistComponent {
       signUpData.score = 4;
       this.singUpSpecialistService.signup(signUpData).subscribe({
         next: (response ) => {
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
         },
         error: (error) => {
           console.error('Error en el registro:', error);

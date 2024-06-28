@@ -1,24 +1,23 @@
-import { SignUpCustomerService } from './../services/sign-up-customer.service';
-import { Component ,ViewEncapsulation} from '@angular/core';
+// register-customer.component.ts
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SingupCustomerRequest } from '../interfaces/singup-customer-request';
-
+import { SignUpCustomerService } from '../services/sign-up-customer.service';
 @Component({
   selector: 'app-register-customer',
   templateUrl: './register-customer.component.html',
-  styleUrl: './register-customer.component.css',
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./register-customer.component.css']
 })
 export class RegisterCustomerComponent {
-
+    
     form: FormGroup;
     passwordVisible = false;
 
     constructor(
       private fb: FormBuilder,
       private router: Router,
-      private signUpCustomerService: SignUpCustomerService
+      private signUpCustomerService :SignUpCustomerService
     ){
       this.form = this.fb.group({
         name: ['', [Validators.required]],
@@ -38,21 +37,26 @@ export class RegisterCustomerComponent {
       return this.form.controls[control].hasError(error);
     }
     
+    togglePasswordVisibility() {
+      this.passwordVisible = !this.passwordVisible;
+    }
+
     signup() {
       if (this.form.invalid) {
         this.form.markAllAsTouched();
+        return;
       }
       
       const signUpData: SingupCustomerRequest = this.form.value as SingupCustomerRequest;
       signUpData.role = 'CUSTOMER';
       this.signUpCustomerService.signup(signUpData).subscribe({
         next: (response ) => {
-          this.router.navigate(['home']);
+          this.router.navigate(['login']);
         },
         error: (error) => {
           console.error('Error en el registro:', error);
         }
       });
-    }
 
+    }
 }

@@ -1,21 +1,15 @@
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body{
-    background-color: var(--dark-grenn);
-    background: linear-gradient(to right, #e2e2e2, #d8ffc9);
+.container-general{
+    min-height: 100vh;
     display: flex;
+    background-image: url('../../../../../public/IMG/Login/fondo-login.png');
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen dentro del contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    height: 100vh;
+    padding: 30px;
+    
 }
-
 .container{
     background-color: #fff;
     border-radius: 30px;
@@ -25,6 +19,7 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 600px;
+    
 }
 
 .container p{
@@ -194,6 +189,7 @@ body{
 
 .toggle-left{
     transform: translateX(-200%);
+
 }
 
 .container.active .toggle-left{

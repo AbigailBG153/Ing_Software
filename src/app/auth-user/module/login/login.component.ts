@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
-
+  showErrorModal: boolean = false;
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
@@ -39,10 +39,13 @@ export class LoginComponent {
       
       error: (err) => {
         console.error('Error en el inicio de sesión:', err.message);
+        this.showErrorModal = true;
       },
     });
   }
-
+  closeModal() {
+    this.showErrorModal = false; // Cerrar el modal
+  }
   controlHasError(control: string, error: string) {
     return this.form.controls[control].hasError(error);
   }

@@ -6,7 +6,7 @@ import { LoginRequest } from '../interfaces/login-request';
 import { LoginResponse } from '../interfaces/login-response';
 
 const authKey = 'banking_auth';
-
+const userId = 'userId';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,7 @@ export class AuthService {
       .pipe(
         map(response => {
           localStorage.setItem(authKey, JSON.stringify(response));
+          localStorage.setItem(userId, response.user.userId.toString());
           this._auth.set(response);
           return response.user;
         })
@@ -41,6 +42,7 @@ export class AuthService {
 
   logout() {
   localStorage.removeItem(authKey);
+  localStorage.removeItem(userId);
   //this._auth = undefined;
   this._auth.set(null);
   }

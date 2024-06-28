@@ -1,4 +1,4 @@
-<body>
+<div class="container-general">
     <div class="container">
         <div class="cover">
             <img src="IMG/Login/Login_img.jpg" alt="">
@@ -25,11 +25,23 @@
                             <div class="button input-box">
                                 <input type="submit" value="Submit">
                             </div>
-                            <div class="text sign-up-text">Don't have an account? <label (click)="navigateToRegister()">Sigup now</label></div>
+                            <div class="text sign-up-text">Don't have an account? <label
+                                    (click)="navigateToRegister()">Sigup now</label></div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
-</body>
+</div>
+
+<!-- Modal de error -->
+<div class="modal" [style.display]="showErrorModal ? 'block' : 'none'">
+    <div class="modal-content">
+        <span class="close-modal" (click)="closeModal()">&times;</span>
+        <i class='bx bx-error' style='font-size: 48px; color: #43A047;'></i>
+        <p>No te has registrado todavía. ¿Deseas registrarte ahora?</p>
+        <button class="register-button" (click)="navigateToRegister()">Regístrate ahora</button>
+    </div>
+</div>

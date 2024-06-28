@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ScheduleResponseDTO , MeetingResponseDTO } from '../../interfaces/meetingResponse.interface';
 import { ScheduleService } from '../../service/schedule.service';
 import { MeetingService } from '../../service/meeting.service';
+import { CustomerProfileResponseDTO } from '../../../../customer/interfaces/customer-response';
+import { CustomerProfileService } from '../../../../customer/service/customer.service';
 
 @Component({
     selector: 'app-schedule',
@@ -18,7 +20,7 @@ export class ScheduleComponent implements OnChanges {
     customerId = 1 ;
     @Input() specialistId: number = 0;
 
-    constructor(private scheduleService: ScheduleService , private meetingService : MeetingService) {}
+    constructor(private scheduleService: ScheduleService , private meetingService : MeetingService,private customerService : CustomerProfileService) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['specialistId'] && !changes['specialistId'].firstChange) {
@@ -127,21 +129,31 @@ export class ScheduleComponent implements OnChanges {
     }
 
     confirmMeeting(): void {
-      if (this.selectedSchedule && this.customerId) {
-        this.meetingService.createMeeting(this.selectedSchedule.scheduleId, this.customerId)
-            .subscribe(
-                (response: MeetingResponseDTO) => {
-                    console.log('Reunión confirmada:', response);
-                    this.selectedSchedule = null;
-                    alert('Reunión confirmada');
-                    this.refreshSchedule();
-                },
-                error => {
-                    console.error('Error al crear la reunión:', error);
-                    alert('Hubo un error al crear la reunión');
-                }
-            );
-      }
+        console.log('user',localStorage.getItem('userId'));
+        const userId = Number(localStorage.getItem('userId'));
+        this.customerService.getProfileByUserId(userId).subscribe(
+            (response: CustomerProfileResponseDTO)=>{
+                console.log('customerid',response.custId)
+                this.customerId = response.custId;
+                if (this.selectedSchedule && this.customerId) {
+                    this.meetingService.createMeeting(this.selectedSchedule.scheduleId, this.customerId)
+                        .subscribe(
+                            (response: MeetingResponseDTO) => {
+                                console.log('Reunión confirmada:', response);
+                                this.selectedSchedule = null;
+                                alert('Reunión confirmada');
+                                this.refreshSchedule();
+                            },
+                            error => {
+                                console.error('Error al crear la reunión:', error);
+                                alert('Hubo un error al crear la reunión');
+                            }
+                        );
+                  }
+            },error => {
+                console.error('Error profile:', error);
+            }
+        )
     
     }
 
